@@ -4,23 +4,32 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:test": "next build",
+    "build:prod": "next build && next-sitemap",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "next": "^12.0.2-canary.14",
+    "next-page-transitions": "^1.0.0-beta.2",
+    "next-seo": "^4.28.1",
     "react": "^18.0.0-alpha-6bce0355c-20211031",
     "react-dom": "^18.0.0-alpha-6bce0355c-20211031",
-    "styled-components": "^5.3.3"
+    "react-notion-x": "^4.11.0",
+    "sharp": "^0.29.2",
+    "styled-components": "^5.3.3",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/next-seo": "^2.1.2",
     "@types/node": "16.11.6",
     "@types/react": "17.0.33",
+    "@types/sharp": "^0.29.2",
     "@types/styled-components": "^5.1.15",
     "babel-plugin-styled-components": "^1.13.3",
-    "eslint": "7",
-    "eslint-config-next": "12.0.2",
     "typescript": "4.4.4"
   }
 }
