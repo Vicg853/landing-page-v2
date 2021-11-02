@@ -27,6 +27,6 @@
     "@manifest/*": "public/manifest/*",
     
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "styled.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

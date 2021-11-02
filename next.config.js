@@ -1,21 +1,21 @@
-import { v4 as uuidv4 } from 'uuid'; 
-
 /** @type {import('next').NextConfig} */
+const { v4 } = require('uuid')
+
 module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   reactStrictMode: true,
   experimental: {
-    reactRoot: true,
-    concurrentFeatures: true,
-    serverComponents: true,
+    //reactRoot: true,
+    //concurrentFeatures: true,
+    //serverComponents: true,
     //urlImports: ['https://example.com/modules/'], //New url imports feature
   },
   images: {
     formats: ['image/avif', 'image/webp']
   },
   generateBuildId: async () => {
-    return 'alpesCap-landing-page-build-id-' + uuidv4().toString()
+    return 'alpesCap-landing-page-build-id-' + v4().toString()
   },
   async rewrites() {
     return {
