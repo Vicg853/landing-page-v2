@@ -15,7 +15,7 @@ export default {
       description: 'Olá nós somos a Alpes Capital! Somos um fundo de endowment formado por jovens, focado em ensinar jovens a como investir no mercado financeiro.',
       images: [
          {
-            url:  + '/favicon-96x96.png',
+            url: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png',
             width: 96,
             height: 96,
             alt: 'Alpes Capital Logo',
