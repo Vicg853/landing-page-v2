@@ -6,12 +6,12 @@ declare module 'styled-components' {
    export interface DefaultTheme {
       palete: {
          background: string,
-         backgroundSecondary: string,
+         bgContrast: string,
          accent1: string,
          accent2: string,
          accent3: string,
-         red: string,
-         green: string,
+         textWhiteBg: string
+         textBlackBg: string
       }
    }
    export interface ThemeTyping extends DefaultTheme {}
