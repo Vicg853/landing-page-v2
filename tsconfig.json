@@ -13,20 +13,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@p-styles/*": ["./src/p-styles/*"],
+      "@layout/*": ["./src/layout/*"],
+      "@public/*": ["./public/*"],
+      "@lotties/*": ["./public/lottie/*"],
+      "@icons/*": ["./public/icons/*"],
+      "@images/*": ["./public/images/*"],
+      "@manifest/*": ["./public/manifest/*"],
+      
+    },
   },
-  "baseUrl": ".",
-  "paths": {
-    "@components/*": "src/components/*",
-    "@p-styles/*": "src/p-styles/*",
-    "@layout/*": "src/layout/*",
-    "@public/*": "public/*",
-    "@lotties/*": "public/lottie/*",
-    "@icons/*": "public/icons/*",
-    "@images/*": "public/images/*",
-    "@manifest/*": "public/manifest/*",
-    
-  },
-  "include": ["next-env.d.ts", "styled.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "styled.d.ts", "**/*.ts", "**/*.tsx", "./src/*"],
   "exclude": ["node_modules"]
 }
