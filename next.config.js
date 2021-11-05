@@ -17,6 +17,31 @@ module.exports = {
   generateBuildId: async () => {
     return 'alpesCap-landing-page-build-id-' + v4().toString()
   },
+  //Customize webpack config
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: {
+        and: [/\.(js|ts)x?$/]
+       // for webpack 5 use
+       // {  }
+      },
+      
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            prettier: false,
+            svgo: true,
+            svgoConfig: { plugins: [{ removeViewBox: false }] },
+            titleProp: true,
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
   async rewrites() {
     return {
       fallback: [
