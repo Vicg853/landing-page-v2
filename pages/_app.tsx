@@ -4,9 +4,11 @@ import {ThemeProvider} from 'styled-components'
 import { DefaultSeo } from 'next-seo'
 
 import { Theme1, GlobalStyle } from "@components/global-style"
-import Layout from '../src/layout'
 import SEO from '../next-seo.config.js'
 import persistentState from '@components/persistentState'
+
+//Importing Layout elements
+import Nav from '@layout/nav'
 
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
@@ -62,9 +64,8 @@ function MyApp({ Component, pageProps }: AppProps) {
          />
          <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Layout>
-               <Component {...pageProps}/>
-            </Layout>
+            <Nav />
+            <Component {...pageProps}/>
          </ThemeProvider>
      </>
    )

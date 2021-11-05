@@ -3,7 +3,7 @@ import { ThemeTyping, createGlobalStyle } from 'styled-components'
 export const Theme1: ThemeTyping = {
    palete: {
       background: '#FFFFFF',
-      bgContrast: '#EBEBFF',
+      bgContrast: '#FBFBFB',
       accent1: '#1E1D45',
       accent2: '#3A54B4',
       accent3: '#8DA0E2',
@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
       text-rendering: optimizeLegibility !important;
       text-decoration-line: none;
       outline: none;
-      font-family: "JetBrains Mono";
+      font-family: "Montserrat";
       box-sizing: border-box; 
       background-repeat: no-repeat;
       transition-property: color, background, background-color;
