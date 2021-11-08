@@ -9,10 +9,14 @@ import persistentState from '@components/persistentState'
 
 //Importing Layout elements
 import Nav from '@layout/nav'
+import { useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
    const [themeState, themeSet] = persistentState(false, 'theme')
+
+   //Mini menu state
+   const [miniMenu, miniMenuSet] = useState(false)
 
    //To switch between themes easily
    var theme = themeState ? Theme1 : Theme1
@@ -64,7 +68,8 @@ function MyApp({ Component, pageProps }: AppProps) {
          />
          <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Nav />
+            <Nav isDarkTheme={themeState} setTheme={themeSet} 
+            miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
             <Component {...pageProps}/>
          </ThemeProvider>
      </>

@@ -21,3 +21,30 @@ export const NavSubSection = styled.section`
    justify-content: center;
    align-items: center;
 `
+
+export const NavColorThemeButton = styled.button`
+   background: transparent;
+   width: 1.8rem;
+   height: 1.8rem;
+   margin-left: 0.5rem;
+   margin-right: 0.5rem;
+   text-decoration-color: unset;
+   text-decoration-line: unset;
+   border: none;
+   background: transparent;
+   display: flex;
+   cursor: pointer;
+   svg {
+      width: 1.6rem !important;
+      height: 1.6rem !important; 
+      transition: unset;
+   }
+   @media (max-width: 600px), (max-height: 600px) and (orientation: landscape) {
+      width: 2.4rem !important;
+      height: 2.4rem !important; 
+      svg{
+         width: 2.1rem !important;
+         height: 2.1rem !important; 
+      }
+   }
+`
