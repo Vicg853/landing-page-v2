@@ -1,6 +1,10 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
-export const NavContainer = styled.nav`
+type NavProps = {
+   scrolled: boolean,
+}
+
+export const NavContainer = styled.nav<NavProps>`
    position: fixed;
    top: 0;
    width: 100vw;
@@ -11,15 +15,37 @@ export const NavContainer = styled.nav`
    padding-left: 5vw;
    padding-right: 5vw;
    background: transparent;
+   overflow: hidden;
+   z-index: 50;
    #logo{
       height: 60%;
+      z-index: 51;
    }
+   ::before{
+      position: absolute;
+      display: block;
+      content: "";
+      width: 0vw;
+      height: 0vw;
+      border-radius: 50%;
+      margin-left: -15vw;
+      background: transparent;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+   }
+   ${props => props.scrolled && css`
+      ::before{
+         width: 120vw;
+         height: 120vw;
+      }
+   `}
 `
 
 export const NavSubSection = styled.section`
    display: inline-flex;
    justify-content: center;
    align-items: center;
+   z-index: 51;
 `
 
 export const NavColorThemeButton = styled.button`

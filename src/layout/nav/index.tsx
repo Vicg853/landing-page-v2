@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { a, useSpring } from '@react-spring/web'
 import { useTheme } from 'styled-components'
 
@@ -57,10 +58,27 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
       config: animPropsColorThemeBTN.springConfig
    })
 
+   //Checking if scrolled value from top has reached a certain limit
+   //to be able to turn on the nav's background on the page
+   const [reachedScrollVal, reachedScrollValSet] = useState(false)
+
+   const windowCheck = typeof window !== "undefined"  
+      ? window : false
+
+   useEffect(() => {
+      if(!windowCheck) return
+      function onScroll() {
+         //Checking if has scrolled pass limit 
+         if(window.scrollY > (window.innerHeight/2)) reachedScrollValSet(true)
+         else reachedScrollValSet(false)
+      }
+      window.addEventListener("scroll", onScroll);
+      return () => window.removeEventListener("scroll", onScroll);
+   }, [])
 
    return (
       <>
-         <NavContainer>
+         <NavContainer scrolled={reachedScrollVal}>
             <Logo id="logo"/>
             <NavSubSection>
                <LinkCustom href="/" name='Home' customStyle={{displayAfter: true}} />

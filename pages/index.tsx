@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import type { GetStaticProps } from 'next'
 import styled from 'styled-components'
 
 const Test = styled.div`
@@ -9,6 +8,7 @@ const Test = styled.div`
 const Home: NextPage = () => (
   <Test>
     Hello World !
+    <div style={{width: '100vw', height: '300vh'}} />
   </Test>
 )
 
