@@ -1,7 +1,6 @@
-import Link from 'next/link'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-type StylesProps = {
+export type StylesProps = {
    color?: string,
    displayAfter?: boolean,
 }
@@ -49,7 +48,7 @@ export const LinkText = styled.span<StylesProps>`
    }
 `
 
-const LinkTextContainer = styled.a`
+export const LinkTextContainer = styled.a`
    display: block;
    perspective: 2000px;
    perspective-origin: 50% 50%;
@@ -69,23 +68,3 @@ const LinkTextContainer = styled.a`
       text-shadow: 0px 3px 2px rgba(150, 150, 150, 1);
    }
 `
-
-type LinkProps = {
-   href: string
-   name: string
-   customStyle?: StylesProps
-}
-
-//TODO Improve animation and style ++ add subitems to the link
-
-const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle }) => {
-  return (
-    <Link href={href} passHref>
-      <LinkTextContainer>
-         <LinkText {...customStyle}>{name}</LinkText>
-      </LinkTextContainer>
-    </Link>
-  )
-}
-
-export default LinkCustom
