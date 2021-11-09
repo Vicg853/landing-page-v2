@@ -1,8 +1,15 @@
+import { useState } from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
+import { config, useSpring } from '@react-spring/web'
 
 import type { StylesProps } from './link-style'
-import { LinkText, LinkTextContainer } from './link-style'
+import { 
+   LinkContainer, 
+   LinkText, 
+   LinkTextContainer,
+   SubLinksContainer,
+   SubLinkItem
+} from './link-style'
 
 
 type LinkProps = {
@@ -15,17 +22,46 @@ type LinkProps = {
    }>
 }
 
-//TODO Improve animation and style ++ add subitems to the link
+//TODO Improve animation and style
 
-const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle }) => {
-  return (
-   <Link href={href} passHref>
-     <LinkTextContainer>
-        <LinkText {...customStyle}>{name}</LinkText>
-     </LinkTextContainer>
-   </Link>
+const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) => {
+   const [isOpen, setIsOpen] = useState(false)
 
-  )
+   const subMenuSpring = useSpring({
+      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -2rem, 0)',
+      opacity: isOpen ? 1 : 0,
+      visibility: isOpen ? 'visible' : 'hidden',
+      config: { ...config.stiff },
+   })
+
+   return (
+      <LinkContainer>
+         <Link href={href} passHref>
+            <LinkTextContainer
+            onMouseOut={() => setIsOpen(false)}
+            onMouseOver={() => setIsOpen(true)}>
+               <LinkText {...customStyle}>{name}</LinkText>
+            </LinkTextContainer>
+         </Link>
+         {subLinks && (
+            <SubLinksContainer 
+            //@ts-ignore: Good and old error of invalid CSS property but in fact it's a valid property
+            style={subMenuSpring} 
+            active={isOpen}
+            onMouseOut={() => setIsOpen(false)}
+            onMouseOver={() => setIsOpen(true)}>
+               <div className='content'>
+               {subLinks.map((subLink, index) => (
+                  <Link href={`${href}${subLink.href}`} passHref>
+                     <SubLinkItem key={index}>{subLink.name}</SubLinkItem>
+                  </Link>
+               ))}
+               </div>
+            </SubLinksContainer>
+         )}
+      </LinkContainer>
+
+   )
 }
 
 export default LinkCustom

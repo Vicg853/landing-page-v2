@@ -15,30 +15,31 @@ export const NavContainer = styled.nav<NavProps>`
    padding-left: 5vw;
    padding-right: 5vw;
    background: transparent;
-   overflow: hidden;
+   overflow: visible;
    z-index: 50;
    #logo{
       height: 60%;
       z-index: 51;
    }
-   ::before{
+   #background {
       position: absolute;
+      margin-left: -5vw;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+   }
+   #background ::before{
       display: block;
       content: "";
-      width: 0vw;
-      height: 0vw;
+      width: ${props => props.scrolled ? "120vw" : "0"};
+      height: ${props => props.scrolled ? "120vw" : "0"};
       border-radius: 50%;
-      margin-left: -15vw;
+      margin-left: -10vw;
+      margin-top: -60vw;
       background: transparent;
       backdrop-filter: blur(10px);
-      transition: 0.3s;
+      transition: 0.7s;
    }
-   ${props => props.scrolled && css`
-      ::before{
-         width: 120vw;
-         height: 120vw;
-      }
-   `}
 `
 
 export const NavSubSection = styled.section`

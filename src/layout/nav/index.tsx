@@ -3,7 +3,7 @@ import { a, useSpring } from '@react-spring/web'
 import { useTheme } from 'styled-components'
 
 import Logo from '@public/images/global/big_whitebg.svg'
-import LinkCustom from '@components/link'
+import LinkCustom from './link'
 import { 
    NavContainer, 
    NavSubSection,
@@ -16,6 +16,8 @@ type NavProps = {
    miniMenuState: boolean,
    setMiniMenu: Function
 }
+
+//TODO think about and how to add more dynamic sublinks for some pages
 
 const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
    const theme = useTheme()
@@ -79,12 +81,20 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
    return (
       <>
          <NavContainer scrolled={reachedScrollVal}>
+            <div id="background" />
             <Logo id="logo"/>
             <NavSubSection>
                <LinkCustom href="/" name='Home' customStyle={{displayAfter: true}} />
                <LinkCustom href="/about" name='Sobre' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/team" name='Time' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/ong" name='ONGs' customStyle={{displayAfter: true}} />
+               <LinkCustom href="/team" name='Time' customStyle={{displayAfter: true}}
+               subLinks={[
+                  { name: 'Gestão', href: '/management' },
+                  { name: 'Conselho', href: '/council' }
+               ]} />
+               <LinkCustom href="/ong" name='ONGs' customStyle={{displayAfter: true}} 
+               subLinks={[
+                  { name: 'Arrastão', href: '/management' },
+               ]} />
                <LinkCustom href="/donate" name='Doar' customStyle={{displayAfter: true}} />
                <LinkCustom href="/report" name='Relatorios' customStyle={{displayAfter: true}} />
                <LinkCustom href="/contact" name='Contato' customStyle={{displayAfter: true}} />

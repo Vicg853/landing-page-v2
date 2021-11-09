@@ -1,4 +1,19 @@
+import { a } from '@react-spring/web'
 import styled from 'styled-components'
+
+//* Link big container
+export const LinkContainer = styled.div`
+   width: min-content;
+   height: min-content;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   overflow: visible;
+   position: relative;
+   margin: 0.3rem;
+`
+
+//* Main link component style
 
 export type StylesProps = {
    color?: string,
@@ -26,7 +41,6 @@ export const LinkText = styled.span<StylesProps>`
    padding-bottom: 0.1rem;
    padding-left: 0.5rem;
    padding-right: 0.5rem;
-   margin: 0.3rem;
    :after, :before {
       content: '';
       background: grey;
@@ -53,6 +67,7 @@ export const LinkTextContainer = styled.a`
    perspective: 2000px;
    perspective-origin: 50% 50%;
    cursor: pointer;
+   z-index: 53;
    :hover ${LinkText} {
       transform: 
          scale3d(1,1,1) rotateX(17deg) rotateY(-12deg) translate3d(-2px,-2px,11px);
@@ -66,5 +81,48 @@ export const LinkTextContainer = styled.a`
          3.5px 3.5px ${props => props.theme.palete.accent1 + '10'};
       
       text-shadow: 0px 3px 2px rgba(150, 150, 150, 1);
+   }
+`
+
+//* Subitems style (menu that opens for pages that have multiple subdirectories)
+
+type SubMenuProps = {
+   active?: boolean
+}
+
+export const SubLinksContainer = styled(a.div)<SubMenuProps>`
+   position: absolute;
+   padding-top: 2.3rem;
+   top: 0;
+   left: 0;
+   z-index: 52;
+   visibility: ${props => props.active ? 'visible' : 'hidden'};
+   .content{
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      background: ${props => props.theme.palete.background};
+      border-radius: 0.4rem;
+      box-shadow: 0px 4px 16px rgb(46 41 51 / 4%), 
+      0px 8px 24px rgb(71 63 79 / 5%);
+      backdrop-filter: blur(20px);
+      padding: 0.5rem;
+   }
+`
+
+export const SubLinkItem = styled.a`
+   display: block;
+   border-radius: 0.3rem;
+   background: transparent;
+   padding: 0.5rem;
+   padding-left: 0.8rem;
+   padding-right: 0.8rem;
+   text-decoration: none;
+   color: ${props => props.theme.palete.textWhiteBg};
+   :hover {
+      background: ${props => props.theme.palete.bgContrast};
+      cursor: pointer;
    }
 `

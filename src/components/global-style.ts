@@ -3,7 +3,7 @@ import { ThemeTyping, createGlobalStyle } from 'styled-components'
 export const Theme1: ThemeTyping = {
    palete: {
       background: '#FFFFFF',
-      bgContrast: '#FBFBFB',
+      bgContrast: '#f5f5f5',
       accent1: '#1E1D45',
       accent2: '#3A54B4',
       accent3: '#8DA0E2',
