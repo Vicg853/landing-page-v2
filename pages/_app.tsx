@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import {ThemeProvider} from 'styled-components'
+import {ThemeProvider, ThemeTyping} from 'styled-components'
 import { DefaultSeo } from 'next-seo'
 
-import { Theme1, GlobalStyle } from "@components/global-style"
+import { Theme1, Theme2, GlobalStyle } from "@components/global-style"
 import SEO from '../next-seo.config.js'
 import persistentState from '@components/persistentState'
 
@@ -19,7 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
    const [miniMenu, miniMenuSet] = useState(false)
 
    //To switch between themes easily
-   var theme = themeState ? Theme1 : Theme1
+   //TODO Check this out!!
+   //!!! Checkout issue that prevents styled-components to load style on nav's link when theme is dark
+   var theme: ThemeTyping = themeState ? Theme2 : Theme1
 
    return (
      <>
