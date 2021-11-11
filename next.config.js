@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const { v4 } = require('uuid')
+const withPreact = require('next-plugin-preact');
 
-module.exports = {
+module.exports = withPreact({
   reactStrictMode: true,
   swcMinify: true,
   reactStrictMode: true,
@@ -23,8 +24,6 @@ module.exports = {
       test: /\.svg$/,
       issuer: {
         and: [/\.(js|ts)x?$/]
-       // for webpack 5 use
-       // {  }
       },
       
       use: [
@@ -68,4 +67,4 @@ module.exports = {
   },
   **
   */
-}
+})
