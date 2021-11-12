@@ -7,8 +7,8 @@ export const Theme1: ThemeTyping = {
       accent1: '#1E1D45',
       accent2: '#3A54B4',
       accent3: '#8DA0E2',
-      textWhiteBg: '#1E1D45',
-      textBlackBg: '#FFFFFF'
+      textMain: '#1E1D45',
+      textInverse: '#FFFFFF'
    }
 }
 
@@ -18,12 +18,12 @@ export const Theme1: ThemeTyping = {
 export const Theme2: ThemeTyping = {
    palete: {
       background: '#000000',
-      bgContrast: '#1a1a1a',
+      bgContrast: '#363636',
       accent1: '#1E1D45',
       accent2: '#3A54B4',
       accent3: '#8DA0E2',
-      textWhiteBg: '#FFFFFF',
-      textBlackBg: '#1E1D45'
+      textMain: '#FFFFFF',
+      textInverse: '#1E1D45'
    }
 }
 

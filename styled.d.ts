@@ -10,8 +10,8 @@ declare module 'styled-components' {
          accent1: string,
          accent2: string,
          accent3: string,
-         textWhiteBg: string
-         textBlackBg: string
+         textMain: string
+         textInverse: string
       }
    }
    export interface ThemeTyping extends DefaultTheme {}
