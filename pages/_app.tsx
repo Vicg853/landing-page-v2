@@ -9,19 +9,20 @@ import persistentState from '@components/persistentState'
 
 //Importing Layout elements
 import Nav from '@layout/nav'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
-   const [themeState, themeSet] = persistentState(false, 'theme')
+   const [isDarkMode, isDarkModeToggle] = persistentState(false, 'theme')
+   const [theme, themeSet] = useState(Theme1)
 
    //Mini menu state
    const [miniMenu, miniMenuSet] = useState(false)
 
    //To switch between themes easily
-   //TODO Check this out!!
-   //!!! Checkout issue that prevents styled-components to load style on nav's link when theme is dark
-   var theme: ThemeTyping = themeState ? Theme2 : Theme1
+   useEffect(() => {
+      isDarkMode ? themeSet(Theme2) : themeSet(Theme1)
+   }, [isDarkMode])
 
    return (
      <>
@@ -68,9 +69,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
          ]}
          />
+         {console.log(theme)}
          <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Nav isDarkTheme={themeState} setTheme={themeSet} 
+            <Nav isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
             miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
             <Component {...pageProps}/>
          </ThemeProvider>
