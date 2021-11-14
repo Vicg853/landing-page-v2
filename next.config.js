@@ -52,7 +52,7 @@ module.exports = withPreact({
     }
   },
 
-  //! Look out to using this for sercrets
+  //! Get more info about using this for sercrets, good resource in the future to maybe create inner api to get posts directly from the server
   //* More info here https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
   /*
   **
