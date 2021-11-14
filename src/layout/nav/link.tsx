@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { config, useSpring } from '@react-spring/web'
+import { useTheme } from 'styled-components'
 
 import type { StylesProps } from './link-style'
 import { 
@@ -23,6 +24,8 @@ type LinkProps = {
 }
 
 //TODO Improve animation and style
+//TODO Fix
+//! Issue where sub menus overflow screen 
 
 const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) => {
    const [isOpen, setIsOpen] = useState(false)
@@ -47,12 +50,11 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) 
             <SubLinksContainer 
             //@ts-ignore: Good and old error of invalid CSS property but in fact it's a valid property
             style={subMenuSpring} 
-            active={isOpen}
             onMouseOut={() => setIsOpen(false)}
             onMouseOver={() => setIsOpen(true)}>
                <div className='content'>
                {subLinks.map((subLink, index) => (
-                  <Link href={`${href}${subLink.href}`} passHref>
+                  <Link href={`${href}${subLink.href}`} passHref key={index}>
                      <SubLinkItem key={index}>{subLink.name}</SubLinkItem>
                   </Link>
                ))}

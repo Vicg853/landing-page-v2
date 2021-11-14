@@ -1,28 +1,37 @@
+import type { Dispatch, SetStateAction } from 'react'
+
 import { useEffect, useState } from 'react'
-import { a, useSpring } from '@react-spring/web'
+import { a, useSpring, config } from '@react-spring/web'
 import { useTheme } from 'styled-components'
 
 import Logo from '@public/images/global/big_whitebg.svg'
+import LogoMini from '@public/images/global/mini.svg'
 import LinkCustom from './link'
 import { 
    NavContainer, 
    NavSubSection,
-   NavColorThemeButton
+   NavColorThemeButton,
+   NavMiniMenuButton
 } from './style'
 
 type NavProps = {
    isDarkTheme: boolean,
-   setTheme: Function,
+   setTheme: Dispatch<SetStateAction<boolean>>,
    miniMenuState: boolean,
-   setMiniMenu: Function
+   setMiniMenu: Dispatch<SetStateAction<boolean>>
 }
 
 //TODO think about and how to add more dynamic sublinks for some pages
+//TODO Improve svgs resolution and style 
+//TODO Improve performance and overall code quality/impact in website performance
+//TODO Look out for the spring values props typing conflicting with css props typing issue and fix it
 
-const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
+const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniMenu}) => {
    const theme = useTheme()
 
-   //Color theme change button's react spring animation config 
+   //**** React-spring animation's configs 
+
+   // Color theme button react-spring's animation props array 
    const animPropsColorThemeBTN = {
       dark: {
          rCTBtn: 9,
@@ -38,10 +47,10 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
          cyCTBtn: 0,
          opacityCTBtn: 1
       },
-      springConfig: { mass: 4, tension: 250, friction: 40 }
+      springConfig: { ...config.wobbly }
    };
 
-   //React-spring animation values and tweaks for the colorTheme button
+   //Color theme button spring animation values 
    const { rCTBtn, transformCTBtn, cxCTBtn, cyCTBtn, opacityCTBtn } = animPropsColorThemeBTN[isDarkTheme? 'dark' : 'light']
    const svgSpring = useSpring({
       transform: transformCTBtn,
@@ -58,6 +67,39 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
    const groupSpring = useSpring({
       opacity: opacityCTBtn,
       config: animPropsColorThemeBTN.springConfig
+   })
+
+   //----
+   //Burger button react-spring's animation props array 
+   const animPropsBurgerBTN = {
+      open: {
+         yBurgBtn: -90,
+         transformBurgBtn: 45,
+      },
+      close: {
+         yBurgBtn: 0,
+         transformBurgBtn: 0,
+      },
+      springConfig: {...config.default}
+   }
+
+   //Menu button spring animation values 
+   const { yBurgBtn, transformBurgBtn } = animPropsBurgerBTN[miniMenuState? 'open' : 'close']
+   const topSpringBurgBtn = useSpring({
+      transform: `translateY(${-yBurgBtn}%)`,
+      config: animPropsBurgerBTN.springConfig
+   })
+   const mid1SpringBurgBtn = useSpring({
+      transform: `rotate(${-transformBurgBtn}deg)`,
+      config: animPropsBurgerBTN.springConfig
+   })
+   const mid2SpringBurgBtn = useSpring({
+      transform: `rotate(${transformBurgBtn}deg)`,
+      config: animPropsBurgerBTN.springConfig
+   })
+   const botSpringBurgBtn = useSpring({
+      transform: `translateY(${yBurgBtn}%)`,
+      config: animPropsBurgerBTN.springConfig
    })
 
    //Checking if scrolled value from top has reached a certain limit
@@ -83,7 +125,11 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
          <NavContainer scrolled={reachedScrollVal}>
             <div id="background" />
             <Logo id="logo"/>
+            <LogoMini id="logo-mini"/>
             <NavSubSection>
+
+               {/* Start of modifiable content (nav links, may change in case new pages are added or something) */}
+
                <LinkCustom href="/" name='Home' customStyle={{displayAfter: true}} />
                <LinkCustom href="/about" name='Sobre' customStyle={{displayAfter: true}} />
                <LinkCustom href="/team" name='Time' customStyle={{displayAfter: true}}
@@ -99,18 +145,38 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme}) => {
                <LinkCustom href="/report" name='Relatorios' customStyle={{displayAfter: true}} />
                <LinkCustom href="/contact" name='Contato' customStyle={{displayAfter: true}} />
                <LinkCustom href="/blog" name='Blog' customStyle={{displayAfter: true}} />
+
+               {/* End of modifiable content */}
+               {/* Static content (this shouldn't be changed, as it has any relation with the links above: just menu and theme buttons) */}
+
+               <NavMiniMenuButton 
+               onClick={() => setMiniMenu(val => !val)}
+               aria-label={`${miniMenuState ? `Close` : `Open`} mini page's menu`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" >
+                     {/*// @ts-ignore: False error due to original css props not understanding spring values */}
+                     <a.rect y="9" x="5" width="90" height="6" rx="4" style={{...topSpringBurgBtn}} fill={theme.palete.textMain} />
+                     {/*// @ts-ignore: False error due to original css props not understanding spring values */}
+                     <a.rect y="37" x="5" width="90" height="6" rx="4" style={{...mid1SpringBurgBtn, transformOrigin: "center"}} fill={theme.palete.textMain} />
+                     {/*// @ts-ignore: False error due to original css props not understanding spring values */}
+                     <a.rect y="37" x="5" width="90" height="6" rx="4" style={{...mid2SpringBurgBtn, transformOrigin: "center"}} fill={theme.palete.textMain} />
+                     {/*// @ts-ignore: False error due to original css props not understanding spring values */}
+                     <a.rect y="65" x="5" width="90" height="6" rx="4" style={{...botSpringBurgBtn}} fill={theme.palete.textMain} />
+                  </svg>
+               </NavMiniMenuButton>
+               {console.log(miniMenuState)}
                <NavColorThemeButton 
-                  onClick={() => setTheme(!isDarkTheme)}  style={{marginLeft: "1.5rem"}} 
-                  aria-label={"Set color mode to " + (!isDarkTheme? "dark" : "light")}>
+                  onClick={() => setTheme(val => !val)} 
+                  aria-label={`Set color theme to ${!isDarkTheme? `dark.` : `light.`}`}>
                   <a.svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={svgSpring}>
                      <mask id="moon-mask">
                         <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                        {/*// @ts-ignore: False error due missing css svg typing props  */}
+                        {/*// @ts-ignore: False error due to original css props not understanding spring values */}
                         <a.circle style={maskSpring} r="7" fill="black" />
                      </mask>
-                     {/*// @ts-ignore: False error due missing css svg typing props  */}
-                     <a.circle style={moonSpring} cx="12" cy="12" fill={theme.palete.accent1} mask="url(#moon-mask)" />
-                     <a.g stroke={theme.palete.accent1} style={groupSpring}>
+                     {/*// @ts-ignore: False error due to original css props not understanding spring values */}
+                     <a.circle style={moonSpring} cx="12" cy="12" 
+                        fill={theme.palete.textMain} mask="url(#moon-mask)" />
+                     <a.g stroke={theme.palete.textMain} style={groupSpring}>
                         <line x1="12" y1="1" x2="12" y2="3" />
                         <line x1="12" y1="21" x2="12" y2="23" />
                         <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />

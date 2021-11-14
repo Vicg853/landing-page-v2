@@ -26,8 +26,8 @@ export const LinkText = styled.span<StylesProps>`
    font-family: 'Montserrat Alternates';
    text-decoration: none;
    width: fit-content;
-   color: ${props => props.color || props.theme.palete.textWhiteBg};
-   font-size: 1.2rem;
+   color: ${props => props.color || props.theme.palete.textMain};
+   font-size: 1.15rem;
    font-weight: 400;
    display: flex;
    flex-direction: column;
@@ -86,17 +86,12 @@ export const LinkTextContainer = styled.a`
 
 //* Subitems style (menu that opens for pages that have multiple subdirectories)
 
-type SubMenuProps = {
-   active?: boolean
-}
-
-export const SubLinksContainer = styled(a.div)<SubMenuProps>`
+export const SubLinksContainer = styled(a.div)`
    position: absolute;
    padding-top: 2.3rem;
    top: 0;
    left: 0;
    z-index: 52;
-   visibility: ${props => props.active ? 'visible' : 'hidden'};
    .content{
       min-width: 160px;
       display: flex;
@@ -120,7 +115,9 @@ export const SubLinkItem = styled.a`
    padding-left: 0.8rem;
    padding-right: 0.8rem;
    text-decoration: none;
-   color: ${props => props.theme.palete.textWhiteBg};
+   color: ${props => props.theme.palete.textMain};
+   margin-top: 0.2rem;
+   margin-bottom: 0.2rem;
    :hover {
       background: ${props => props.theme.palete.bgContrast};
       cursor: pointer;

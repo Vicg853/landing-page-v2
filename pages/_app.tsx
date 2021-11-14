@@ -69,7 +69,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
          ]}
          />
-         {console.log(theme)}
          <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Nav isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 

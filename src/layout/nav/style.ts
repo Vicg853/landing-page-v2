@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
+import { LinkContainer, LinkText } from './link-style'
 
 type NavProps = {
    scrolled: boolean,
@@ -17,9 +18,16 @@ export const NavContainer = styled.nav<NavProps>`
    background: transparent;
    overflow: visible;
    z-index: 50;
-   #logo{
-      height: 60%;
+   #logo, #logo-mini{
+      height: 50%;
       z-index: 51;
+      width: min-content;
+      min-width: fit-content;
+      display: none;
+   }
+   #logo-mini{
+      height: 70% !important;
+      display: none;
    }
    #background {
       position: absolute;
@@ -40,6 +48,27 @@ export const NavContainer = styled.nav<NavProps>`
       backdrop-filter: blur(10px);
       transition: 0.7s;
    }
+   @media (min-width: 1200px) {
+      #logo{ display: block; }
+      #logo-mini{ display: none; }
+   }
+   @media (max-width: 1200px) {
+      #logo{ display: none; }
+      #logo-mini{ display: block; }
+      ${LinkContainer} {
+         margin: 0.01rem;
+      }
+      ${LinkText} {
+         font-size: 1rem;
+      }
+   }
+   @media (max-width: 760px) {
+      #logo{ display: none; }
+      #logo-mini{ display: block; }
+      ${LinkContainer} {
+         display: none !important;
+      }
+   }
 `
 
 export const NavSubSection = styled.section`
@@ -49,29 +78,32 @@ export const NavSubSection = styled.section`
    z-index: 51;
 `
 
+//Nav buttons style: mini menu button and theme change
+
 export const NavColorThemeButton = styled.button`
-   background: transparent;
-   width: 1.8rem;
-   height: 1.8rem;
-   margin-left: 0.5rem;
-   margin-right: 0.5rem;
-   text-decoration-color: unset;
-   text-decoration-line: unset;
+   width: 2.1rem;
+   height: 2.1rem;
+   margin-left: 0.2rem;
+   margin-right: 0.2rem;
+   text-decoration-color: none;
+   text-decoration-line: none;
    border: none;
-   background: transparent;
+   background: ${props => props.theme.palete.bgContrast};
+   backdrop-filter: blur(10px);
+   border-radius: 0.25rem;
    display: flex;
    cursor: pointer;
+   justify-content: center;
+   align-items: center;
    svg {
       width: 1.6rem !important;
       height: 1.6rem !important; 
       transition: unset;
    }
-   @media (max-width: 600px), (max-height: 600px) and (orientation: landscape) {
-      width: 2.4rem !important;
-      height: 2.4rem !important; 
-      svg{
-         width: 2.1rem !important;
-         height: 2.1rem !important; 
-      }
+`
+
+export const NavMiniMenuButton = styled(NavColorThemeButton)`
+   @media (min-width: 760px) {
+      display: none;
    }
 `
