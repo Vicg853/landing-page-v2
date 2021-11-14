@@ -20,7 +20,9 @@ const MiniNav: React.FC<MiniNavProps> = ({active}) => {
    //? set to none and not finishing correctly in the middle of the exit
    //! But anyway, try and fix this issue or find some better substitute in case it is not really fixable
    const [display, setDisplay] = useState(false)
-   useEffect(() => { if (active) setDisplay(true) }, [active])
+   useEffect(() => { 
+      if (active) setDisplay(true) 
+   }, [active])
    //---
    const ContainerSpring = useSpring({
       width: active ? '100vw' : '0%',
@@ -33,10 +35,11 @@ const MiniNav: React.FC<MiniNavProps> = ({active}) => {
    })
 
    return (
-      <Container style={{...ContainerSpring, display: display ? 'flex' : 'none'}}>
-         {/* //! After finishing styling and dev remove the true up here for it to work as expected */}
-         Hello world
-         <div id='background' />
+      <Container active={active} 
+      style={{...ContainerSpring, display: display ? 'flex' : 'none'}}>
+         <div id="content">
+
+         </div>
       </Container>
    );
 }
