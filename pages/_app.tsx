@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import {ThemeProvider, ThemeTyping} from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 import { DefaultSeo } from 'next-seo'
 
 import { Theme1, Theme2, GlobalStyle } from "@components/global-style"
@@ -9,7 +10,7 @@ import persistentState from '@components/persistentState'
 
 //Importing Layout elements
 import Nav from '@layout/nav'
-import { useEffect, useState } from 'react'
+import MiniNav from '@layout/mini-nav'
 
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
@@ -73,6 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <GlobalStyle />
             <Nav isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
             miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
+            <MiniNav active={miniMenu} />
             <Component {...pageProps}/>
          </ThemeProvider>
      </>
