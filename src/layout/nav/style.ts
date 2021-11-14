@@ -3,6 +3,7 @@ import { LinkContainer, LinkText } from './link-style'
 
 type NavProps = {
    scrolled: boolean,
+   miniMenuState: boolean,
 }
 
 export const NavContainer = styled.nav<NavProps>`
@@ -39,14 +40,13 @@ export const NavContainer = styled.nav<NavProps>`
    #background ::before{
       display: block;
       content: "";
-      width: ${props => props.scrolled ? "120vw" : "0"};
-      height: ${props => props.scrolled ? "120vw" : "0"};
-      border-radius: 50%;
-      margin-left: -10vw;
-      margin-top: -60vw;
+      width: ${props => props.scrolled ? "100vw" : "0"};
+      height: ${props => props.scrolled ? "6rem" : "0"};
+      margin-left: ${props => props.scrolled ? "0" : "100vw"};
+      border-bottom-left-radius: ${props => props.scrolled ? "0" : "100%"};
       background: transparent;
       backdrop-filter: blur(10px);
-      transition: 0.7s;
+      transition: 0.7s, backdrop-filter 0s;
    }
    @media (min-width: 1200px) {
       #logo{ display: block; }
@@ -65,6 +65,9 @@ export const NavContainer = styled.nav<NavProps>`
    @media (max-width: 760px) {
       #logo{ display: none; }
       #logo-mini{ display: block; }
+      #background ::before {
+         backdrop-filter: ${props => props.miniMenuState ? "blur(0px)" : "blur(10px)"};
+      }
       ${LinkContainer} {
          display: none !important;
       }

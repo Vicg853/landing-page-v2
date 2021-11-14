@@ -122,7 +122,7 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
 
    return (
       <>
-         <NavContainer scrolled={reachedScrollVal}>
+         <NavContainer scrolled={reachedScrollVal} miniMenuState={miniMenuState}>
             <div id="background" />
             <Logo id="logo"/>
             <LogoMini id="logo-mini"/>
