@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-function persistentState<Type>(defaultValue: Type, key: string): [Type, React.Dispatch<Type>] {
+function persistentState<Type>(defaultValue: Type, key: string): [Type, Dispatch<SetStateAction<Type>>] {
    const [value, setValue] = useState(() => { 
       if(typeof window !== 'undefined') {
          const storedValue = window.localStorage.getItem(key)

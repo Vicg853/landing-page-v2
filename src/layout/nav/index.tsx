@@ -163,7 +163,6 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                      <a.rect y="65" x="5" width="90" height="6" rx="4" style={{...botSpringBurgBtn}} fill={theme.palete.textMain} />
                   </svg>
                </NavMiniMenuButton>
-               {console.log(miniMenuState)}
                <NavColorThemeButton 
                   onClick={() => setTheme(val => !val)} 
                   aria-label={`Set color theme to ${!isDarkTheme? `dark.` : `light.`}`}>
