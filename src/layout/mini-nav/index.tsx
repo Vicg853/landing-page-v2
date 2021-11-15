@@ -11,6 +11,10 @@ type MiniNavProps = {
 
 const MiniNav: React.FC<MiniNavProps> = ({active}) => {
    
+   //* Control which of the subLinks menus are open
+   //? If there aren't any subLinks, then... well, this will be useless, so check out to make
+   //? this state's inclusion conditional
+   const [subLinkOpenI, setSubLinkOpenI] = useState<string|false>(false)
    
    //* Elements spring animations configs and functions
    
@@ -19,7 +23,7 @@ const MiniNav: React.FC<MiniNavProps> = ({active}) => {
    //? this way preventing css problem where animation does not occur at appearance in cas display is 
    //? set to none and not finishing correctly in the middle of the exit
    //! But anyway, try and fix this issue or find some better substitute in case it is not really fixable
-   const [display, setDisplay] = useState(false)
+   const [display, setDisplay] = useState<boolean>(false)
    useEffect(() => { 
       if (active) setDisplay(true) 
    }, [active])
@@ -38,11 +42,20 @@ const MiniNav: React.FC<MiniNavProps> = ({active}) => {
       <Container active={active} 
       style={{...ContainerSpring, display: display ? 'flex' : 'none'}}>
          <div id="content">
-            <CustomLink href='/' title="Hey hey" />
-            <CustomLink href='/' title="Hey hey" subLinks={[{
-               title: 'Sub 1',
-               href: '/'
-            }]} />
+            <CustomLink href='/' title="Home" />
+            <CustomLink href="/team" title='Time'
+            openState={(subLinkOpenI && subLinkOpenI === 'team')? true : false} 
+            openMenu={() => setSubLinkOpenI(val => val === 'team' ? false : 'team')}
+            subLinks={[
+               { title: 'Gestão', href: '/management' },
+               { title: 'Conselho', href: '/council' }
+            ]} />
+            <CustomLink href="/ong" title='ONGs'
+            openState={(subLinkOpenI && subLinkOpenI === 'ong')? true : false}
+            openMenu={() => setSubLinkOpenI(val => val === 'ong' ? false : 'ong')}
+            subLinks={[
+               { title: 'Arrastão', href: '/management' },
+            ]} />
          </div>
       </Container>
    );
