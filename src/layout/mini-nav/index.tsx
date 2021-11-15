@@ -2,7 +2,7 @@
 import { config, useSpring, a, useChain, useSpringRef } from '@react-spring/web'
 import { useEffect, useState } from 'react'
 
-import Link from './link'
+import CustomLink from './link'
 import { Container } from './style'
 
 type MiniNavProps = {
@@ -38,7 +38,11 @@ const MiniNav: React.FC<MiniNavProps> = ({active}) => {
       <Container active={active} 
       style={{...ContainerSpring, display: display ? 'flex' : 'none'}}>
          <div id="content">
-
+            <CustomLink href='/' title="Hey hey" />
+            <CustomLink href='/' title="Hey hey" subLinks={[{
+               title: 'Sub 1',
+               href: '/'
+            }]} />
          </div>
       </Container>
    );
