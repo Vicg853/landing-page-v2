@@ -18,7 +18,7 @@ type LinkProps = {
    name: string
    customStyle?: StylesProps
    subLinks?: Array<{
-      name: string,
+      title: string,
       href: string,
    }>
 }
@@ -55,7 +55,7 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) 
                <div className='content'>
                {subLinks.map((subLink, index) => (
                   <Link href={`${href}${subLink.href}`} passHref key={index}>
-                     <SubLinkItem key={index}>{subLink.name}</SubLinkItem>
+                     <SubLinkItem key={index}>{subLink.title}</SubLinkItem>
                   </Link>
                ))}
                </div>

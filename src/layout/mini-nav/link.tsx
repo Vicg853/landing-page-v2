@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useTheme } from 'styled-components'
+import { config, useSpring } from '@react-spring/web'
 
 import {
    CustomLinkContainer,
@@ -26,12 +27,17 @@ type WithSubDirLinkProps = | {
 
 type Props = LinkProps & WithSubDirLinkProps
 
-//TODO Add open and close functionality/animation - pass the option to open and close as a prop
-
 const CustomLink: React.FC<Props> = ({ href, title, subLinks, openState, openMenu }) => {
    const theme = useTheme()
 
    //* Spring animations
+
+   //TODO Issue
+   //! Fix issue to animate height from 0% to 100%
+   //const  = useSpring({
+   //   height: openState ? 'scaleY(1)' : 'scaleY(0)',
+   //   config: { ...config.wobbly }
+   //})
 
    return (
       <CustomLinkContainer>
@@ -57,20 +63,19 @@ const CustomLink: React.FC<Props> = ({ href, title, subLinks, openState, openMen
             }
          </CustomLinkStyle>
          {subLinks && 
-         <SubLinkContainer 
-         isOpen={openState}>
-            {subLinks.map((subLink, index) => (
-               <Link href={subLink.href} passHref key={index}>
-                  <SubLinkStyle key={index}>
-                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                     width="96" height="96"
-                     viewBox="0 0 48 48"
-                     style={{fill: theme.palete.textMain}}><path d="M 11.5 6 C 8.4802259 6 6 8.4802259 6 11.5 L 6 36.5 C 6 39.519774 8.4802259 42 11.5 42 L 36.5 42 C 39.519774 42 42 39.519774 42 36.5 L 42 11.5 C 42 8.4802259 39.519774 6 36.5 6 L 11.5 6 z M 11.5 9 L 36.5 9 C 37.898226 9 39 10.101774 39 11.5 L 39 36.5 C 39 37.898226 37.898226 39 36.5 39 L 11.5 39 C 10.101774 39 9 37.898226 9 36.5 L 9 11.5 C 9 10.101774 10.101774 9 11.5 9 z M 34.470703 11.986328 A 1.50015 1.50015 0 0 0 34.308594 12 L 23.5 12 A 1.50015 1.50015 0 1 0 23.5 15 L 30.878906 15 L 15.439453 30.439453 A 1.50015 1.50015 0 1 0 17.560547 32.560547 L 33 17.121094 L 33 24.5 A 1.50015 1.50015 0 1 0 36 24.5 L 36 13.689453 A 1.50015 1.50015 0 0 0 34.470703 11.986328 z"></path></svg>
-                     {subLink.title}
-                  </SubLinkStyle>
-               </Link>
-            ))}
-         </SubLinkContainer>
+            <SubLinkContainer isOpen={openState}>
+               {subLinks.map((subLink, index) => (
+                  <Link href={subLink.href} passHref key={index}>
+                     <SubLinkStyle key={index}>
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        width="96" height="96"
+                        viewBox="0 0 48 48"
+                        style={{fill: theme.palete.textMain}}><path d="M 11.5 6 C 8.4802259 6 6 8.4802259 6 11.5 L 6 36.5 C 6 39.519774 8.4802259 42 11.5 42 L 36.5 42 C 39.519774 42 42 39.519774 42 36.5 L 42 11.5 C 42 8.4802259 39.519774 6 36.5 6 L 11.5 6 z M 11.5 9 L 36.5 9 C 37.898226 9 39 10.101774 39 11.5 L 39 36.5 C 39 37.898226 37.898226 39 36.5 39 L 11.5 39 C 10.101774 39 9 37.898226 9 36.5 L 9 11.5 C 9 10.101774 10.101774 9 11.5 9 z M 34.470703 11.986328 A 1.50015 1.50015 0 0 0 34.308594 12 L 23.5 12 A 1.50015 1.50015 0 1 0 23.5 15 L 30.878906 15 L 15.439453 30.439453 A 1.50015 1.50015 0 1 0 17.560547 32.560547 L 33 17.121094 L 33 24.5 A 1.50015 1.50015 0 1 0 36 24.5 L 36 13.689453 A 1.50015 1.50015 0 0 0 34.470703 11.986328 z"></path></svg>
+                        {subLink.title}
+                     </SubLinkStyle>
+                  </Link>
+               ))}
+            </SubLinkContainer>
          }
       </CustomLinkContainer>
    )

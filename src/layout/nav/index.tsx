@@ -1,8 +1,9 @@
 import type { Dispatch, SetStateAction } from 'react'
-
 import { useEffect, useState } from 'react'
 import { a, useSpring, config } from '@react-spring/web'
 import { useTheme } from 'styled-components'
+
+import routes from '@routes'
 
 import Logo from '@public/images/global/big_whitebg.svg'
 import LogoMini from '@public/images/global/mini.svg'
@@ -21,9 +22,7 @@ type NavProps = {
    setMiniMenu: Dispatch<SetStateAction<boolean>>
 }
 
-//TODO think about and how to add more dynamic sublinks for some pages
-//TODO Improve svgs resolution and style 
-//TODO Improve performance and overall code quality/impact in website performance
+//TODO Has to improve SVG and other visual components quality 
 //TODO Look out for the spring values props typing conflicting with css props typing issue and fix it
 
 const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniMenu}) => {
@@ -127,28 +126,14 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
             <Logo id="logo"/>
             <LogoMini id="logo-mini"/>
             <NavSubSection>
-
-               {/* Start of modifiable content (nav links, may change in case new pages are added or something) */}
-
-               <LinkCustom href="/" name='Home' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/about" name='Sobre' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/team" name='Time' customStyle={{displayAfter: true}}
-               subLinks={[
-                  { name: 'Gestão', href: '/management' },
-                  { name: 'Conselho', href: '/council' }
-               ]} />
-               <LinkCustom href="/ong" name='ONGs' customStyle={{displayAfter: true}} 
-               subLinks={[
-                  { name: 'Arrastão', href: '/management' },
-               ]} />
-               <LinkCustom href="/donate" name='Doar' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/report" name='Relatorios' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/contact" name='Contato' customStyle={{displayAfter: true}} />
-               <LinkCustom href="/blog" name='Blog' customStyle={{displayAfter: true}} />
-
-               {/* End of modifiable content */}
-               {/* Static content (this shouldn't be changed, as it has any relation with the links above: just menu and theme buttons) */}
-
+               {routes.map((route, index) => (
+                  <LinkCustom
+                     key={index}
+                     href={route.path}
+                     name={route.name}
+                     subLinks={route.navSubLinks ? route.navSubLinks : undefined}
+                  />
+               ))}
                <NavMiniMenuButton 
                onClick={() => setMiniMenu(val => !val)}
                aria-label={`${miniMenuState ? `Close` : `Open`} mini page's menu`}>

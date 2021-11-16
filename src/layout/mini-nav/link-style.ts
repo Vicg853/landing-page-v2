@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { a } from '@react-spring/web'
 
 //* Main links style
 
@@ -66,19 +67,20 @@ export const SubLinkToggle = styled.button`
    cursor: zoom-in;
 `
 
-//* All about sublinks 
+//* All about subLinks 
 
-type SubLinkContainerProps = {
+type SubLinksContainerProps = {
    isOpen: boolean
 }
 
-export const SubLinkContainer = styled.div<SubLinkContainerProps>`
+export const SubLinkContainer = styled(a.div)<SubLinksContainerProps>`
    display: flex;
    align-items: flex-start;
    justify-content: flex-start;
    flex-direction: column;
    width: 100%;
    height: ${props => props.isOpen ? 'fit-content' : '0px'};
+   overflow: hidden;
 `
 
 export const SubLinkStyle = styled.a.attrs({

@@ -2,12 +2,17 @@
 import { config, useSpring, a, useChain, useSpringRef } from '@react-spring/web'
 import { useEffect, useState } from 'react'
 
+import routes from '@routes'
+
 import CustomLink from './link'
 import { Container } from './style'
 
 type MiniNavProps = {
    active: boolean
 }
+
+//TODO Finish intro and outro animations for mini-nav
+//TODO Add auto link generation
 
 const MiniNav: React.FC<MiniNavProps> = ({active}) => {
    
@@ -42,20 +47,29 @@ const MiniNav: React.FC<MiniNavProps> = ({active}) => {
       <Container active={active} 
       style={{...ContainerSpring, display: display ? 'flex' : 'none'}}>
          <div id="content">
-            <CustomLink href='/' title="Home" />
-            <CustomLink href="/team" title='Time'
-            openState={(subLinkOpenI && subLinkOpenI === 'team')? true : false} 
-            openMenu={() => setSubLinkOpenI(val => val === 'team' ? false : 'team')}
-            subLinks={[
-               { title: 'Gestão', href: '/management' },
-               { title: 'Conselho', href: '/council' }
-            ]} />
-            <CustomLink href="/ong" title='ONGs'
-            openState={(subLinkOpenI && subLinkOpenI === 'ong')? true : false}
-            openMenu={() => setSubLinkOpenI(val => val === 'ong' ? false : 'ong')}
-            subLinks={[
-               { title: 'Arrastão', href: '/management' },
-            ]} />
+            {routes.map((route, i) => {
+               if(route.navSubLinks && route.navSubLinks.length > 0) {
+                  return (
+                     <CustomLink
+                        key={i}
+                        href={route.path}
+                        title={route.name}
+                        subLinks={route.navSubLinks}
+                        openState={(subLinkOpenI && subLinkOpenI === (route.path + '-' + i).toString())? true : false}
+                        openMenu={() => setSubLinkOpenI(val => val === (route.path + '-' + i).toString() ? 
+                           false : (route.path + '-' + i).toString())}
+                     />
+                  )
+               } else {
+                  return (
+                     <CustomLink
+                        key={i}
+                        href={route.path}
+                        title={route.name}
+                     />
+                  )
+               }
+            })}
          </div>
       </Container>
    );
