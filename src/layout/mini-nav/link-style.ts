@@ -70,7 +70,7 @@ export const SubLinkToggle = styled.button`
 //* All about subLinks 
 
 type SubLinksContainerProps = {
-   isOpen: boolean
+   isOpen?: boolean
 }
 
 export const SubLinkContainer = styled(a.div)<SubLinksContainerProps>`

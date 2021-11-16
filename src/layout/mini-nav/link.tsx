@@ -51,7 +51,7 @@ const CustomLink: React.FC<Props> = ({ href, title, subLinks, openState, openMen
                   {title}
                </a>
             </Link>
-            {subLinks && 
+            {(subLinks && openMenu) && 
                <SubLinkToggle 
                onClick={() => openMenu()}>
                   Sub-diretorios

@@ -2,6 +2,8 @@
 const { v4 } = require('uuid')
 const withPreact = require('next-plugin-preact');
 
+//TODO See how to set .env file as development when build:test command is ran and eventually to production when running build:prod
+
 module.exports = withPreact({
   reactStrictMode: true,
   swcMinify: true,
