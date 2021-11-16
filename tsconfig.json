@@ -24,7 +24,7 @@
       "@icons/*": ["./public/icons/*"],
       "@images/*": ["./public/images/*"],
       "@manifest/*": ["./public/manifest/*"],
-      
+      "@routes": ["./routes.ts"],
     },
   },
   "include": ["next-env.d.ts", "styled.d.ts", "**/*.ts", "**/*.tsx", "./src/*"],
