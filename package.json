@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:test": "next build",
+    "build:test": "env-cmd -f .env.development.local next build && next start",
     "build:prod": "next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
@@ -14,6 +14,7 @@
     "@react-spring/three": "^9.3.0",
     "@react-spring/web": "^9.3.0",
     "axios": "^0.24.0",
+    "env-cmd": "^10.1.0",
     "next": "^12.0.4-canary.0",
     "next-page-transitions": "^1.0.0-beta.2",
     "next-plugin-preact": "^3.0.6",

@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const { v4 } = require('uuid')
-const withPreact = require('next-plugin-preact');
-
-//TODO See how to set .env file as development when build:test command is ran and eventually to production when running build:prod
+const withPreact = require('next-plugin-preact')
 
 module.exports = withPreact({
   reactStrictMode: true,
