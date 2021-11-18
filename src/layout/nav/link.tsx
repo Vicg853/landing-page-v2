@@ -24,8 +24,7 @@ type LinkProps = {
 }
 
 //TODO Improve animation and style
-//TODO Fix
-//! Issue where sub menus overflow screen 
+
 
 const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) => {
    const [isOpen, setIsOpen] = useState(false)

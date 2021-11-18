@@ -1,32 +1,4 @@
-interface PermanentProps {
-  readonly name: string,
-  readonly path: string,
-  readonly navShow: boolean,
-  readonly appearOnRobotsTXT: boolean,
-  readonly siteMapOptions: {
-    priority: number,
-    changeFreq: string,
-    lastMod: string,
-  },
-}
-
-type OptionalProps = {
-  readonly seo?: {
-    description?: string,
-    title?: string,
-    keywords?: string,
-    author?: string,
-    canonical?: string,
-  }
-  readonly navSubLinks?: Array<{
-    title: string,
-    href: string,
-  }>
-}
-
-//TODO Create type file for the props 
-
-export type PropsCombined = Array<PermanentProps & OptionalProps>
+import type { PropsCombined } from './types/routes'
 
 const pages: PropsCombined = [
    { 
