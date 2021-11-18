@@ -16,8 +16,7 @@ export const LinkContainer = styled.div`
 //* Main link component style
 
 export type StylesProps = {
-   color?: string,
-   displayAfter?: boolean,
+   color?: string
 }
 
 
@@ -92,8 +91,12 @@ export const SubLinksContainer = styled(a.div)`
    top: 0;
    left: 0;
    z-index: 52;
+   min-width: 160px;
+   max-width: 98vw !important;
    .content{
       min-width: 160px;
+      max-width: 98vw !important;
+      width: fit-content;   
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -105,6 +108,8 @@ export const SubLinksContainer = styled(a.div)`
       backdrop-filter: blur(20px);
       padding: 0.5rem;
    }
+   transition: translateX 0s;
+   right: 0;
 `
 
 export const SubLinkItem = styled.a`
