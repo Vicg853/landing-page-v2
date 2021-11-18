@@ -1,5 +1,8 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
 
+//TODO Improve both mode palettes
+//! Caution, also look for components that don't follow palete rules and fix them
+// ! (or add add new item to palete to support them) (also check logos and add their version for it)
 export const Theme1: ThemeTyping = {
    palete: {
       background: '#FFFFFF',
@@ -12,9 +15,6 @@ export const Theme1: ThemeTyping = {
    }
 }
 
-//TODO Improve dark mode palete
-//! Caution, also look for components that don't follow palete rules and fix them
-// ! (or add add new item to palete to support them) (also check logos and add their version for it)
 export const Theme2: ThemeTyping = {
    palete: {
       background: '#000000',
@@ -31,8 +31,9 @@ export const GlobalStyle = createGlobalStyle`
    *{
       margin: 0px;
       padding: 0px;
-      -webkit-font-smoothing: antialiased !important;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
       text-rendering: optimizeLegibility !important;
+      -webkit-font-smoothing: antialiased !important;
       text-decoration-line: none;
       outline: none;
       font-family: "Montserrat";

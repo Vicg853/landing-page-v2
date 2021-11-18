@@ -12,7 +12,6 @@ type MiniNavProps = {
 }
 
 //TODO Finish intro and outro animations for mini-nav
-//TODO Add auto link generation
 
 const MiniNav: React.FC<MiniNavProps> = ({active}) => {
    
