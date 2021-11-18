@@ -28,6 +28,6 @@
       "@routes": ["./routes.ts"],
     },
   },
-  "include": ["types/next-env.d.ts", "types/styled.d.ts", "**/*.ts", "**/*.tsx", "./src/*"],
+  "include": ["next-env.d.ts", "types/styled.d.ts", "**/*.ts", "**/*.tsx", "./src/*"],
   "exclude": ["node_modules"]
 }
