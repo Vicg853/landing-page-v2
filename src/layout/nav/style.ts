@@ -81,7 +81,7 @@ export const NavSubSection = styled.section`
    z-index: 51;
 `
 
-//Nav buttons style: mini menu button and theme change
+//*Nav buttons style: mini menu button and theme change
 
 export const NavColorThemeButton = styled.button`
    width: 2.1rem;
@@ -91,7 +91,7 @@ export const NavColorThemeButton = styled.button`
    text-decoration-color: none;
    text-decoration-line: none;
    border: none;
-   background: ${props => props.theme.palete.bgContrast};
+   background: ${props => props.theme.palete.bgContrast + '20'};
    backdrop-filter: blur(10px);
    border-radius: 0.25rem;
    display: flex;

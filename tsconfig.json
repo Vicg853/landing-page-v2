@@ -20,6 +20,7 @@
       "@p-styles/*": ["./src/p-styles/*"],
       "@layout/*": ["./src/layout/*"],
       "@public/*": ["./public/*"],
+      "@p-images/*": ["./public/images/pages/*"],
       "@lotties/*": ["./public/lottie/*"],
       "@icons/*": ["./public/icons/*"],
       "@images/*": ["./public/images/*"],
