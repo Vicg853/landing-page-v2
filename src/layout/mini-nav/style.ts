@@ -10,12 +10,12 @@ export const Container = styled(a.div)<ContainerProps>`
    background: transparent;
    position: fixed;
    top: 0;
-   backdrop-filter: blur(10px);
+   backdrop-filter: ${props => props.theme.mods.blur};
    z-index: 47;
    overflow-x: hidden;
    overflow-y: scroll;
    padding: 0.4rem;
-   background-color: ${props => props.theme.palete.accent1 + '10'};
+   background-color: ${props => props.theme.palette.accent1 + '10'};
    ::-webkit-scrollbar {
       display: none;
    }

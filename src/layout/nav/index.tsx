@@ -135,10 +135,10 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                onClick={() => setMiniMenu(val => !val)}
                aria-label={`${miniMenuState ? `Close` : `Open`} mini page's menu`}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" >
-                     <a.rect y="9" x="5" width="90" height="6" rx="4" style={{...topSpringBurgBtn}} fill={theme.palete.textMain} />
-                     <a.rect y="37" x="5" width="90" height="6" rx="4" style={{...mid1SpringBurgBtn, transformOrigin: "center"}} fill={theme.palete.textMain} />
-                     <a.rect y="37" x="5" width="90" height="6" rx="4" style={{...mid2SpringBurgBtn, transformOrigin: "center"}} fill={theme.palete.textMain} />
-                     <a.rect y="65" x="5" width="90" height="6" rx="4" style={{...botSpringBurgBtn}} fill={theme.palete.textMain} />
+                     <a.rect y="9" x="5" width="90" height="6" rx="4" style={{...topSpringBurgBtn}} fill={theme.palette.textMain} />
+                     <a.rect y="37" x="5" width="90" height="6" rx="4" style={{...mid1SpringBurgBtn, transformOrigin: "center"}} fill={theme.palette.textMain} />
+                     <a.rect y="37" x="5" width="90" height="6" rx="4" style={{...mid2SpringBurgBtn, transformOrigin: "center"}} fill={theme.palette.textMain} />
+                     <a.rect y="65" x="5" width="90" height="6" rx="4" style={{...botSpringBurgBtn}} fill={theme.palette.textMain} />
                   </svg>
                </NavMiniMenuButton>
                <NavColorThemeButton 
@@ -150,8 +150,8 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                         <a.circle {...maskSpring} r="7" fill="black" />
                      </mask>
                      <a.circle {...moonSpring} cx="12" cy="12" 
-                        fill={theme.palete.textMain} mask="url(#moon-mask)" />
-                     <a.g stroke={theme.palete.textMain} style={groupSpring}>
+                        fill={theme.palette.textMain} mask="url(#moon-mask)" />
+                     <a.g stroke={theme.palette.textMain} style={groupSpring}>
                         <line x1="12" y1="1" x2="12" y2="3" />
                         <line x1="12" y1="21" x2="12" y2="23" />
                         <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />

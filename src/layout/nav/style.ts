@@ -18,10 +18,10 @@ export const NavContainer = styled.nav<NavProps>`
    padding-right: 5vw;
    background: transparent;
    overflow: visible;
-   z-index: 50;
+   z-index: ${props => props.theme.zIndexes.navMaster};
    #logo, #logo-mini{
       height: 50%;
-      z-index: 51;
+      z-index: ${props => props.theme.zIndexes.navContent};
       width: min-content;
       min-width: fit-content;
       display: none;
@@ -45,7 +45,7 @@ export const NavContainer = styled.nav<NavProps>`
       margin-left: ${props => props.scrolled ? "0" : "100vw"};
       border-bottom-left-radius: ${props => props.scrolled ? "0" : "100%"};
       background: transparent;
-      backdrop-filter: blur(10px);
+      backdrop-filter: ${props => props.theme.mods.blur};
       transition: 0.7s, backdrop-filter 0s;
    }
    @media (min-width: 1200px) {
@@ -66,7 +66,7 @@ export const NavContainer = styled.nav<NavProps>`
       #logo{ display: none; }
       #logo-mini{ display: block; }
       #background ::before {
-         backdrop-filter: ${props => props.miniMenuState ? "blur(0px)" : "blur(10px)"};
+         backdrop-filter: ${props => props.miniMenuState ? "blur(0px)" : props.theme.mods.blur};
       }
       ${LinkContainer} {
          display: none !important;
@@ -78,7 +78,7 @@ export const NavSubSection = styled.section`
    display: inline-flex;
    justify-content: center;
    align-items: center;
-   z-index: 51;
+   z-index: ${props => props.theme.zIndexes.navContent};
 `
 
 //*Nav buttons style: mini menu button and theme change
@@ -91,8 +91,8 @@ export const NavColorThemeButton = styled.button`
    text-decoration-color: none;
    text-decoration-line: none;
    border: none;
-   background: ${props => props.theme.palete.bgContrast + '20'};
-   backdrop-filter: blur(10px);
+   background: ${props => props.theme.palette.bgContrast + '20'};
+   backdrop-filter: ${props => props.theme.mods.blur};
    border-radius: 0.25rem;
    display: flex;
    cursor: pointer;

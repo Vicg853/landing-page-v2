@@ -58,11 +58,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
             {
                name: 'theme-color',
-               content: theme.palete.accent1,
+               content: theme.palette.accent1,
             },
             {
                name: 'msapplication-TileColor',
-               content: theme.palete.accent1,
+               content: theme.palette.accent1,
             },
             {
                name: 'msapplication-TileImage',

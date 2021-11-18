@@ -10,7 +10,7 @@ export const CustomLinkContainer = styled.div`
    flex-direction: column;
    width: 100%;
    height: fit-content;
-   background-color: ${props => props.theme.palete.accent3 + '20'};
+   background-color: ${props => props.theme.palette.accent3 + '20'};
    border-radius: 0.35rem;
    overflow: hidden;
    margin-top: 0.3rem;
@@ -27,7 +27,7 @@ export const CustomLinkStyle = styled.div<CustomLinkProps>`
    justify-content: flex-start;
    width: 100%;
    height: fit-content;
-   background-color: ${props => props.theme.palete.background};
+   background-color: ${props => props.theme.palette.background};
    padding-top: ${props => !props.hasSubLink ? '0.42rem' : '0rem'};
    padding-bottom: ${props => !props.hasSubLink ? '0.42rem' : '0rem'};
    border-radius: 0.35rem;
@@ -37,7 +37,7 @@ export const CustomLinkStyle = styled.div<CustomLinkProps>`
       flex-grow: 1;
       padding-left: 0.4rem;
       text-decoration: none;
-      color: ${props => props.theme.palete.textMain};
+      color: ${props => props.theme.palette.textMain};
       svg {
          margin-right: 0.5rem;
          width: 1rem;
@@ -50,8 +50,8 @@ export const SubLinkToggle = styled.button`
    display: inline-flex;
    align-items: center;
    padding: 0.4rem;
-   background-color: ${props => props.theme.palete.accent3};
-   color: ${props => props.theme.palete.textInverse};
+   background-color: ${props => props.theme.palette.accent3};
+   color: ${props => props.theme.palette.textInverse};
    width: fit-content;
    padding-right: 0.4rem;
    margin: 0.2rem;
@@ -99,7 +99,7 @@ export const SubLinkStyle = styled.a.attrs({
    margin-right: ${props => props.marginSides};
    height: fit-content;
    background: transparent;
-   color: ${props => props.theme.palete.textMain};
+   color: ${props => props.theme.palette.textMain};
    text-decoration: none;
    font-size: 0.86rem;
    svg {
