@@ -98,4 +98,6 @@ const pages: PropsCombined = [
    },
 ];
 
+export type {PropsCombined}
+
 export default pages

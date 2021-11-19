@@ -7,6 +7,7 @@ import { DefaultSeo } from 'next-seo'
 import { Theme1, Theme2, GlobalStyle } from "@components/global-style"
 import SEO from '../next-seo.config.js'
 import persistentState from '@components/persistentState'
+import routes from '@routes'
 
 //Importing Layout elements
 import Nav from '@layout/nav'
@@ -72,9 +73,9 @@ function MyApp({ Component, pageProps }: AppProps) {
          />
          <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Nav isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
+            <Nav routes={routes} isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
             miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
-            <MiniNav active={miniMenu} />
+            <MiniNav routes={routes} active={miniMenu} />
             <Component {...pageProps}/>
          </ThemeProvider>
      </>

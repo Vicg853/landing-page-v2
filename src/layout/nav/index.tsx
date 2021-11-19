@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { a, useSpring, config } from '@react-spring/web'
 import { useTheme } from 'styled-components'
 
-import routes from '@routes'
+import type {PropsCombined as RoutesProps} from '@routes'
 
 import Logo from '@public/images/global/big_whitebg.svg'
 import LogoMini from '@public/images/global/mini.svg'
@@ -19,10 +19,11 @@ type NavProps = {
    isDarkTheme: boolean,
    setTheme: Dispatch<SetStateAction<boolean>>,
    miniMenuState: boolean,
-   setMiniMenu: Dispatch<SetStateAction<boolean>>
+   setMiniMenu: Dispatch<SetStateAction<boolean>>,
+   routes: RoutesProps 
 }
 
-const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniMenu}) => {
+const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniMenu, routes}) => {
    const theme = useTheme()
 
    //**** React-spring animation's configs 
