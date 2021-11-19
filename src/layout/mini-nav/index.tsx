@@ -1,5 +1,5 @@
 
-import { config, useSpring, useChain, useSpringRef, useTrail } from '@react-spring/web'
+import { config, useSpring, useTrail } from '@react-spring/web'
 import { useState } from 'react'
 
 import type {PropsCombined as RouteProps} from '@routes'
@@ -12,13 +12,9 @@ type MiniNavProps = {
    routes: RouteProps
 }
 
-//TODO Finish intro and outro animations for mini-nav
-
 const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
    
    //* Control which of the subLinks menus are open
-   //? If there aren't any subLinks, then... well, this will be useless, so check out to make
-   //? this state's inclusion conditional
    const [subLinkOpenI, setSubLinkOpenI] = useState<string|false>(false)
    
    //* Elements spring animations configs and functions
@@ -30,15 +26,16 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
       shouldDisplay: active ? 1 : 0,
       borderBottomLeftRadius: active ? '0' : '150%',
       config: { ...config.wobbly, duration: 200 },
+      delay: active ? 0 : routes.length/3 * 50,
    })
-
    
    const linksTrail = useTrail(routes.length, {
       opacity: active ? 1 : 0,
-      x: active ? 0 : 10,
-      from: { opacity: 0, x: 20 },
-      config: { ...config.slow },
-   })
+      y: active ? 0 : 40,
+      from: { opacity: 0, y: 40 },
+      config: { ...config.stiff, duration: active ? 300 : 50 },
+      delay: active ? 200 : 0,
+   }) 
 
    return (
       <Container active={active} 
@@ -52,6 +49,7 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
                if(route.navSubLinks && route.navSubLinks.length > 0) {
                   return (
                      <CustomLink
+                        styles={{...linksTrail[i]}}
                         key={i}
                         href={route.path}
                         title={route.name}
@@ -64,6 +62,7 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
                } else {
                   return (
                      <CustomLink
+                        styles={{...linksTrail[i]}}
                         key={i}
                         href={route.path}
                         title={route.name}

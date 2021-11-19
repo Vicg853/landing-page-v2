@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useTheme } from 'styled-components'
-import { config, useSpring } from '@react-spring/web'
+import { useSpring, config } from '@react-spring/web'
 
 import {
    CustomLinkContainer,
@@ -13,6 +13,7 @@ import {
 interface LinkProps {
    href: string,
    title: string,
+   styles?: any,
 }
 
 type WithSubDirLinkProps = | { 
@@ -27,20 +28,11 @@ type WithSubDirLinkProps = | {
 
 type Props = LinkProps & WithSubDirLinkProps
 
-const CustomLink: React.FC<Props> = ({ href, title, subLinks, openState, openMenu }) => {
+const CustomLink: React.FC<Props> = ({ href, title, subLinks, openState, openMenu, styles }) => {
    const theme = useTheme()
 
-   //* Spring animations
-
-   //TODO Issue
-   //! Fix issue to animate height from 0% to 100%
-   //const  = useSpring({
-   //   height: openState ? 'scaleY(1)' : 'scaleY(0)',
-   //   config: { ...config.wobbly }
-   //})
-
    return (
-      <CustomLinkContainer>
+      <CustomLinkContainer style={{...styles}}>
          <CustomLinkStyle hasSubLink={(subLinks && subLinks?.length >= 0)}>
             <Link href={href} passHref>
                <a id="clickable-text" >

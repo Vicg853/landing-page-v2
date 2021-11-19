@@ -3,7 +3,7 @@ import { a } from '@react-spring/web'
 
 //* Main links style
 
-export const CustomLinkContainer = styled.div`
+export const CustomLinkContainer = styled(a.div)`
    display: flex;
    align-items: flex-start;
    justify-content: flex-start;
@@ -73,8 +73,7 @@ type SubLinksContainerProps = {
    isOpen?: boolean
 }
 
-export const SubLinkContainer = styled(a.div)<SubLinksContainerProps>`
-   display: flex;
+export const SubLinkContainer = styled.div<SubLinksContainerProps>`
    align-items: flex-start;
    justify-content: flex-start;
    flex-direction: column;
