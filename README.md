@@ -15,6 +15,12 @@ React streaming is not on!
 #### *Downloading:*
 Download/clone this repo in whichever method you prefer. Access the folders root...
 
+#### *Before running:*
+> In both cases you must create a env.development file by creating a ``` .env.development ``` file containing
+```environment
+  NEXT_PUBLIC_SITE_URL='http://localhost:3000'
+```
+
 #### *Installing deps.:*
 ```bash
 yarn 
@@ -35,7 +41,7 @@ Well, there are two ways to run the project, in ```production ``` mode or ```dev
 
   ...build time
   ```bash
-   yarn build:prod
+   yarn build:test
   ```
 
   ...runtime

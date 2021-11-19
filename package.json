@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:test": "env-cmd -f .env.development.local next build && next start",
+    "build:test": "env-cmd -f .env.development next build && next start",
     "build:prod": "next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
