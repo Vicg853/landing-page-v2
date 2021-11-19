@@ -1,16 +1,17 @@
 /** @type {import('next').NextConfig} */
 const { v4 } = require('uuid')
-const withPreact = require('next-plugin-preact')
+//TODO Add preact latter
+//const withPreact = require('next-plugin-preact')
 
-module.exports = withPreact({
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-  reactStrictMode: true,
   experimental: {
     //reactRoot: true,
     //concurrentFeatures: true,
     //serverComponents: true,
     //urlImports: ['https://example.com/modules/'], //New url imports feature
+    styledComponents: true,
   },
   images: {
     formats: ['image/avif', 'image/webp']
@@ -67,4 +68,4 @@ module.exports = withPreact({
   },
   **
   */
-})
+}
