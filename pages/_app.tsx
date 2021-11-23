@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider, ThemeTyping } from 'styled-components'
 import { DefaultSeo } from 'next-seo'
 
-import { Theme1, Theme2, GlobalStyle } from "@components/global-style"
+import { Theme1, Theme2, GlobalStyle, makeCssThemeVars } from "@components/global-style"
 import SEO from '../next-seo.config.js'
 import usePersistentState from '@components/usePersistentState'
 import routes from '@routes'
@@ -16,12 +16,17 @@ import MiniNav from '@layout/mini-nav'
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
-   const [theme, themeSet] = useState(Theme1)
+   
+   //TODO Remove this when css variables are supported
+   const [theme, themeSet] = useState<ThemeTyping>(Theme1)
+
+   const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode])
 
    //Mini menu state
    const [miniMenu, miniMenuSet] = useState(false)
 
    //To switch between themes easily
+   //TODO Remove this when css variables are supported
    useEffect(() => {
       isDarkMode ? themeSet(Theme2) : themeSet(Theme1)
    }, [isDarkMode])
@@ -70,12 +75,16 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
          ]}
          />
+         {/*//TODO Remove this when css variables are supported */}
          <ThemeProvider theme={theme}>
+         <div style={cssTheme}>
             <GlobalStyle />
             <Nav routes={routes} isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
             miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
+            {/* //TODO Check why all page components reloads when mini menu is opened */}
             <MiniNav routes={routes} active={miniMenu} />
             <Component {...pageProps}/>
+         </div>
          </ThemeProvider>
      </>
    )

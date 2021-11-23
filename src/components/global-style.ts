@@ -1,5 +1,7 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
 
+import { toFlatPropertyMap } from '@components/utils'
+
 const zIndexes = {
    navMaster: 50,
    navContent: 51,
@@ -76,11 +78,12 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 
-export const makeCssTheme = (jsTheme: ThemeTyping, namespace: string)  =>
-   Object.entries(jsTheme).reduce(
+export const makeCssThemeVars = (jsTheme: Object, namespace: string): Object  => {
+   const flattenedObject = toFlatPropertyMap(jsTheme)
+   return Object.entries(flattenedObject).reduce(
       (cssTheme, [key, value]) => ({
          ...cssTheme,
          [`--${namespace}-${key}`]: value
-      }),
-   {}
-);
+      }), {}
+   )
+}
