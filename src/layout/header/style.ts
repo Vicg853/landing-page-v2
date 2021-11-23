@@ -1,48 +1,52 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
-   display: flex;
-   justify-content: center;
+   display: inline-flex;
+   justify-content: space-between;
    align-items: center;
-   flex-direction: column;
    position: relative;
+   width: 100vw;
    height: 102vh;
-   z-index: 18;
+   z-index: var(--zIndex-headerMaster);
+   perspective: 1000px;
    #background {
       //TODO Fix this issue
       //! Weird issue where Next/img component has an internal size different than the
       //! requested one
-      width: 100vw !important;
-      height: 100vh !important;
+      width: 100% !important;
+      height: 100% !important;
       transform: scale(1.1);
-   }
-   :after{
-      z-index: 19;
-      content: "";
-      display: block;
-      width: 54vw;
-      height: 100%;
       position: absolute;
-      left: 0;
-      background: linear-gradient(145deg, rgba(30,29,69,0.870886025308561) 8%, rgba(141,160,226,0.45071795808167014) 50%, rgba(58,84,180,0.2294294426755077) 77%);
-      backdrop-filter: blur(1rem);
+      top: 0; right: 0; left: 0; bottom: 0;
+   }
+   #HeaderLogo {
+      z-index: var(--zIndex-headerContent);
+      opacity: 0.8;
+      transform: rotateX(-5deg) rotateY(-30deg) rotateZ(0deg) scaleZ(3);
+      margin-right: 10vw; 
+      
+   }
+   #HeaderLogo * {
+      backdrop-filter: var(--mods-blur);
    }
 `
 
 export const HeaderContent = styled.div.attrs({
-   paddingLeft: "10vw"
+   padding: "10vw"
 })`
-   position: absolute;
    left: 0;
-   width: 50vw;
-   height: fit-content;
-   z-index: 20;
+   width: 55vw;
+   height: 100%;
+   z-index: var(--zIndex-headerContent);
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: stretch;
-   padding-left: ${props => props.paddingLeft};
+   padding-left: ${props => props.padding};
+   padding-right: ${props => props.padding};
    color: #fff;
+   background: linear-gradient(145deg, rgba(30,29,69,0.870886025308561) 8%, rgba(141,160,226,0.45071795808167014) 50%, rgba(58,84,180,0.2294294426755077) 77%);
+   backdrop-filter: var(--mods-blur);
    h2{
       font-size: 3rem;
    }

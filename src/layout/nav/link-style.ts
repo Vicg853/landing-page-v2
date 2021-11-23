@@ -22,10 +22,10 @@ export type StylesProps = {
 
 export const LinkText = styled.span<StylesProps>`
    position: relative;
-   font-family: ${props => props.theme.fonts.secondary};
+   font-family: var(--fonts-secondary);
    text-decoration: none;
    width: fit-content;
-   color: ${props => props.color || props.theme.palette.textMain};
+   color: var(--palette-textMain);
    font-size: 1.15rem;
    font-weight: 400;
    display: flex;
@@ -66,18 +66,20 @@ export const LinkTextContainer = styled.a`
    perspective: 2000px;
    perspective-origin: 50% 50%;
    cursor: pointer;
-   z-index: ${props => props.theme.zIndexes.navDropdown + 1};
+   z-index: calc(var(--zIndex-navDropdown) + 1);
    :hover ${LinkText} {
       transform: 
          scale3d(1,1,1) rotateX(17deg) rotateY(-12deg) translate3d(-2px,-2px,11px);
-      background-color: ${props => props.theme.palette.accent1 + '10'};
-      box-shadow: 0.5px 0.5px ${props => props.theme.palette.accent1 + '10'},
-         1px 1px ${props => props.theme.palette.accent1 + '10'},
-         1.5px 1.5px ${props => props.theme.palette.accent1 + '10'},
-         2px 2px ${props => props.theme.palette.accent1 + '10'},
-         2.5px 2.5px ${props => props.theme.palette.accent1 + '10'},
-         3px 3px ${props => props.theme.palette.accent1 + '10'},
-         3.5px 3.5px ${props => props.theme.palette.accent1 + '10'};
+      background-color: var(--palette-accent1);
+      box-shadow: 0.5px 0.5px var(--palette-accent1),
+         1px 1px var(--palette-accent1),
+         1.5px 1.5px var(--palette-accent1),
+         2px 2px var(--palette-accent1),
+         2.5px 2.5px var(--palette-accent1),
+         3px 3px var(--palette-accent1),
+         3.5px 3.5px var(--palette-accent1);
+      backdrop-filter: opacity(0.1);
+      color: white;
       
       text-shadow: 0px 3px 2px rgba(150, 150, 150, 1);
    }
@@ -90,7 +92,7 @@ export const SubLinksContainer = styled(a.div)`
    padding-top: 2.3rem;
    top: 0;
    left: 0;
-   z-index: ${props => props.theme.zIndexes.navDropdown};
+   z-index: var(--zIndex-navDropdown);
    min-width: 160px;
    max-width: 98vw !important;
    .content{
@@ -101,11 +103,11 @@ export const SubLinksContainer = styled(a.div)`
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
-      background: ${props => props.theme.palette.background};
+      background: var(--palette-background);
       border-radius: 0.4rem;
       box-shadow: 0px 4px 16px rgb(46 41 51 / 4%), 
       0px 8px 24px rgb(71 63 79 / 5%);
-      backdrop-filter: ${props => props.theme.mods.blur};
+      backdrop-filter: var(--mods-blur);
       padding: 0.5rem;
    }
    transition: translateX 0s;
@@ -120,11 +122,11 @@ export const SubLinkItem = styled.a`
    padding-left: 0.8rem;
    padding-right: 0.8rem;
    text-decoration: none;
-   color: ${props => props.theme.palette.textMain};
+   color: var(--palette-textMain);
    margin-top: 0.2rem;
    margin-bottom: 0.2rem;
    :hover {
-      background: ${props => props.theme.palette.bgContrast};
+      background: var(--palette-bgContrast);
       cursor: pointer;
    }
 `

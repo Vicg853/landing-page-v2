@@ -61,7 +61,7 @@ export const GlobalStyle = createGlobalStyle`
       -webkit-font-smoothing: antialiased !important;
       text-decoration-line: none;
       outline: none;
-      font-family: ${props => props.theme.fonts.primary};
+      font-family: var(--fonts-primary);
       box-sizing: border-box; 
       background-repeat: no-repeat;
       transition-property: color, background, background-color;
@@ -70,7 +70,9 @@ export const GlobalStyle = createGlobalStyle`
    html{
       width: 100vw;
       overflow-x: hidden;
-      background-color: ${props => props.theme.palette.background};
+   }
+   #themeContainer{
+      background-color: var(--palette-background);
    }
    @media (prefers-reduced-motion: reduce) {
       transition: none;

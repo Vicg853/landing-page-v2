@@ -6,6 +6,7 @@ import {
 } from './style'
 
 import TestImage from '@p-images/index/test.jpg'
+import AlpesLogo from '@images/global/mini.svg'
 
 const Header = () => {
    return (
@@ -22,6 +23,7 @@ const Header = () => {
             <h2>Hello World from AlpesCap !</h2>
             <p>Nós somos a Alpes Capital, olá!!👋😉</p>
          </HeaderContent>
+         <AlpesLogo  id='HeaderLogo' />
       </HeaderContainer>
    )
 }

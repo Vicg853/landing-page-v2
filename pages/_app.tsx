@@ -16,20 +16,14 @@ import MiniNav from '@layout/mini-nav'
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
-   
-   //TODO Remove this when css variables are supported
-   const [theme, themeSet] = useState<ThemeTyping>(Theme1)
 
    const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode])
+   const cssZIndex = makeCssThemeVars(Theme1.zIndexes, 'zIndex')
+   const cssMods = makeCssThemeVars(Theme1.mods, 'mods')
+   const cssFonts = makeCssThemeVars(Theme1.fonts, 'fonts')
 
    //Mini menu state
    const [miniMenu, miniMenuSet] = useState(false)
-
-   //To switch between themes easily
-   //TODO Remove this when css variables are supported
-   useEffect(() => {
-      isDarkMode ? themeSet(Theme2) : themeSet(Theme1)
-   }, [isDarkMode])
 
    return (
      <>
@@ -63,11 +57,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
             {
                name: 'theme-color',
-               content: theme.palette.accent1,
+               content: isDarkMode ? Theme2.palette.accent1 : Theme1.palette.accent1,
             },
             {
                name: 'msapplication-TileColor',
-               content: theme.palette.accent1,
+               content: isDarkMode ? Theme2.palette.accent1 : Theme1.palette.accent1,
             },
             {
                name: 'msapplication-TileImage',
@@ -76,8 +70,9 @@ function MyApp({ Component, pageProps }: AppProps) {
          ]}
          />
          {/*//TODO Remove this when css variables are supported */}
-         <ThemeProvider theme={theme}>
-         <div style={cssTheme}>
+         
+         <div id="themeContainer" style={{
+            ...cssTheme, ...cssZIndex, ...cssMods, ...cssFonts}}>
             <GlobalStyle />
             <Nav routes={routes} isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
             miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
@@ -85,7 +80,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <MiniNav routes={routes} active={miniMenu} />
             <Component {...pageProps}/>
          </div>
-         </ThemeProvider>
+         
      </>
    )
 }
