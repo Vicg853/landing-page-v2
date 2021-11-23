@@ -115,7 +115,7 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
       }
       window.addEventListener("scroll", onScroll);
       return () => window.removeEventListener("scroll", onScroll);
-   }, [])
+   }, [windowCheck])
 
    return (
       <>

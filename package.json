@@ -8,7 +8,9 @@
     "build:test": "env-cmd -f .env.development next build && next start",
     "build:prod": "next build && next-sitemap",
     "start": "next start",
-    "lint": "next lint",
+    "lint:all": "next lint && stylelint './src/**/*.ts'",
+    "lint:next": "next lint",
+    "lint:style": "stylelint './src/**/*.ts'",
     "postbuild": "next-sitemap"
   },
   "dependencies": {
@@ -44,7 +46,10 @@
     "eslint-config-next": "12.0.4",
     "sharp": "^0.29.2",
     "stylelint": "^14.1.0",
+    "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-standard": "^24.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
     "typescript": "4.4.4",
     "uuid": "^8.3.2"
   }
