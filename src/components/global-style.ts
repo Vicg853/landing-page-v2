@@ -74,3 +74,13 @@ export const GlobalStyle = createGlobalStyle`
       transition: none;
    }
 `
+
+
+export const makeCssTheme = (jsTheme: ThemeTyping, namespace: string)  =>
+   Object.entries(jsTheme).reduce(
+      (cssTheme, [key, value]) => ({
+         ...cssTheme,
+         [`--${namespace}-${key}`]: value
+      }),
+   {}
+);
