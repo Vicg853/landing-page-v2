@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { ThemeProvider, ThemeTyping } from 'styled-components'
 import { DefaultSeo } from 'next-seo'
 
 import { Theme1, Theme2, GlobalStyle, makeCssThemeVars } from "@components/global-style"
@@ -10,20 +9,38 @@ import usePersistentState from '@components/usePersistentState'
 import routes from '@routes'
 
 //Importing Layout elements
-import Nav from '@layout/nav'
-import MiniNav from '@layout/mini-nav'
+import Navigation from '@layout/navigation'
+
+const ThemeProviderCSS: React.FC = ({ children }) => {
+   const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
+
+   {/* //! Look why is this not updating on first load using dark theme */}
+   const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode]) as React.CSSProperties
+   const cssZIndex = makeCssThemeVars(Theme1.zIndexes, 'zIndex') as React.CSSProperties
+   const cssMods = makeCssThemeVars(Theme1.mods, 'mods') as React.CSSProperties
+   const cssFonts = makeCssThemeVars(Theme1.fonts, 'fonts') as React.CSSProperties
+   return (
+      <div style={{
+         ...cssTheme, ...cssZIndex, ...cssMods, ...cssFonts}}>   
+         {console.log(cssTheme)}
+         <GlobalStyle />
+         <Navigation routes={routes} isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
+         {children}
+      </div>
+   )
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
    //Theme persistent state
+   {/*
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
 
-   const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode])
-   const cssZIndex = makeCssThemeVars(Theme1.zIndexes, 'zIndex')
-   const cssMods = makeCssThemeVars(Theme1.mods, 'mods')
-   const cssFonts = makeCssThemeVars(Theme1.fonts, 'fonts')
+   const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode]) as React.CSSProperties
+   const cssZIndex = makeCssThemeVars(Theme1.zIndexes, 'zIndex') as React.CSSProperties
+   const cssMods = makeCssThemeVars(Theme1.mods, 'mods') as React.CSSProperties
+   const cssFonts = makeCssThemeVars(Theme1.fonts, 'fonts') as React.CSSProperties
 
-   //Mini menu state
-   const [miniMenu, miniMenuSet] = useState(false)
+*/}
 
    return (
      <>
@@ -47,7 +64,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             `}
             </script>
          </Head>
-         <DefaultSeo 
+         {/*<DefaultSeo 
          titleTemplate='%s | AlpesCap'
          {...SEO}
          additionalMetaTags={[
@@ -69,18 +86,15 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
          ]}
          />
-         {/*//TODO Remove this when css variables are supported */}
-         
          <div id="themeContainer" style={{
             ...cssTheme, ...cssZIndex, ...cssMods, ...cssFonts}}>
             <GlobalStyle />
-            <Nav routes={routes} isDarkTheme={isDarkMode} setTheme={isDarkModeToggle} 
-            miniMenuState={miniMenu} setMiniMenu={miniMenuSet}/>
-            {/* //TODO Check why all page components reloads when mini menu is opened */}
-            <MiniNav routes={routes} active={miniMenu} />
-            <Component {...pageProps}/>
-         </div>
-         
+            <Navigation routes={routes} isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
+            <Component {...pageProps} />
+         </div> */}
+         <ThemeProviderCSS>
+            <Component {...pageProps} />
+         </ThemeProviderCSS>
      </>
    )
 }

@@ -1,4 +1,4 @@
-
+import { memo } from 'react'
 import { config, useSpring, useTrail } from '@react-spring/web'
 import { useState } from 'react'
 
@@ -75,4 +75,4 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
    );
 }
 
-export default MiniNav
+export default memo(MiniNav)
