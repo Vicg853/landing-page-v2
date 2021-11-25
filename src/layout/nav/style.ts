@@ -36,17 +36,17 @@ export const NavContainer = styled.nav<NavProps>`
       width: 100%;
       height: 100%;
       overflow: hidden;
-   }
-   #background ::before{
-      display: block;
-      content: "";
-      width: ${props => props.scrolled ? "100vw" : "0"};
-      height: ${props => props.scrolled ? "6rem" : "0"};
-      margin-left: ${props => props.scrolled ? "0" : "100vw"};
-      border-bottom-left-radius: ${props => props.scrolled ? "0" : "100%"};
-      background: transparent;
-      backdrop-filter: var(--mod-blur);
-      transition: 0.7s, backdrop-filter 0s;
+      ::before{
+         display: block;
+         content: "";
+         width: ${props => props.scrolled ? "100vw" : "0"};
+         height: ${props => props.scrolled ? "6rem" : "0"};
+         margin-left: ${props => props.scrolled ? "0" : "100vw"};
+         border-bottom-left-radius: ${props => props.scrolled ? "0" : "100%"};
+         background: transparent;
+         backdrop-filter: var(--mods-blur);
+         transition: 0.4s, backdrop-filter 0s;
+      }
    }
    @media (min-width: 1200px) {
       #logo{ display: block; }
@@ -65,8 +65,10 @@ export const NavContainer = styled.nav<NavProps>`
    @media (max-width: 760px) {
       #logo{ display: none; }
       #logo-mini{ display: block; }
-      #background ::before {
-         backdrop-filter: ${props => props.miniMenuState ? "blur(0px)" : 'var(--mods-blur)'};
+      #background {
+         ::before {
+            backdrop-filter: ${props => props.miniMenuState ? "blur(0px)" : 'var(--mods-blur)'};
+         }
       }
       ${LinkContainer} {
          display: none !important;
