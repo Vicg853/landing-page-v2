@@ -1,47 +1,29 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 
-import { Theme1, Theme2, GlobalStyle, makeCssThemeVars } from "@components/global-style"
+import { GlobalStyle, Theme1, Theme2 } from "@components/global-style"
 import SEO from '../next-seo.config.js'
 import usePersistentState from '@components/usePersistentState'
+import CssThemeProvider from '@components/CssThemeProvider'
 import routes from '@routes'
 
 //Importing Layout elements
 import Navigation from '@layout/navigation'
 
-const ThemeProviderCSS: React.FC = ({ children }) => {
+const WithThemeProvider: React.FC = ({ children }) => {
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
 
-   {/* //! Look why is this not updating on first load using dark theme */}
-   const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode]) as React.CSSProperties
-   const cssZIndex = makeCssThemeVars(Theme1.zIndexes, 'zIndex') as React.CSSProperties
-   const cssMods = makeCssThemeVars(Theme1.mods, 'mods') as React.CSSProperties
-   const cssFonts = makeCssThemeVars(Theme1.fonts, 'fonts') as React.CSSProperties
    return (
-      <div style={{
-         ...cssTheme, ...cssZIndex, ...cssMods, ...cssFonts}}>   
-         {console.log(cssTheme)}
-         <GlobalStyle />
+      <CssThemeProvider theme={isDarkMode ? Theme2 : Theme1} defaultTheme={Theme1}>
          <Navigation routes={routes} isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
          {children}
-      </div>
+      </CssThemeProvider>
    )
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-   //Theme persistent state
-   {/*
-   const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
-
-   const cssTheme = useMemo(() => makeCssThemeVars(isDarkMode ? Theme2.palette : Theme1.palette, 'palette'), [isDarkMode]) as React.CSSProperties
-   const cssZIndex = makeCssThemeVars(Theme1.zIndexes, 'zIndex') as React.CSSProperties
-   const cssMods = makeCssThemeVars(Theme1.mods, 'mods') as React.CSSProperties
-   const cssFonts = makeCssThemeVars(Theme1.fonts, 'fonts') as React.CSSProperties
-
-*/}
-
    return (
      <>
          <Head>
@@ -74,7 +56,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
             {
                name: 'theme-color',
-               content: isDarkMode ? Theme2.palette.accent1 : Theme1.palette.accent1,
+               content:   
+               getComputedStyle(document.getElementById('themeContainer')).getPropertyValue('--theme-color'),
             },
             {
                name: 'msapplication-TileColor',
@@ -85,16 +68,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                content: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/ms-icon-150x150.png',
             },
          ]}
-         />
-         <div id="themeContainer" style={{
-            ...cssTheme, ...cssZIndex, ...cssMods, ...cssFonts}}>
+         />*/}
+         <WithThemeProvider>
             <GlobalStyle />
-            <Navigation routes={routes} isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
             <Component {...pageProps} />
-         </div> */}
-         <ThemeProviderCSS>
-            <Component {...pageProps} />
-         </ThemeProviderCSS>
+         </WithThemeProvider>
      </>
    )
 }

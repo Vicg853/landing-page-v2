@@ -1,16 +1,32 @@
+//!Improve overall typing (maybe adding declaration files)
+//! typing improvement for functions: toFlatPropertyMap, makeCssThemeVars
+
 //*Flattens an object into a single level 
 //?Code from https://stackoverflow.com/a/65883097/11699778 , thx to gkunz on StackOverflow
 export function toFlatPropertyMap(obj: object, keySeparator = '.') {
-   const flattenRecursive = (obj: object, parentProperty?: string, propertyMap: Record<string, unknown> = {}) => {
-     for(const [key, value] of Object.entries(obj)){
-       const property = parentProperty ? `${parentProperty}${keySeparator}${key}` : key;
-       if(value && typeof value === 'object'){
-         flattenRecursive(value, property, propertyMap);
-       } else {
-         propertyMap[property] = value;
-       }
-     }
-     return propertyMap;
-   };
-   return flattenRecursive(obj);
+  	const flattenRecursive = (obj: object, parentProperty?: string, propertyMap: Record<string, unknown> = {}) => {
+    	for(const [key, value] of Object.entries(obj)){
+      	const property = parentProperty ? `${parentProperty}${keySeparator}${key}` : key;
+      	if(value && typeof value === 'object'){
+				//TODO fix problem where where depending on object's depth is to high it will 
+				//! return a default "." separator 
+        		flattenRecursive(value, property, propertyMap);
+      	} else {
+        		propertyMap[property] = value;
+	      }
+    	}
+    	return propertyMap;
+  	};
+  	return flattenRecursive(obj);
+}
+
+//* Creates css vars in: "--varName: value;" format
+export const makeCssThemeVars = (jsTheme: Object, namespace?: string): Object  => {
+   const flattenedObject = toFlatPropertyMap(jsTheme, '-');
+   return Object.entries(flattenedObject).reduce(
+      (cssTheme, [key, value]) => ({
+         ...cssTheme,
+         [`--${namespace ? `${namespace}-` : ``}${key}`]: value
+      }), {}
+   )
 }
