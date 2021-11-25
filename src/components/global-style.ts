@@ -1,7 +1,5 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
 
-import { toFlatPropertyMap } from '@components/utils'
-
 const zIndexes = {
    navMaster: 50,
    navContent: 51,
@@ -32,7 +30,7 @@ export const Theme1: ThemeTyping = {
       textMain: '#1E1D45',
       textInverse: '#FFFFFF'
    },
-   zIndexes: {...zIndexes},
+   zIndex: {...zIndexes},
    mods: {...mods},
    fonts: {...fonts}
 }
@@ -47,7 +45,7 @@ export const Theme2: ThemeTyping = {
       textMain: '#FFFFFF',
       textInverse: '#1E1D45'
    },
-   zIndexes: {...zIndexes},
+   zIndex: {...zIndexes},
    mods: {...mods},
    fonts: {...fonts}
 }
@@ -78,14 +76,3 @@ export const GlobalStyle = createGlobalStyle`
       transition: none;
    }
 `
-
-
-export const makeCssThemeVars = (jsTheme: Object, namespace: string): Object  => {
-   const flattenedObject = toFlatPropertyMap(jsTheme)
-   return Object.entries(flattenedObject).reduce(
-      (cssTheme, [key, value]) => ({
-         ...cssTheme,
-         [`--${namespace}-${key}`]: value
-      }), {}
-   )
-}

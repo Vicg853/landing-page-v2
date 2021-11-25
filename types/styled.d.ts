@@ -12,7 +12,7 @@ declare module 'styled-components' {
          textMain: string
          textInverse: string
       }
-      zIndexes: {
+      zIndex: {
          navMaster: number
          navContent: number
          navDropdown: number
