@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build:test:vercel": "next build",
-    "build:test": "env-cmd -f .env.development next build && next start",
+    "build:test": "env-cmd -f .env.development.local next build && next start",
     "build:prod": "next build && next-sitemap",
     "start": "next start",
     "lint:all": "next lint && stylelint './src/**/*.ts'",
@@ -21,7 +21,7 @@
     "@react-spring/three": "^9.3.0",
     "@react-spring/web": "^9.3.0",
     "axios": "^0.24.0",
-    "next": "^12.0.5-canary.8",
+    "next": "^12.0.5-canary.10",
     "next-page-transitions": "^1.0.0-beta.2",
     "next-plugin-preact": "^3.0.6",
     "next-seo": "^4.28.1",
