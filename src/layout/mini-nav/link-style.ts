@@ -16,6 +16,7 @@ export const CustomLinkContainer = styled(a.div)`
    overflow: hidden;
    margin-top: 0.3rem;
    margin-bottom: 0.3rem;
+   max-width: 760px;
 `
 
 type CustomLinkProps = {

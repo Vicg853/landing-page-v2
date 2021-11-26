@@ -43,14 +43,12 @@ module.exports = {
     return config;
   },
   async rewrites() {
-    return {
-      fallback: [
-        {
-          source: '/:path',
-          destination: 'https://alpescap.com.br/:path',
-        }
-      ]
-    }
+    return [
+      {
+        source: '/:path',
+        destination: 'https://alpescap.com.br/:path',
+      }
+    ]
   },
 
   //! Get more info about using this for sercrets, good resource in the future to maybe create inner api to get posts directly from the server

@@ -74,6 +74,11 @@ export const NavContainer = styled.nav<NavProps>`
          display: none !important;
       }
    }
+   @media (min-width: 3300px) {
+      width: 100vw;
+      padding-left: calc((100vw - 3000px) / 2);
+      padding-right: calc((100vw - 3000px) / 2);
+   }
 `
 
 export const NavSubSection = styled.section`

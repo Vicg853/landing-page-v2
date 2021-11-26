@@ -54,11 +54,14 @@ Well, there are two ways to run the project, in ```production ``` mode or ```dev
 ## Main stack and references
 
 - React: javascript framework to create UI - version 18.0.0-alpha
-- NextJS: React based web framework - version: 12.0.2-canary.14 
+- NextJS: React based web framework - version: 12.0.5-canary.10
 - styled-component: CSS-in-JS framework for react - version: 5.3.3
 - typescript: strong typing javascript based language - version: 4.4.4
 
 > other secondary dependencies and dev dependencies can be seen in the [```package.json```](https://github.com/Alpes-Capital/landingPage/blob/landing-page-v2/package.json) file
 
+
+## Contributors to this project
+- [@Vicg853]( https://github.com/Vicg853 )
 
 

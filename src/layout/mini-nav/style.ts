@@ -26,7 +26,8 @@ export const Container = styled(a.div)<ContainerProps>`
       margin-top: 6rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: flex-start;
       padding: 0.5rem;
    }
    @media (min-width: 760px) {
