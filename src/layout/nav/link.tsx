@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import type { SpringValues } from '@react-spring/web'
 import { config, useSpring } from '@react-spring/web'
 
-import type { StylesProps } from './link-style'
 import { 
    LinkContainer, 
-   LinkText, 
-   LinkTextContainer,
+   LinkText,
    SubLinksContainer,
    SubLinkItem
 } from './link-style'
@@ -16,17 +14,13 @@ import {
 type LinkProps = {
    href: string
    name: string
-   customStyle?: StylesProps
    subLinks?: Array<{
       title: string,
       href: string,
    }>
 }
 
-//TODO Improve animation and style
-
-
-const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) => {
+const LinkCustom: React.FC<LinkProps> = ({ href, name, subLinks }) => {
    const [isOpen, setIsOpen] = useState(false)
    const [offsetState, offsetStateSet] = useState<number>(0)
 
@@ -38,16 +32,15 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) 
          'translateY(0)' : 
          'translateY(-2rem)',
       opacity: isOpen ? 1 : 0,
-      visibility: isOpen ? 'visible' : 'hidden',
+      shouldDisplay: isOpen ? 1 : 0,
       config: { ...config.stiff },
-   }) as SpringValues<{ opacity: number; visibility: "visible" | "hidden"; transform: string }>
+   }) as SpringValues<{ opacity: number; transform: string; shouldDisplay: number }>
 
    let windowInnerWidth = typeof window !== 'undefined' 
       ? window.innerWidth : 0
 
-   //TODO Improve performance
    useEffect(() => {
-      if(!window || !containerRef.current || !isOpen) return
+      if(!window || !containerRef.current || !isOpen || !subLinks) return
 
       //? As the subLinks menu is inside a parent component which width is lower than it's width
       //? we must first get the subLinks ref's width and then in the line underneath we then get
@@ -58,26 +51,34 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) 
 
       let windowPaddingLeft = (windowInnerWidth * 0.02)
       let windowWithPaddingRight = windowInnerWidth - (windowInnerWidth * 0.02)
+      
       //? Checking now if the component overflows the screen 
       if(offsetLeft + componentWidth 
          > windowWithPaddingRight) offsetStateSet(windowWithPaddingRight - (offsetLeft + componentWidth))
       else if(offsetLeft < windowPaddingLeft) offsetStateSet(-(windowPaddingLeft - offsetLeft))
       else offsetStateSet(0)
-   }, [windowInnerWidth])
+   }, [windowInnerWidth, subLinks, isOpen])
 
    return (
       <LinkContainer ref={containerRef}>
          <Link href={href} passHref>
-            <LinkTextContainer
-            onMouseOut={() => setIsOpen(false)}
-            onMouseOver={() => setIsOpen(true)}>
-               <LinkText {...customStyle}>{name}</LinkText>
-            </LinkTextContainer>
+            {subLinks ? 
+            (<LinkText
+               onMouseOut={() => setIsOpen(false)}
+               onMouseOver={() => setIsOpen(true)}
+               isActive={isOpen}>
+               <span>{name}</span>
+            </LinkText>)
+            : (<LinkText><span>{name}</span></LinkText>) }
          </Link>
          {subLinks && (
             <SubLinksContainer 
             ref={subContainerRef}
-            style={{...subMenuSpring, translateX: offsetState.toString() + 'px'}}
+            style={{...subMenuSpring, translateX: offsetState.toString() + 'px',
+               display: subMenuSpring
+                  .shouldDisplay
+                  .to((shouldDisplay) => shouldDisplay === 0 ? 'none' : 'initial') 
+            }}
             onMouseOut={() => setIsOpen(false)}
             onMouseOver={() => setIsOpen(true)}>
                <div className='content'>
@@ -94,4 +95,4 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, customStyle, subLinks }) 
    )
 }
 
-export default LinkCustom
+export default memo(LinkCustom)

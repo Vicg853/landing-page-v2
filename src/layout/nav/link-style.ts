@@ -15,73 +15,46 @@ export const LinkContainer = styled.div`
 
 //* Main link component style
 
-export type StylesProps = {
-   color?: string
+type LinkProps = {
+   isActive?: boolean
 }
 
-
-export const LinkText = styled.span<StylesProps>`
+export const LinkText = styled.a<LinkProps>`
    position: relative;
-   font-family: var(--fonts-secondary);
-   text-decoration: none;
    width: fit-content;
-   color: var(--palette-textMain);
-   font-size: 1.15rem;
-   font-weight: 400;
+   padding: 0.5rem;
    display: flex;
    flex-direction: column;
-   justify-content: space-between;
+   justify-content: center;
    align-items: center;
-   overflow: visible;
-   transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-   background: transparent;
-   border-radius: 6px;
-   padding-top: 0.1rem;
-   padding-bottom: 0.1rem;
-   padding-left: 0.5rem;
-   padding-right: 0.5rem;
-   :after, :before {
-      content: '';
-      background: grey;
-      position: absolute;
-   }
-   :after {
-      width: 100%;
-      height: 20px;
-      left: 10px;
-      bottom: 0;
-      transform: translateY(100%) rotateX(90deg);
-   }
-   :before {
-      width: 20px;
-      height: 100%;
-      right: 0;
-      transform: translateX(100%) rotateY(90deg);
-      top: 10px;
-   }
-`
-
-export const LinkTextContainer = styled.a`
-   display: block;
-   perspective: 2000px;
-   perspective-origin: 50% 50%;
-   cursor: pointer;
    z-index: calc(var(--zIndex-navDropdown) + 1);
-   :hover ${LinkText} {
-      transform: 
-         scale3d(1,1,1) rotateX(17deg) rotateY(-12deg) translate3d(-2px,-2px,11px);
-      background-color: var(--palette-accent1);
-      box-shadow: 0.5px 0.5px var(--palette-accent1),
-         1px 1px var(--palette-accent1),
-         1.5px 1.5px var(--palette-accent1),
-         2px 2px var(--palette-accent1),
-         2.5px 2.5px var(--palette-accent1),
-         3px 3px var(--palette-accent1),
-         3.5px 3.5px var(--palette-accent1);
-      backdrop-filter: opacity(0.1);
-      color: white;
-      
-      text-shadow: 0px 3px 2px rgba(150, 150, 150, 1);
+   overflow: hidden;
+   text-decoration-color: unset;
+   text-decoration-line: unset;
+   color: var(--palette-textMain);
+   font-family: var(--fonts-secondary);
+   font-size: 1rem;
+   line-height: 0.9rem;
+   font-weight: 500;
+   cursor: pointer;
+   span {
+      display: relative;
+      z-index: calc(var(--zIndex-navDropdown));
+   }
+   :hover {
+      :before {
+         opacity: 0.7;
+      }
+   }
+   ::before {
+      content: '';
+      position: absolute;
+      width: calc(100% - 0.23rem);
+      height: calc(100% - 0.47rem);
+      border-radius: 0.25rem;
+      background-color: var(--palette-bgContrast);
+      opacity: ${props => props.isActive ? '0.7' : '0'};
+      transition: opacity 0.2s linear;
    }
 `
 
