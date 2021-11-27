@@ -96,6 +96,17 @@ const pages: PropsCombined = [
         lastMod: "never",
       }
    },
+   { 
+    name: "Politicas", 
+    path: "/policies" ,
+    navShow: false,
+    appearOnRobotsTXT: false,
+    siteMapOptions: {
+      priority: 1,
+      changeFreq: "never",
+      lastMod: "never",
+    }
+ },
 ];
 
 export type {PropsCombined}

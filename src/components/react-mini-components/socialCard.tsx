@@ -16,22 +16,22 @@ export const Container = styled.a`
    justify-content: flex-start;
    align-items: center; 
    border-radius: 0.36rem;
-   padding-left: 0.6rem;
-   padding-right: 0.6rem;
+   padding-left: 0.7rem;
+   padding-right: 0.7rem;
    background-color: var(--palette-background);
    backdrop-filter: blur(10px);
-   margin: 0.4rem;
+   margin: 0.3rem;
    title {
       display: block;
       font-size: 0.8rem;
-      font-weight: 200;
+      font-weight: 600;
       color: var(--palette-textMain);
       text-decoration: none;
       margin-left: 0.6rem; 
    }
-   .icon{
-      width: 1.4rem;
-      height: 1.4rem;
+   img{
+      width: 1.25rem !important;
+      height: 1.25rem !important;
    }
 `
 
@@ -42,7 +42,7 @@ const SocialCard: React.FC<ComponentProps> = ({iconUrl, text, url, alt}, ...prop
    return (
       <>
          <Container href={url} {...props}>
-            <Image src={iconUrl} className='icon' 
+            <Image width="1.4rem" height="1.4rem" src={iconUrl}
                alt={alt ? `Ilustração de card social para ${alt}.` : 
                'Ilustração de card social para visitar uma de nossas redes!'} 
             />
