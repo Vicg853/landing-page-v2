@@ -11,6 +11,7 @@ import routes from '@routes'
 
 //Importing Layout elements
 import Navigation from '@layout/navigation'
+import Footer from '@layout/footer'
 
 const WithThemeProvider: React.FC = ({ children }) => {
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
@@ -72,6 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
          <WithThemeProvider>
             <GlobalStyle />
             <Component {...pageProps} />
+            <Footer />
          </WithThemeProvider>
      </>
    )
