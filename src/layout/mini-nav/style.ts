@@ -1,5 +1,6 @@
 import { a } from "@react-spring/web"
 import styled from "styled-components"
+import { transparentize, cssVar } from 'polished'
 
 type ContainerProps = {
    active: boolean,
@@ -15,8 +16,8 @@ export const Container = styled(a.div)<ContainerProps>`
    overflow-x: hidden;
    overflow-y: scroll;
    padding: 0.4rem;
-   background-color: var(--palette-accent1);
-   backdrop-filter: opacity(0.1);
+   background-color: ${transparentize(0.7, cssVar('--palette-accent1', '#8DA0E2') as string)};
+   backdrop-filter: var(--mods-blur);
    ::-webkit-scrollbar {
       display: none;
    }
