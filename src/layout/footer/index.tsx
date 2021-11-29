@@ -57,7 +57,7 @@ const Footer = () => {
                <HorizontalLineIcons class='horizontalLine' />
             </div>
             <div className='footerContentSections'>
-               <span data-name="title"><ExternalLinkIcon />Links externos</span>
+               <span data-name="title"><ExternalLinkIcon />Links uteís + referencias</span>
                <ReferenceLink>
                   <a href='https://icons8.com/'> &#8594; Icons8</a>
                   <span>Esse site usa lindos icónes de Icons 8</span>
@@ -65,6 +65,14 @@ const Footer = () => {
                <ReferenceLink>
                   <a href='https://unsplash.com/'> &#8594; Unsplash</a>
                   <span>Usamos algumas imagens fornecidas por Unsplash</span>
+               </ReferenceLink>
+               <ReferenceLink>
+                  <Link href='/site-stack' passHref><a>&#8594; Techstack</a></Link>
+                  <span> Stack tecnologica e referencias a elas usadas para o site</span>
+               </ReferenceLink>
+               <ReferenceLink>
+                  <Link href='/site-and-cookies' passHref><a>&#8594; Cookies & dados</a></Link>
+                  <span>Informação sobre uso de cookies e outros dados coletados no site</span>
                </ReferenceLink>
                <HorizontalLineIcons class='horizontalLine' />
             </div>
