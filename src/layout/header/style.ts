@@ -10,9 +10,11 @@ export const HeaderContainer = styled.header`
    z-index: var(--zIndex-headerMaster);
    perspective: 1000px;
    #background {
+      /*
       //TODO Fix this issue
       //! Weird issue where Next/img component has an internal size different than the
       //! requested one
+      */
       width: 100% !important;
       height: 100% !important;
       transform: scale(1.1);

@@ -11,7 +11,6 @@ export const Container = styled(a.div)<ContainerProps>`
    background: transparent;
    position: fixed;
    top: 0;
-   backdrop-filter: var(--mods-blur);
    z-index: calc(var(--zIndex-navMaster) - 1);
    overflow-x: hidden;
    overflow-y: scroll;

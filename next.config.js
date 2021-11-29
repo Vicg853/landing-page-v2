@@ -39,19 +39,6 @@ module.exports = {
         },
       ],
     })
-    config.module.rules.push({
-      test: /\.js$/,
-      
-      use: [
-        { loader: 'babel-loader' },
-        {
-          loader: '@linaria/webpack-loader',
-          options: {
-            sourceMap: process.env.NODE_ENV !== 'production',
-          },
-        }
-      ],
-    })
 
     return config
   },
