@@ -1,4 +1,6 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
+import { cssVarsRootProps } from '@components/CssThemeProvider'
+import { transparentize } from 'polished'
 
 const zIndexes = {
    navMaster: 50,
@@ -28,7 +30,16 @@ export const Theme1: ThemeTyping = {
       accent2: '#3A54B4',
       accent3: '#8DA0E2',
       textMain: '#1E1D45',
-      textInverse: '#FFFFFF'
+      textInverse: '#FFFFFF',
+      opaque: {
+         background: transparentize(0.6, '#FFFFFF'),
+         bgContrast: transparentize(0.6, '#f5f5f5'),
+         accent1: transparentize(0.6, '#1E1D45'),
+         accent2: transparentize(0.6, '#3A54B4'),
+         accent3: transparentize(0.6, '#8DA0E2'),
+         textMain: transparentize(0.6, '#1E1D45'),
+         textInverse: transparentize(0.6, '#FFFFFF'),
+      }
    },
    zIndex: {...zIndexes},
    mods: {...mods},
@@ -43,14 +54,26 @@ export const Theme2: ThemeTyping = {
       accent2: '#3A54B4',
       accent3: '#8DA0E2',
       textMain: '#FFFFFF',
-      textInverse: '#1E1D45'
+      textInverse: '#1E1D45',
+      opaque: {
+         background: transparentize(0.6, '#000000'),
+         bgContrast: transparentize(0.6, '#363636'),
+         accent1: transparentize(0.6, '#1E1D45'),
+         accent2: transparentize(0.6, '#3A54B4'),
+         accent3: transparentize(0.6, '#8DA0E2'),
+         textMain: transparentize(0.6, '#FFFFFF'),
+         textInverse: transparentize(0.6, '#1E1D45'),
+      }
    },
    zIndex: {...zIndexes},
    mods: {...mods},
    fonts: {...fonts}
 }
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<cssVarsRootProps>`
+   :root {
+      ${props => props.cssTheme}
+   }
    *{
       margin: 0px;
       padding: 0px;
@@ -68,8 +91,6 @@ export const GlobalStyle = createGlobalStyle`
    html{
       width: 100vw;
       overflow-x: hidden;
-   }
-   #themeContainer{
       background-color: var(--palette-background);
    }
    @media (prefers-reduced-motion: reduce) {

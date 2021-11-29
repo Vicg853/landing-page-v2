@@ -5,12 +5,23 @@ declare module 'styled-components' {
    export interface DefaultTheme {
       palette: {
          background: string
+         background: string
          bgContrast: string
          accent1: string
          accent2: string
          accent3: string
          textMain: string
          textInverse: string
+         opaque: {
+            background: string
+            background: string
+            bgContrast: string
+            accent1: string
+            accent2: string
+            accent3: string
+            textMain: string
+            textInverse: string
+         }
       }
       zIndex: {
          navMaster: number

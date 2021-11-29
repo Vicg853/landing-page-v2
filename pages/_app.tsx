@@ -17,7 +17,10 @@ const WithThemeProvider: React.FC = ({ children }) => {
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
 
    return (
-      <CssThemeProvider theme={isDarkMode ? Theme2 : Theme1} defaultTheme={Theme1}>
+      <>
+         <CssThemeProvider 
+            theme={isDarkMode ? Theme2 : Theme1} 
+            defaultTheme={Theme1} CustomGlobalStyle={GlobalStyle} />
          <DefaultSeo 
          titleTemplate='%s | AlpesCap'
          {...SEO}
@@ -41,8 +44,7 @@ const WithThemeProvider: React.FC = ({ children }) => {
          ]}
          />
          <Navigation routes={routes} isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
-         {children}
-      </CssThemeProvider>
+      </>
    )
 }
 
@@ -70,11 +72,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             `}
             </script>
          </Head>
-         <WithThemeProvider>
-            <GlobalStyle />
-            <Component {...pageProps} />
-            <Footer />
-         </WithThemeProvider>
+         <WithThemeProvider />
+         <Component {...pageProps} />
+         <Footer />
      </>
    )
 }

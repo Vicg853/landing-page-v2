@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { LinkContainer, LinkText } from './link-style'
-import { transparentize, cssVar } from 'polished'
 
 type NavProps = {
    scrolled: boolean,
@@ -99,7 +98,7 @@ export const NavColorThemeButton = styled.button`
    text-decoration-color: none;
    text-decoration-line: none;
    border: none;
-   background-color: ${transparentize(0.7, cssVar('--palette-bgContrast', '#363636') as string)};
+   background-color: var(--palette-opaque-bgContrast);
    backdrop-filter: var(--mods-blur);
    border-radius: 0.25rem;
    display: flex;
