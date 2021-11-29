@@ -1,6 +1,3 @@
-//!Improve overall typing (maybe adding declaration files)
-//! typing improvement for functions: toFlatPropertyMap, makeCssThemeVars
-
 //*Flattens an object into a single level 
 //?Code from https://stackoverflow.com/a/65883097/11699778 , thx to gkunz on StackOverflow
 export function toFlatPropertyMap(obj: object, keySeparator = '.') {
@@ -20,13 +17,23 @@ export function toFlatPropertyMap(obj: object, keySeparator = '.') {
   	return flattenRecursive(obj);
 }
 
-//* Creates css vars in: "--varName: value;" format
-export const makeCssThemeVars = (jsTheme: Object, namespace?: string): Object  => {
-   const flattenedObject = toFlatPropertyMap(jsTheme, '-');
-   return Object.entries(flattenedObject).reduce(
+
+
+//* Creates css vars in: "--varName: value;" format and exports it as an string Array, with each string containing a var
+//* or exports an Object containing key: var name, and value: value
+export function makeCssThemeVars<T extends true | false = false>(
+	jsTheme: Object, toArray?: T, namespace?: string
+	): T extends true ? string[] : Object {
+   const flattenedObject = toFlatPropertyMap(jsTheme, '-')
+	const recordEntries = Object.entries(flattenedObject)
+
+	if(toArray) return recordEntries.map(
+		([key, value]) => `--${namespace ? `${namespace}-` : ''}${key}: ${value};`
+	) as string[]
+	return recordEntries.reduce(
       (cssTheme, [key, value]) => ({
          ...cssTheme,
          [`--${namespace ? `${namespace}-` : ``}${key}`]: value
       }), {}
-   )
+   ) as any
 }
