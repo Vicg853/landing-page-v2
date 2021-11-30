@@ -14,7 +14,7 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/avif', 'image/webp'],
   },
   generateBuildId: async () => {
     return 'alpesCap-landing-page-build-id-' + v4().toString()
