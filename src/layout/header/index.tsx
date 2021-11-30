@@ -1,5 +1,5 @@
-import { memo } from 'react'
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
+import type { ThreeBackgroundProps } from './threeBg'
 
 import {
    HeaderContainer,
@@ -9,10 +9,30 @@ import {
 import TestImage from '@p-images/index/test.jpg'
 import AlpesLogo from '@images/global/mini.svg'
 
-const Header = () => {
+//* Background components that will be dynamically imported to header based in headers background
+const DynamicImageImport = dynamic(() => import('next/image'))
+const DynamicThreeImport = dynamic(() => import('./threeBg'))
+
+type DefaultProps = {
+   title: string,
+   subTitle: string,
+   customMask?: boolean,
+   illustrationDisplay: boolean,
+   customIllustration?: any
+}
+
+type ImageBackgroundProps = {
+   
+}
+
+type OptionalProps = {isThreeBg: ThreeBackgroundProps} | {isImgBg: ImageBackgroundProps} | {}
+
+type HeaderProps = DefaultProps & OptionalProps
+
+const Header: React.FC<HeaderProps> = () => {
    return (
       <HeaderContainer>
-         <Image 
+         <DynamicImageImport 
          id="background"
          src={TestImage} 
          alt="background"
