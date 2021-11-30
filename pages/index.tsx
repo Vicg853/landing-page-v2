@@ -7,9 +7,14 @@ const Test = styled.div`
   color: red;
 `
 
+import TestHeaderImg from '@p-images/index/test2.jpg'
+
 const Home: NextPage = () => (
   <>
-    <Header />
+    <Header 
+    title="Hello World from AlpesCap !" subTitle="Nós somos a Alpes Capital, olá!!👋😉" 
+    illustrationDisplay={false} isCustomThreeBg={{modelType: 'default', customModel: undefined}} 
+     />
     <Test>
       Hello World !
       <div style={{width: '100vw', height: '300vh'}} />
