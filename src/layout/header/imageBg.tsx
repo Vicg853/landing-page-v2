@@ -29,7 +29,7 @@ export type BgImgElemProps = CommonProps & {
    imgSource: any
 }
 
-import DefaultImg from '@p-images/index/test.jpg'
+import DefaultImg from '@p-images/defaultHeaderBg.jpg'
 
 const HeaderImgBackground = ({imgSource, customPlaceholder, customBlurDataURL, bgAlt}: BgImgElemProps) => (
    <Image 
