@@ -2,7 +2,7 @@ import { a } from "@react-spring/web"
 import styled from "styled-components"
 
 type ContainerProps = {
-   active: boolean,
+   active: number,
 }
 
 export const Container = styled(a.div)<ContainerProps>`

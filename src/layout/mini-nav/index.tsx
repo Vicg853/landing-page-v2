@@ -38,7 +38,8 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
    }) 
 
    return (
-      <Container active={active} 
+      <Container 
+      active={active ? 1 : 0} 
       style={{...ContainerSpring, 
          display: ContainerSpring
             .shouldDisplay

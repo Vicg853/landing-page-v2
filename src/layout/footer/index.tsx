@@ -30,7 +30,7 @@ const Footer = () => {
                   <Link href='/policies' passHref><a>&#8594; Politicas</a></Link>
                   <span> Só um pouco a politica de privacidade e questões legais do nosso site e outros...</span>
                </ReferenceLink>
-               <HorizontalLineIcons class='horizontalLine' />
+               <HorizontalLineIcons className='horizontalLine' />
             </div>
             <div className='footerContentSections'>
                <span data-name="title"><SocialIcons8 />Sociais</span>
@@ -54,7 +54,7 @@ const Footer = () => {
                   iconUrl="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzEgMTcxIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MS45OTY1NHYtMTcxLjk5NjU0aDE3MS45OTY1NHYxNzEuOTk2NTR6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzhkYTBlMiI+PHBhdGggZD0iTTU0LjExMjQzLDIxLjM3NWMtNi42MjEwNiwwIC0xMi44MDg5OCwzLjM1ODI4IC0xNi40MjA5LDguOTEzMjFsLTE2Ljg4MDEzLDI1LjkzMjVsMC4yMDg3NCwtMC4yODUyOGMtMi4wNzgyNywyLjc3MjgxIC0zLjIwNzY0LDYuMTQ1NjggLTMuMjA3NjQsOS42MTU5N3Y2NC40Nzk4NmMwLDguNzkwNDcgNy4yNDA3OCwxNi4wMzEyNSAxNi4wMzEyNSwxNi4wMzEyNWgxOS41OTM3NXYxMi40Njg3NWMwLjAwMDMsMi45NTExNSAyLjM5MjYsNS4zNDM0NSA1LjM0Mzc1LDUuMzQzNzVoNC4xNzQ4YzMuMzA2NCwwIDYuNDc4OTUsLTEuMzE2MTEgOC44MTU3OSwtMy42NTI5NmwxNC4xNTk1NSwtMTQuMTU5NTRoMjEuNTYyODZjNC41MTU0MiwwIDguODIwMTcsLTEuOTExMjQgMTEuODU2NDUsLTUuMjQ2MzRsMjYuODkyNywtMjkuNTc4NDloLTAuMDA2OTZjNC40NzEzLC00LjkxNjQ2IDYuOTUxMDUsLTExLjMyNzAzIDYuOTUxMDUsLTE3Ljk3MjUzdi01NS44NTg4OWMwLC04Ljc5MDQ3IC03LjI0MDc4LC0xNi4wMzEyNSAtMTYuMDMxMjUsLTE2LjAzMTI1ek01NC4xMTI0MywzMi4wNjI1aDI3LjgyNTA3aDU1LjIxODc1YzMuMDE1NjUsMCA1LjM0Mzc1LDIuMzI4MSA1LjM0Mzc1LDUuMzQzNzV2NTUuODU4ODljMCwzLjk5MjEyIC0xLjQ4NTQ4LDcuODM1MzcgLTQuMTY3ODUsMTAuNzg0OTFsLTEuNjM1MTMsMS43OTUxN2wwLjEwNDM3LC0wLjIxNTdsLTkuNzU1MTMsMTAuNzk4ODNjLTIuNzAzOTQsMi45OTI1IC02LjU0MzQyLDQuNjk2NjUgLTEwLjU3NjE3LDQuNjk2NjVoLTI5LjE4ODg0bC0xOS41OTM3NSwxNy44MTI1di0xNy44MTI1aC0xNC4yNWMtMy45MTg3NSwwIC03LjEyNSwtMy4yMDYyNSAtNy4xMjUsLTcuMTI1di03NC44MTI1YzAsLTEuOTI1NTMgMC43NzA3MywtMy42NjUxOSAyLjAxMDg2LC00Ljk0NzE0YzEuNTk0MDYsLTEuMzcxIDMuNjI3NjYsLTIuMTc3ODYgNS43ODkwNiwtMi4xNzc4NnpNODMuNjM1MjUsNTMuMzYwOTZjLTIuOTQ4NTQsMC4wNDYwNiAtNS4zMDI1NSwyLjQ3MTY5IC01LjI2MDI1LDUuNDIwMjl2MjguNWMtMC4wMjcyNSwxLjkyNzE1IDAuOTg1MjYsMy43MTk2OCAyLjY0OTgyLDQuNjkxMjFjMS42NjQ1NywwLjk3MTUzIDMuNzIzMjksMC45NzE1MyA1LjM4Nzg2LDBjMS42NjQ1NywtMC45NzE1MyAyLjY3NzA4LC0yLjc2NDA2IDIuNjQ5ODIsLTQuNjkxMjF2LTI4LjVjMC4wMjA3MywtMS40NDUwMiAtMC41NDQ2NCwtMi44MzY4MyAtMS41NjcxOCwtMy44NTgwNmMtMS4wMjI1NCwtMS4wMjEyMyAtMi40MTUwOCwtMS41ODQ4MSAtMy44NjAwNywtMS41NjIyM3pNMTEyLjEzNTI1LDUzLjM2MDk2Yy0yLjk0ODU0LDAuMDQ2MDYgLTUuMzAyNTUsMi40NzE2OSAtNS4yNjAyNSw1LjQyMDI5djI4LjVjLTAuMDI3MjUsMS45MjcxNSAwLjk4NTI2LDMuNzE5NjggMi42NDk4Miw0LjY5MTIxYzEuNjY0NTcsMC45NzE1MyAzLjcyMzI5LDAuOTcxNTMgNS4zODc4NiwwYzEuNjY0NTcsLTAuOTcxNTMgMi42NzcwOCwtMi43NjQwNiAyLjY0OTgyLC00LjY5MTIxdi0yOC41YzAuMDIwNzMsLTEuNDQ1MDIgLTAuNTQ0NjQsLTIuODM2ODMgLTEuNTY3MTgsLTMuODU4MDZjLTEuMDIyNTQsLTEuMDIxMjMgLTIuNDE1MDgsLTEuNTg0ODEgLTMuODYwMDcsLTEuNTYyMjN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4="
                   text="Twitch TV"
                   url='https://www.twitch.tv/alpescapital' />
-               <HorizontalLineIcons class='horizontalLine' />
+               <HorizontalLineIcons className='horizontalLine' />
             </div>
             <div className='footerContentSections'>
                <span data-name="title"><ExternalLinkIcon />Links uteís + referencias</span>
@@ -74,7 +74,7 @@ const Footer = () => {
                   <Link href='/site-and-cookies' passHref><a>&#8594; Cookies & dados</a></Link>
                   <span>Informação sobre uso de cookies e outros dados coletados no site</span>
                </ReferenceLink>
-               <HorizontalLineIcons class='horizontalLine' />
+               <HorizontalLineIcons className='horizontalLine' />
             </div>
          </div>
          <div id='copyright'>Copyright © 2021-present Alpes Capital: Fundo do bem. All rights reserved.</div>
