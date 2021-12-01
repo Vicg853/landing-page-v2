@@ -1,7 +1,7 @@
 import {memo} from 'react'
 import dynamic from 'next/dynamic'
 import type { ThreeBgProps } from './threeBg'
-import type { ImageBackgroundProps } from './imageBg'
+import type { CustomImgBgProps } from './imageBg'
 
 import {
    HeaderContainer,
@@ -23,7 +23,7 @@ type DefaultProps = {
    CustomIllustration?: any
 }
 
-type HeaderProps = DefaultProps & {isCustomThreeBg?: ThreeBgProps, isCustomImgBg?: ImageBackgroundProps}
+type HeaderProps = DefaultProps & {isCustomThreeBg?: ThreeBgProps, isCustomImgBg?: CustomImgBgProps}
 
 const Header: React.FC<HeaderProps> = ({
    title, subTitle, bgAlt, customMask,
