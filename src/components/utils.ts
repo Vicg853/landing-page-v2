@@ -37,3 +37,7 @@ export function makeCssThemeVars<T extends true | false = false>(
       }), {}
    ) as any
 }
+
+
+//* Returns in radians the passed angle in degrees
+export const degToRad = (degrees: number): number => degrees * (Math.PI / 180)
