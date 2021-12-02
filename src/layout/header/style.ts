@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { a } from '@react-spring/web'
 
 export const HeaderContainer = styled.header`
    display: inline-flex;
@@ -9,6 +10,7 @@ export const HeaderContainer = styled.header`
    height: 102vh;
    z-index: var(--zIndex-headerMaster);
    perspective: 1000px;
+   overflow: hidden;
    #background {
       width: 100%;
       height: 100%;
@@ -18,12 +20,28 @@ export const HeaderContainer = styled.header`
    #headerIllustration {
       z-index: var(--zIndex-headerContent);
       opacity: 0.8;
-      transform: rotateX(-5deg) rotateY(-30deg) rotateZ(0deg) scaleZ(3);
       margin-right: 10vw; 
-      
    }
    #headerIllustration * {
       backdrop-filter: var(--mods-blur);
+   }
+   #parallaxHideEffect {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      z-index: var(--zIndex-headerContent - 1);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--palette-background) 90%);
+   }
+   @media (max-width: 730px) {
+      #headerIllustration {
+         position: absolute;
+         opacity: 0.4;
+         filter: contrast(1.5) grayscale(1);
+         bottom: -20%;
+         left: -25vw;
+         transform: none;
+      }
    }
 `
 
@@ -48,5 +66,39 @@ export const HeaderContent = styled.div<HeaderContentCssProps>`
    backdrop-filter: var(--mods-blur);
    h2{
       font-size: 3rem;
+   }
+   @media (max-width: 1100px) {
+      h2{ font-size: 2.5rem; }
+   }
+   @media (max-width: 850px) {
+      h2{ font-size: 2.2rem; }
+
+   }
+   @media (max-width: 730px) {
+      width: 100vw;
+      justify-content: flex-end;
+      padding-bottom: 35vh;
+      backdrop-filter: blur(0.4rem);
+      h2{ font-size: 1.9rem; }
+   }
+`
+
+export const HeaderDisplayButton = styled(a.a)`
+   width: fit-content;
+   height: fit-content;
+   background: var(--palette-opaque-accent2);
+   justify-content: center;
+   padding: 0.55rem 1.5rem;
+   color: white;
+   font-size: 1rem;
+   font-weight: 400;
+   font-family: var(--fons-secondary);
+   border: none;
+   border-radius: 0.3rem;
+   backdrop-filter: var(--mods-blur);
+   margin-top: 5rem;
+   transition: background 0.3s ease-in-out;
+   :hover {
+      background: linear-gradient(120deg, var(--palette-accent2) 37%, var(--palette-opaque-accent2) 100%);
    }
 `

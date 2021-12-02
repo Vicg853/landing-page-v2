@@ -13,7 +13,7 @@ const Home: NextPage = () => (
   <>
     <Header 
     title="Hello World from AlpesCap !" subTitle="Nós somos a Alpes Capital, olá!!👋😉" 
-    illustrationDisplay={false} isCustomThreeBg={{modelType: 'default', customModel: undefined}} 
+    illustrationDisplay={true} optionalButton={{url: '/about', text: 'Saiba mais'}}
      />
     <Test>
       Hello World !

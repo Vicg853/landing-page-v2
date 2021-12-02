@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Image from 'next/image'
 import type { ImageProps } from 'next/image'
 
@@ -44,4 +45,4 @@ const HeaderImgBackground = ({imgSource, customPlaceholder, customBlurDataURL, b
       quality={100} />
 )
 
-export default HeaderImgBackground
+export default memo(HeaderImgBackground)
