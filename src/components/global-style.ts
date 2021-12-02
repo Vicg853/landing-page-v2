@@ -8,6 +8,7 @@ const zIndexes = {
    navDropdown: 52,
    headerMaster: 20,
    headerContent: 21,
+   cookiesPolicyCard: 25,
 }
 
 const mods = {
