@@ -89,30 +89,3 @@ export const FooterContainer = styled.footer`
       }
    }
 `
-
-export const ReferenceLink = styled.div`
-   width: fit-content;
-   height: fit-content;
-   display: flex;
-   flex-direction: column;
-   justify-content: center; 
-   align-items: flex-start;
-   margin-top: 0.3rem;
-   margin-bottom: 0.3rem;
-   a{
-      color: var(--palette-textMain);
-      font-size: 0.7rem;
-      text-decoration: none;
-      padding: 0.1rem;
-      padding-left: 0.3rem;
-      padding-right: 0.3rem;
-      border-radius: 0.3rem;
-      :hover{
-         background-color: var(--palette-background);
-      }
-   }
-   span{
-      font-size: 0.68rem;
-      font-style: italic;
-   }
-`

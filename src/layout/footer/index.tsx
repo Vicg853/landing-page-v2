@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 import {
    FooterContainer,
-   ReferenceLink
 } from './style'
 
 import SocialCard from '@components/react-mini-components/socialCard'
+import ReferenceLink from '@components/react-mini-components/ReferenceLink'
 
 import ExternalLinkIcon from '@icons/externalLinksIcons8.svg'
 import SocialIcons8 from '@icons/socialsIcons8.svg'
@@ -26,10 +26,8 @@ const Footer = () => {
                e sobre, bom... no &quot;Sobre&quot; tambem localizado no cabeçalho.
                <br /><br />
                - - -
-               <ReferenceLink>
-                  <Link href='/policies' passHref><a>&#8594; Politicas</a></Link>
-                  <span> Só um pouco a politica de privacidade e questões legais do nosso site e outros...</span>
-               </ReferenceLink>
+               <ReferenceLink href='/policies' title='Politicas' 
+               optionalDescription='Só um pouco a politica de privacidade e questões legais do nosso site e outros...' />
                <HorizontalLineIcons className='horizontalLine' />
             </div>
             <div className='footerContentSections'>
@@ -63,22 +61,13 @@ const Footer = () => {
             </div>
             <div className='footerContentSections'>
                <span data-name="title"><ExternalLinkIcon />Links uteís + referencias</span>
-               <ReferenceLink>
-                  <a href='https://icons8.com/'> &#8594; Icons8</a>
-                  <span>Esse site usa lindos icónes de Icons 8</span>
-               </ReferenceLink>
-               <ReferenceLink>
-                  <a href='https://unsplash.com/'> &#8594; Unsplash</a>
-                  <span>Usamos algumas imagens fornecidas por Unsplash</span>
-               </ReferenceLink>
-               <ReferenceLink>
-                  <Link href='/site-stack' passHref><a>&#8594; Techstack</a></Link>
-                  <span> Stack tecnologica e referencias a elas usadas para o site</span>
-               </ReferenceLink>
-               <ReferenceLink>
-                  <Link href='/site-and-cookies' passHref><a>&#8594; Cookies & dados</a></Link>
-                  <span>Informação sobre uso de cookies e outros dados coletados no site</span>
-               </ReferenceLink>
+               <ReferenceLink href='https://icons8.com/' title='Icons8' goesOutside
+               optionalDescription='Esse site usa lindos icónes de Icons 8' />
+               <ReferenceLink href='https://unsplash.com/' title='Unsplash' goesOutside
+               optionalDescription='Usamos algumas imagens fornecidas por Unsplash' />
+               <ReferenceLink href='/site-stack' title='Techstack' 
+               optionalDescription='Stack tecnologica e referencias a elas usadas para o site' />
+               <ReferenceLink href='/site-and-cookies' title='Cookies & dados' optionalDescription='Informação sobre uso de cookies e outros dados coletados no site' />
                <HorizontalLineIcons className='horizontalLine' />
             </div>
          </div>
