@@ -41,3 +41,9 @@ export function makeCssThemeVars<T extends true | false = false>(
 
 //* Returns in radians the passed angle in degrees
 export const degToRad = (degrees: number): number => degrees * (Math.PI / 180)
+
+//* Get a number's scale in an interval on an other one
+//* e.g.: getScale(5, 0, 10, 0, 100) => 50
+export function scale (val: number, inMin: number, inMax: number, outMin: number, outMax: number): number {
+   return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
