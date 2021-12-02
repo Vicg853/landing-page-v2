@@ -3,8 +3,6 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
-//TODO Fix this damn typescript error when importing glb/glft files -_-
-
 import Default3DLogo from '@public/models/logo3D.glb'
 
 type GLTFResult = GLTF & {

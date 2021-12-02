@@ -5,8 +5,6 @@ export function toFlatPropertyMap(obj: object, keySeparator = '.') {
     	for(const [key, value] of Object.entries(obj)){
       	const property = parentProperty ? `${parentProperty}${keySeparator}${key}` : key;
       	if(value && typeof value === 'object'){
-				//TODO fix problem where where depending on object's depth is to high it will 
-				//! return a default "." separator 
         		flattenRecursive(value, property, propertyMap);
       	} else {
         		propertyMap[property] = value;

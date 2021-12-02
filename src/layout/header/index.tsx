@@ -35,9 +35,6 @@ type DefaultProps = {
    }
 }
 
-//TODO Add quick link button option
-//* under title and sublinks
-
 const windowCheck = typeof window !== "undefined"  
       ? window : false
 type HeaderProps = DefaultProps & {isCustomThreeBg?: ThreeBgProps, isCustomImgBg?: CustomImgBgProps}
