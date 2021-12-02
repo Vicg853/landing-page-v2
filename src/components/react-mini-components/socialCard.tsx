@@ -1,8 +1,17 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 
-interface ComponentProps {
-   iconUrl: string,
+interface IconTypeSvgProps {
+   iconType: 'svg'
+   IconSource: any
+}
+
+interface IconTypeImgProps {
+   iconType: 'img' | 'sourceData' | 'url'
+   IconSource: string | StaticImageData
+}
+
+type ComponentProps = (IconTypeSvgProps | IconTypeImgProps) & {
    alt?: string,
    text: string,
    url: string,
@@ -35,17 +44,20 @@ export const Container = styled.a`
    }
 `
 
-//TODO Add option to import internal resources
-//? Maybe this is useful to do it: https://nextjs.org/docs/advanced-features/dynamic-import
-
-const SocialCard: React.FC<ComponentProps> = ({iconUrl, text, url, alt}, ...props) => {
+const SocialCard: React.FC<ComponentProps> = ({iconType, IconSource, text, url, alt}, ...props) => {
    return (
       <>
          <Container href={url} {...props}>
-            <Image width="1.4rem" height="1.4rem" src={iconUrl}
-               alt={alt ? `Ilustração de card social para ${alt}.` : 
-               'Ilustração de card social para visitar uma de nossas redes!'} 
-            />
+            {iconType === 'svg' && 
+               <IconSource alt={alt ? `Ilustração de card social para ${alt}.` : 
+               'Ilustração de card social para visitar uma de nossas redes!'}  />
+            }
+            {(iconType === 'img' || iconType === 'sourceData' || iconType === 'url') &&
+               <Image width="1.4rem" height="1.4rem" src={IconSource}
+                  alt={alt ? `Ilustração de card social para ${alt}.` : 
+                  'Ilustração de card social para visitar uma de nossas redes!'} 
+               />
+            }
             <title>{text}</title>
          </Container>
       </> 
