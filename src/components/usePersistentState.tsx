@@ -6,7 +6,7 @@ function usePersistentState<Type>(defaultValue: Type, key: string): [Type, Dispa
    //* is already available
    const [value, setValue] = useState(() => { 
       if(typeof window !== 'undefined') {
-         const storedValue = window.localStorage.getItem(key)
+         const storedValue = localStorage.getItem(key)
          return storedValue !== null ? JSON.parse(storedValue) : defaultValue
       }
       return defaultValue
@@ -20,13 +20,12 @@ function usePersistentState<Type>(defaultValue: Type, key: string): [Type, Dispa
 
       const val = window.localStorage.getItem(key)
       if(val !== null && val !== value) setValue(JSON.parse(val))
-   })
-      
-
+   })      
+   
    //* Updating localStorage value on state change, so the value persists simply
    //* and firing an storage event, because otherwise listeners on the same page won't work
    useEffect(() => {
-      window.localStorage.setItem(key, JSON.stringify(value))
+      localStorage.setItem(key, JSON.stringify(value))
       window.dispatchEvent( new StorageEvent('storage', {key: key, newValue: value}) )
    }, [key, value])
    return [value, setValue]

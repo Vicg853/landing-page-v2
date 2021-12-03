@@ -1,16 +1,14 @@
+import { useState, useEffect, memo } from "react"
 import usePersistentState from "@components/usePersistentState"
 import styled from "styled-components"
 
 import ReferenceLink from "@components/react-mini-components/ReferenceLink"
 
 const Container = styled.div`
-   display: none;
    flex-direction: column;
    align-items: stretch;
    justify-content: center;
    position: fixed;
-   bottom: 3rem;
-   right: 3rem;
    width: fit-content;
    max-width: 600px;
    height: fit-content;
@@ -58,16 +56,32 @@ const Container = styled.div`
          background: linear-gradient(120deg, var(--palette-accent2) 37%, var(--palette-opaque-accent2) 100%);
       }
    }
-   &[data-should-display='true'] {
-      display: flex !important;
+   @media (min-width: 1920px),  (min-height: 1080px) {
+      bottom: 3rem;
+      right: 3rem;
+   }
+   @media (max-width: 1280px), (max-height: 1080px) {
+      bottom: 2vh;
+      right: 2vw;
+   }
+   @media (max-width: 700px){
+      width: calc(98vw - 0.8rem - 2vw);
    }
 `
 
+//TODO fix state-render issue that makes card appear on every page load, although it should
+// only appear when localStorage.getItem("user-cookies-agreed") is false
+
 const CookiesCard = () => {
    const [userAgreement, setUseAgreement] = usePersistentState(false, "user-cookies-agreed")
+   const [showCard, setShowCard] = useState(false)
+
+   useEffect(() => {
+      setShowCard(!userAgreement)
+   }, [userAgreement])
 
    return (
-      <Container data-should-display={(!userAgreement).toString()}>
+      <Container style={{ display: showCard ? 'flex' : 'none'}}>
          <sub>
             Ao usar essa pagina você concorda com a nossa politica de privacidade/coleta de dados {"("}os chamados: cookies{")"}. <br/>
             Resumidamente os cookies coletados são somente dados sobre funcionamento/performance da pagina,<br/> e não são/serão usados para comercialização de modo algum.<br/>
@@ -78,7 +92,7 @@ const CookiesCard = () => {
             <ReferenceLink href="/site-and-cookies" title='Politica de Cookies'  />
          </sub>
          <sub>
-            <button onClick={() => setUseAgreement(true)}>Concordo e entendi</button>
+            <button onClick={() => setUseAgreement(true)}>Entendi e concordo</button>
          </sub>
       </Container>
    )
