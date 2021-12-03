@@ -69,9 +69,6 @@ const Container = styled.div`
    }
 `
 
-//TODO fix state-render issue that makes card appear on every page load, although it should
-// only appear when localStorage.getItem("user-cookies-agreed") is false
-
 const CookiesCard = () => {
    const [userAgreement, setUseAgreement] = usePersistentState(false, "user-cookies-agreed")
    const [showCard, setShowCard] = useState(false)

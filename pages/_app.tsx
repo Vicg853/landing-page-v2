@@ -13,8 +13,10 @@ import routes from '@routes'
 import Navigation from '@layout/navigation'
 import Footer from '@layout/footer'
 import CookiesPolicyCard from '@components/react-mini-components/CookiesPolicyCard'
+import Alert from '@components/react-mini-components/Alert'
 
-const WithThemeProvider: React.FC = ({ children }) => {
+
+const WithThemeProvider: React.FC = () => {
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
 
    return (
@@ -74,8 +76,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             </script>
          </Head>
          <WithThemeProvider />
-         <Component {...pageProps} />
          <CookiesPolicyCard />
+         <Alert />
+         <Component {...pageProps} />
          <Footer />
      </>
    )

@@ -67,7 +67,8 @@ const Footer = () => {
                optionalDescription='Usamos algumas imagens fornecidas por Unsplash' />
                <ReferenceLink href='/site-stack' title='Techstack' 
                optionalDescription='Stack tecnologica e referencias a elas usadas para o site' />
-               <ReferenceLink href='/site-and-cookies' title='Cookies & dados' optionalDescription='Informação sobre uso de cookies e outros dados coletados no site' />
+               <ReferenceLink href='/site-and-cookies' title='Cookies & dados' 
+               optionalDescription='Informação sobre uso de cookies e outros dados coletados no site' />
                <HorizontalLineIcons className='horizontalLine' />
             </div>
          </div>
