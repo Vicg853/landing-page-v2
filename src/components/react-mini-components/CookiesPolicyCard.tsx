@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from "react"
-import usePersistentState from "@components/usePersistentState"
+import usePersistentState from "@components/hooks/usePersistentState"
 import styled from "styled-components"
 
 import ReferenceLink from "@components/react-mini-components/ReferenceLink"
