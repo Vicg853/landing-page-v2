@@ -21,10 +21,13 @@ function usePersistentState<Type>(defaultValue: Type, key: string): [Type, Dispa
       const val = window.localStorage.getItem(key)
       if(val !== null && val !== value) setValue(JSON.parse(val))
    })
+      
 
    //* Updating localStorage value on state change, so the value persists simply
+   //* and firing an storage event, because otherwise listeners on the same page won't work
    useEffect(() => {
       window.localStorage.setItem(key, JSON.stringify(value))
+      window.dispatchEvent( new StorageEvent('storage', {key: key, newValue: value}) )
    }, [key, value])
    return [value, setValue]
 }
