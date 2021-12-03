@@ -23,6 +23,7 @@ declare module 'styled-components' {
          navDropdown: number
          headerMaster: number
          headerContent: number
+         cookiesPolicyCard: number
       }
       mods: {
          blur: string
