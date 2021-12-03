@@ -12,6 +12,7 @@ import routes from '@routes'
 //Importing Layout elements
 import Navigation from '@layout/navigation'
 import Footer from '@layout/footer'
+import CookiesPolicyCard from '@components/react-mini-components/CookiesPolicyCard'
 
 const WithThemeProvider: React.FC = ({ children }) => {
    const [isDarkMode, isDarkModeToggle] = usePersistentState(false, 'theme')
@@ -49,7 +50,7 @@ const WithThemeProvider: React.FC = ({ children }) => {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-   
+
    return (
      <>
          <Head>
@@ -74,6 +75,7 @@ function MyApp({ Component, pageProps }: AppProps) {
          </Head>
          <WithThemeProvider />
          <Component {...pageProps} />
+         <CookiesPolicyCard />
          <Footer />
      </>
    )
