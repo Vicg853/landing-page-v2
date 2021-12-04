@@ -16,6 +16,13 @@ declare module 'styled-components' {
    export interface DefaultTheme {
       palette: pallete & {
          opaque: pallete
+         userAdvise: {
+            success: string
+            error: string
+            warning: string
+            info: string
+            neutral: string
+         }
       }
       zIndex: {
          navMaster: number
@@ -24,6 +31,7 @@ declare module 'styled-components' {
          headerMaster: number
          headerContent: number
          cookiesPolicyCard: number
+         alertCard: number
       }
       mods: {
          blur: string

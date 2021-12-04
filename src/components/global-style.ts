@@ -2,6 +2,14 @@ import { ThemeTyping, createGlobalStyle } from 'styled-components'
 import { cssVarsRootProps } from '@components/CssThemeProvider'
 import { transparentize } from 'polished'
 
+const userAdvise = {
+   success: '#00c853',
+   error: '#ff3d00',
+   warning: '#ffa000',
+   info: '#8DA0E2',
+   neutral: '#9e9e9e',
+}
+
 const zIndexes = {
    navMaster: 50,
    navContent: 51,
@@ -9,6 +17,7 @@ const zIndexes = {
    headerMaster: 20,
    headerContent: 21,
    cookiesPolicyCard: 25,
+   alertCard: 30,
 }
 
 const mods = {
@@ -40,7 +49,8 @@ export const Theme1: ThemeTyping = {
          accent3: transparentize(0.6, '#8DA0E2'),
          textMain: transparentize(0.6, '#1E1D45'),
          textInverse: transparentize(0.6, '#FFFFFF'),
-      }
+      },
+      userAdvise: userAdvise,
    },
    zIndex: {...zIndexes},
    mods: {...mods},
@@ -64,7 +74,8 @@ export const Theme2: ThemeTyping = {
          accent3: transparentize(0.6, '#8DA0E2'),
          textMain: transparentize(0.6, '#FFFFFF'),
          textInverse: transparentize(0.6, '#1E1D45'),
-      }
+      },
+      userAdvise: userAdvise,
    },
    zIndex: {...zIndexes},
    mods: {...mods},
