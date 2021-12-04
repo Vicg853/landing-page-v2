@@ -1,5 +1,5 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
-import { cssVarsRootProps } from '@components/CssThemeProvider'
+import { cssVarsRootProps } from '@components/css-theme'
 import { transparentize } from 'polished'
 
 const userAdvise = {

@@ -6,7 +6,7 @@ import { DefaultSeo } from 'next-seo'
 import { GlobalStyle, Theme1, Theme2 } from "@components/global-style"
 import SEO from '../next-seo.config.js'
 import usePersistentState from '@components/hooks/usePersistentState'
-import CssThemeProvider from '@components/CssThemeProvider'
+import CssThemeProvider from '@components/css-theme'
 import routes from '@routes'
 
 //Importing Layout elements
