@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useSpring, config, a } from '@react-spring/web'
+
 import { scale } from '@components/utils'
 
 //* Three and Image backgrounds types for header custom bg options
@@ -20,6 +21,7 @@ import AlpesLogo from '@images/global/mini.svg'
 //* if customBg is chosen between custom threeBg and imageBg
 const DynamicImageImport = dynamic(() => import('./imageBg'))
 const DynamicThreeImport = dynamic(() => import('./threeBg'))
+const DefaultIllustrationImport = dynamic(() => import('./defaultIllustration'))
 
 type DefaultProps = {
    title: string
@@ -27,7 +29,7 @@ type DefaultProps = {
    bgAlt?: string
    customMask?: string
    illustrationDisplay: boolean
-   CustomIllustration?: any
+   CustomIllustration?: React.FC<any>
    optionalButton?: {
       text: string
       url: string
@@ -36,7 +38,8 @@ type DefaultProps = {
 }
 
 const windowCheck = typeof window !== "undefined"  
-      ? window : false
+? window : false
+
 type HeaderProps = DefaultProps & {isCustomThreeBg?: ThreeBgProps, isCustomImgBg?: CustomImgBgProps}
 const Header: React.FC<HeaderProps> = ({
    title, subTitle, bgAlt, customMask, optionalButton,
@@ -47,8 +50,10 @@ const Header: React.FC<HeaderProps> = ({
 
    //Getting scrolled value for spring parallax
    useEffect(() => {
-      //Check if window var exists (check if is ssr)
+      //*Check if window var exists (check if is ssr)
       if(!windowCheck) return
+
+      //* Funtion for setting things with scroll y defining a scroll percentage from 0 to 100vh
       const onScroll = () => {
          if((window.innerHeight - window.scrollY) < 0) return scrollValSet(100)
          else if((window.innerHeight - window.scrollY) === window.innerHeight) return scrollValSet(0)
@@ -73,11 +78,12 @@ const Header: React.FC<HeaderProps> = ({
       }
    })
 
+   const opacityConst = 1
    const illustParallaxY = scale(scrollVal, 0, 100, 0, 500)
-   const illustParallaxOpacity = scale(illustParallaxY, 250, 400, 0.8, 0)
+   const illustParallaxOpacity = scale(illustParallaxY, 250, 400, opacityConst, 0)
    const illustrationSpring = useSpring({
       y: illustParallaxY,
-      opacity: illustParallaxOpacity > 0.8 ? 0.8 : illustParallaxOpacity,
+      opacity: illustParallaxOpacity > opacityConst ? opacityConst : illustParallaxOpacity,
       transform: 'translateY(0) rotateY(0) rotateX(0)',
       from: {
          opacity: 0,
@@ -129,7 +135,7 @@ const Header: React.FC<HeaderProps> = ({
          </HeaderContent>
          {(illustrationDisplay && !CustomIllustration) && (
             <a.div style={illustrationSpring} id='headerIllustration'>
-               <AlpesLogo />
+               <DefaultIllustrationImport />
             </a.div>
          )}
          {(illustrationDisplay && CustomIllustration) && (

@@ -19,11 +19,7 @@ export const HeaderContainer = styled.header`
    }
    #headerIllustration {
       z-index: var(--zIndex-headerContent);
-      opacity: 0.8;
       margin-right: 10vw; 
-   }
-   #headerIllustration * {
-      backdrop-filter: var(--mods-blur);
    }
    #parallaxHideEffect {
       position: absolute;
