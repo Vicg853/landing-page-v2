@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 
-function usePersistentState<Type>(defaultValue: Type, key: string): [Type, Dispatch<SetStateAction<Type>>] {
+type DispatchProps<Type> = Dispatch<SetStateAction<Type>>
+
+type PersistentStateProps = <Type extends unknown>(defaultValue: Type, key: string) => [Type, DispatchProps<Type>]
+
+const usePersistentState: PersistentStateProps = (defaultValue, key) => {
    //* Defining state and doing first localhost load if the following 
    //* is already available
    const [value, setValue] = useState(() => { 
