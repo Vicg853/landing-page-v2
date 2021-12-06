@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const { v4 } = require('uuid')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 //TODO Add preact latter
 //const withPreact = require('next-plugin-preact')
 
-module.exports = {
+module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -78,4 +82,4 @@ module.exports = {
   },
   **
   */
-}
+})

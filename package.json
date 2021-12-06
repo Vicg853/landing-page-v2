@@ -10,7 +10,8 @@
     "lint:all": "next lint && stylelint './src/**/*.ts'",
     "lint:next": "next lint",
     "lint:style": "stylelint './**/*.{ts,tsx}'",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "analyze": "cross-env ANALYZE=true env-cmd -f .env.development.local next build && yarn serve"
   },
   "dependencies": {
     "@react-spring/three": "^9.3.0",
@@ -33,6 +34,7 @@
     "zdog": "^1.1.2"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.0.7",
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@svgr/webpack": "^5.5.0",
     "@types/next-seo": "^2.1.2",
@@ -41,11 +43,13 @@
     "@types/sharp": "^0.29.2",
     "@types/styled-components": "^5.1.15",
     "@types/three": "^0.134.0",
+    "cross-env": "^7.0.3",
     "env-cmd": "^10.1.0",
     "eslint": "8.2.0",
     "eslint-config-next": "12.0.4",
     "file-loader": "^6.2.0",
     "polished": "^4.1.3",
+    "serve": "^13.0.2",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-standard": "^24.0.0",
