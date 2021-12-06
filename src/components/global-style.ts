@@ -1,6 +1,5 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
 import { cssVarsRootProps } from '@components/css-theme'
-import { transparentize } from 'polished'
 
 const userAdvise = {
    success: '#00c853',
@@ -42,13 +41,13 @@ export const Theme1: ThemeTyping = {
       textMain: '#1E1D45',
       textInverse: '#FFFFFF',
       opaque: {
-         background: transparentize(0.6, '#FFFFFF'),
-         bgContrast: transparentize(0.6, '#f5f5f5'),
-         accent1: transparentize(0.6, '#1E1D45'),
-         accent2: transparentize(0.6, '#3A54B4'),
-         accent3: transparentize(0.6, '#8DA0E2'),
-         textMain: transparentize(0.6, '#1E1D45'),
-         textInverse: transparentize(0.6, '#FFFFFF'),
+         background: '#FFFFFF60',
+         bgContrast: '#f5f5f560',
+         accent1: '#1E1D4560',
+         accent2: '#3A54B460',
+         accent3: '#8DA0E260',
+         textMain: '#1E1D4560',
+         textInverse: '#FFFFFF60',
       },
       userAdvise: userAdvise,
    },
@@ -67,13 +66,13 @@ export const Theme2: ThemeTyping = {
       textMain: '#FFFFFF',
       textInverse: '#1E1D45',
       opaque: {
-         background: transparentize(0.6, '#000000'),
-         bgContrast: transparentize(0.6, '#363636'),
-         accent1: transparentize(0.6, '#1E1D45'),
-         accent2: transparentize(0.6, '#3A54B4'),
-         accent3: transparentize(0.6, '#8DA0E2'),
-         textMain: transparentize(0.6, '#FFFFFF'),
-         textInverse: transparentize(0.6, '#1E1D45'),
+         background: '#00000060',
+         bgContrast: '#36363660',
+         accent1: '#1E1D4560',
+         accent2: '#3A54B460',
+         accent3: '#8DA0E260',
+         textMain: '#FFFFFF60',
+         textInverse: '#1E1D4560',
       },
       userAdvise: userAdvise,
    },

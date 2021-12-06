@@ -173,7 +173,7 @@ const AlertComponent = () => {
    return (
       <Container
       style={{...alertComponentSpring, display: alertComponentSpring
-         .shouldDisplay.interpolate(shouldDisplay => shouldDisplay ? 'flex' : 'none')}}
+         .shouldDisplay.to(shouldDisplay => shouldDisplay ? 'flex' : 'none')}}
       data-alert-type={alertType}>
          <sub>
             <span>{alertMessage}</span>

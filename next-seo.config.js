@@ -1,4 +1,4 @@
-/** @type {import('next-seo').NextSeoProps} */
+/* eslint-disable */
 
 export default {
    title: "Alpes Capital Web-page",

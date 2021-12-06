@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react'
 import { Illustration, Shape } from 'zdog'
 
@@ -65,7 +63,6 @@ const IllustrationDefaultComponent = () => {
       });
       
       let ticker = 0
-      let cycleCount = 40
       function animate() {
 
          if(illusAnimState) {
@@ -73,7 +70,6 @@ const IllustrationDefaultComponent = () => {
             headerZdogIllustration.rotate.z = Math.cos(ticker / 90) * 0.06 
             
             headerZdogIllustration.translate.y = -Math.cos(ticker / 60) * 3
-            //headerZdogIllustration.translate.x = Math.cos(ticker / 30) * 1
          }
 
          ticker++;
