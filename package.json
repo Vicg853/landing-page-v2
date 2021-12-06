@@ -14,11 +14,7 @@
     "analyze": "cross-env ANALYZE=true env-cmd -f .env.development.local next build && yarn serve"
   },
   "dependencies": {
-    "@react-spring/three": "^9.3.0",
     "@react-spring/web": "^9.3.0",
-    "@react-three/drei": "^7.22.9",
-    "@react-three/fiber": "^7.0.21",
-    "@react-three/flex": "^0.7.0",
     "@types/zdog": "^1.1.2",
     "next": "^12.0.5-canary.11",
     "next-page-transitions": "^1.0.0-beta.2",
@@ -30,7 +26,6 @@
     "scheduler": "^0.20.2",
     "sharp": "^0.29.3",
     "styled-components": "^5.3.3",
-    "three": "^0.135.0",
     "zdog": "^1.1.2"
   },
   "devDependencies": {
@@ -42,7 +37,6 @@
     "@types/react": "17.0.33",
     "@types/sharp": "^0.29.2",
     "@types/styled-components": "^5.1.15",
-    "@types/three": "^0.134.0",
     "cross-env": "^7.0.3",
     "env-cmd": "^10.1.0",
     "eslint": "8.2.0",

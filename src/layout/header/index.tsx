@@ -6,7 +6,6 @@ import { useSpring, config, a } from '@react-spring/web'
 import { scale } from '@components/utils'
 
 //* Three and Image backgrounds types for header custom bg options
-import type { ThreeBgProps } from './threeBg'
 import type { CustomImgBgProps } from './imageBg'
 
 import {
@@ -15,12 +14,9 @@ import {
    HeaderDisplayButton
 } from './style'
 
-import AlpesLogo from '@images/global/mini.svg'
-
 //* Background components that will be dynamically imported based 
 //* if customBg is chosen between custom threeBg and imageBg
 const DynamicImageImport = dynamic(() => import('./imageBg'))
-const DynamicThreeImport = dynamic(() => import('./threeBg'))
 const DefaultIllustrationImport = dynamic(() => import('./defaultIllustration'))
 
 type DefaultProps = {
@@ -40,10 +36,10 @@ type DefaultProps = {
 const windowCheck = typeof window !== "undefined"  
 ? window : false
 
-type HeaderProps = DefaultProps & {isCustomThreeBg?: ThreeBgProps, isCustomImgBg?: CustomImgBgProps}
+type HeaderProps = DefaultProps & { isCustomImgBg?: CustomImgBgProps }
 const Header: React.FC<HeaderProps> = ({
    title, subTitle, bgAlt, customMask, optionalButton,
-   illustrationDisplay, CustomIllustration, isCustomImgBg, isCustomThreeBg
+   illustrationDisplay, CustomIllustration, isCustomImgBg
    }) => {
 
    const [scrollVal, scrollValSet] = useState<number>(0)
@@ -104,19 +100,12 @@ const Header: React.FC<HeaderProps> = ({
    
    return (
       <HeaderContainer>
-         {!isCustomThreeBg && (
-            <DynamicImageImport
-               imgSource={isCustomImgBg?.imgSource}
-               bgAlt={bgAlt} 
-               customBlurDataURL={isCustomImgBg?.customBlurDataURL}
-               customPlaceholder={isCustomImgBg?.customPlaceholder}
-               />
-         )}
-         {isCustomThreeBg && (
-            <div id='background'>
-               <DynamicThreeImport {...isCustomThreeBg} />
-            </div>
-         )}
+         <DynamicImageImport
+            imgSource={isCustomImgBg?.imgSource}
+            bgAlt={bgAlt} 
+            customBlurDataURL={isCustomImgBg?.customBlurDataURL}
+            customPlaceholder={isCustomImgBg?.customPlaceholder}
+            />
          <HeaderContent customMask={customMask}>
             <a.h2 style={mainContentSpring}>{title}</a.h2>
             <a.p style={mainContentSpring}>{subTitle}</a.p>
