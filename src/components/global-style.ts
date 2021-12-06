@@ -108,4 +108,19 @@ export const GlobalStyle = createGlobalStyle<cssVarsRootProps>`
    @media (prefers-reduced-motion: reduce) {
       transition: none;
    }
+   ::-webkit-scrollbar{
+      width: 0.4rem;
+      position: fixed;
+   }
+   ::-webkit-scrollbar-thumb{
+      background: var(--palette-opaque-accent3);
+      border: 1.7px solid #0000;
+      border-radius: 1rem;
+   }
+   ::-webkit-scrollbar-thumb:hover{
+      background: var(--palette-accent3);
+   }
+   ::-webkit-scrollbar-track{
+      background: var(--palette-background);
+   }
 `
