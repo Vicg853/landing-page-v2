@@ -116,7 +116,8 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
 
    return (
       <>
-         <NavContainer scrolled={reachedScrollVal} miniMenuState={miniMenuState}>
+         <NavContainer scrolled={reachedScrollVal} miniMenuState={miniMenuState}
+         role="navigation">
             <div id="background" />
             <Logo id="logo"/>
             <LogoMini id="logo-mini"/>
@@ -130,6 +131,7 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                   />
                ))}
                <NavMiniMenuButton 
+               role="menu-button"
                onClick={() => setMiniMenu(val => !val)}
                aria-label={`${miniMenuState ? `Close` : `Open`} mini page's menu`}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" >
@@ -140,6 +142,7 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                   </svg>
                </NavMiniMenuButton>
                <NavColorThemeButton 
+               role="button"
                   onClick={() => setTheme(val => !val)} 
                   aria-label={`Set color theme to ${!isDarkTheme? `dark.` : `light.`}`}>
                   <a.svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={svgSpring}>

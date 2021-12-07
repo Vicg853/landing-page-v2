@@ -39,6 +39,7 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
 
    return (
       <Container 
+      role="menubar"
       active={active ? 1 : 0} 
       style={{...ContainerSpring, 
          display: ContainerSpring

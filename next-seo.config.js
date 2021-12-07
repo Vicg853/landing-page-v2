@@ -4,14 +4,25 @@ export default {
    title: "Alpes Capital Web-page",
    description: 'Olá nós somos a Alpes Capital! Somos um fundo de endowment formado por jovens, focado em ensinar jovens a como investir no mercado financeiro.',
    canonical: process.env.NEXT_PUBLIC_SITE_URL,
-   author: 'Alpes Capital',
-   keywords: ["Alpes Capital", "Fundo de endowment", "Endowment und", "Investment", "Investimento", "Jovens", "ONG", "Mercado Financeiro"].join(', '),
+   owner: 'Alpes Capital',
+   language: 'pt-br',
+   classification: 'Non-Profit Organization',
+   copyright: 'Alpes Capital - 2021-present. All rights reserved.',
+   email: 'alpes.capital@gmail.com',
+   index: process.env.NEXT_PUBLIC_SITE_URL,
+   keywords: ["Alpes Capital", "Fundo de endowment", "Endowment und", "Investment", "Investimento", "Jovens", "ONG", "Mercado Financeiro"],
+   googleSiteVerification: '',
+   themeColor: '#8DA0E2',
    openGraph: { 
       type: 'website',
-      locale: 'pt_br',
+      locale: 'pt_BR',
       title: "Alpes Capital Web-page",
       url: process.env.NEXT_PUBLIC_SITE_URL,
       site_name: 'Alpes Capital', 
+      region: 'BR',
+      countryName: 'Brasil',
+      locality: 'São Paulo',
+      email: 'alpes.capital@gmail.com',
       description: 'Olá nós somos a Alpes Capital! Somos um fundo de endowment formado por jovens, focado em ensinar jovens a como investir no mercado financeiro.',
       images: [
          {
@@ -19,57 +30,117 @@ export default {
             width: 96,
             height: 96,
             alt: 'Alpes Capital Logo',
+            type: 'image/png',
          }
       ],
    },
    twitter: {
-      site: process.env.NEXT_PUBLIC_SITE_URL,
       cardType: 'summary_large_image',
+      url: process.env.NEXT_PUBLIC_SITE_URL,
+      title: 'Alpes Capital Webpage',
+      description: 'Olá nós somos a Alpes Capital! Somos um fundo de endowment formado por jovens, focado em ensinar jovens a como investir no mercado financeiro.',
+      img: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png'
    },
-   additionalLinkTags: [
-      {
-         rel: 'apple-touch-icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon.png',
-         sizes: '192x192'
+   structuredData: {
+      context: "https://schema.org",
+      name: "Alpes Capital",
+      type: "Nonprofit Organization",
+      url: process.env.NEXT_PUBLIC_SITE_URL,
+      logo: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png',
+      foundingDate: "2019",
+      founders: [
+         {
+            type: "Person",
+            name: "ALESSANDRA OGAWA"
+         },
+         {
+            type: "Person",
+            name: "BENJAMIN COCCOLI"
+         },
+         {
+            type: "Person",
+            name: "CAROLINA BERTOLETTI"
+         },
+         {
+            type: "Person",
+            name: "CECILIA PRADO"
+         },
+         {
+            type: "Person",
+            name: "NICHOLAS LATKANI"
+         },
+         {
+            type: "Person",
+            name: "VALENTINA COSTA"
+         },
+         {
+            type: "Person",
+            name: "Louis Chalamel"
+         },
+         {
+            type: "Person",
+            name: "Jean"
+         },
+      ],
+      address: {
+         type: "PostalAddress",
+         addressLocality: "São Paulo",
+         addressRegion: "SP",
+         addressCountry: "BR"
       },
-      {
-         rel: 'apple-touch-icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon-60x60.png',
-         sizes: '60x60'
+      contactPoint: [
+         {
+            type: "ContactPoint",
+            contactType: "Principal",
+            email: "alpes.capital@gmail.com"
+         }
+      ], 
+      sameAs: [
+         "https://www.facebook.com/alpescapital/",
+         "https://www.instagram.com/alpes_capital_/",
+         "https://www.linkedin.com/company/alpes-capital/",
+         "https://https://github.com/alpes-Capital/"
+      ]
+   },
+   asApplication: {
+      msApplication: {
+         tileColor: '#8DA0E2',
+         applicationName: 'Alpes Capital Webpage',
+         startUrl: process.env.NEXT_PUBLIC_SITE_URL,
+         tooltip: 'Launch Alpes Capital Webpage',
+         shortcutIcon: process.env.NEXT_PUBLIC_SITE_URL + '/favicon.ico',
+         images: [
+            {
+               name: 'msapplication-square150x150logo',
+               content: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/ms-icon-150x150.png',
+            }
+         ]
       },
-      {
-         rel: 'apple-touch-icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon-114x114.png',
-         sizes: '114x114'
-      },
-      {
-         rel: 'apple-touch-icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon-180x180.png',
-         sizes: '180x180'
-      },
-      {
-         rel: 'icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/android-icon-192x192.png',
-         sizes: '192x192',
-         type: 'image/png',
-      },
-      {
-         rel: 'icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-32x32.png',
-         sizes: '32x32',
-         type: 'image/png',
-      },
-      {
-         rel: 'icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png',
-         sizes: '96x96',
-         type: 'image/png',
-      },
-      {
-         rel: 'icon',
-         href: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-16x16.png',
-         sizes: '16x16',
-         type: 'image/png',
-      },
+      appleMobile: {
+         statusBarStyle: 'black-translucent',
+         capable: 'yes',
+         formatDetection: 'telephone=no',
+         touchIcon: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon.png',
+         images: [
+            {
+               rel: 'apple-touch-icon',
+               sizes: '60x60',
+               href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon-60x60.png',
+            },
+            {
+               rel: 'apple-touch-icon',
+               sizes: '114x114',
+               href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon-114x114.png',
+            },
+            {
+               rel: 'apple-touch-icon',
+               sizes: '180x180',
+               href: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon-180x180.png',
+            },
+         ]
+      }
+   },
+   additionalMetaTags: [
+      
    ]
 }

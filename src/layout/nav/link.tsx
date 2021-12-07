@@ -64,6 +64,7 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, subLinks }) => {
          <Link href={href} passHref>
             {subLinks ? 
             (<LinkText
+               role="link"
                onMouseOut={() => setIsOpen(false)}
                onMouseOver={() => setIsOpen(true)}
                isActive={isOpen}>
@@ -84,7 +85,7 @@ const LinkCustom: React.FC<LinkProps> = ({ href, name, subLinks }) => {
                <div className='content'>
                {subLinks.map((subLink, index) => (
                   <Link href={`${href}${subLink.href}`} passHref key={index}>
-                     <SubLinkItem key={index}>{subLink.title}</SubLinkItem>
+                     <SubLinkItem role="link" key={index}>{subLink.title}</SubLinkItem>
                   </Link>
                ))}
                </div>

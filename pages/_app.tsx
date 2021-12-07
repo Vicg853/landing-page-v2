@@ -35,21 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
             <base href={process.env.NEXT_PUBLIC_SITE_URL} target="_blank"></base>
-            <script type="application/ld+json">
-            {`
-               {
-                  "@context": "${process.env.NEXT_PUBLIC_SITE_URL}",
-                  "@type": "ONG",
-                  "url": "${process.env.NEXT_PUBLIC_SITE_URL}",
-                  "name": "Alpes Capital",
-                  "contactPoint": {
-                     "@type": "ContactPoint",
-                     "email": "alpes.capital@gmail.com",
-                     "contactType": "direct"
-                  }
-               }
-            `}
-            </script>
          </Head>
          <WithThemeProvider />
          <CookiesPolicyCard />
