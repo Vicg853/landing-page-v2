@@ -3,9 +3,11 @@ import Head from 'next/head'
 import SEO from '../../next-seo.config'
 
 //* SEO component that is used to define global and default SEO settings for the whole webp
-const DefaultSEOComp: typeof Head = () => (
+const DefaultSEOComp: React.FC = () => (
    <Head>
       <title>{SEO.title}</title>
+      <base href={process.env.NEXT_PUBLIC_SITE_URL} target="_blank" />
+      <meta name='canonical' content={SEO.canonical} />
       <meta name="title" content={SEO.title} />
       <meta name="description" content={SEO.description} />
       <meta name="google-site-verification" content={SEO.googleSiteVerification} />

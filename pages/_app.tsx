@@ -6,6 +6,7 @@ import { GlobalStyle, Theme1, Theme2 } from "@components/global-style"
 import usePersistentState from '@components/hooks/usePersistentState'
 import CssThemeProvider from '@components/css-theme'
 import routes from '@routes'
+import { DefaultSEOComp } from '@components/SEO'
 
 //Importing Layout elements
 import Navigation from '@layout/navigation'
@@ -34,8 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
          <Head>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
-            <base href={process.env.NEXT_PUBLIC_SITE_URL} target="_blank"></base>
          </Head>
+         <DefaultSEOComp />
          <WithThemeProvider />
          <CookiesPolicyCard />
          <Alert />
