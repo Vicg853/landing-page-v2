@@ -1,6 +1,5 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { config, useSpring, useTrail } from '@react-spring/web'
-import { useState } from 'react'
 
 import type {PropsCombined as RouteProps} from '@routes'
 
@@ -48,6 +47,7 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
          }}>
          <div id="content">
             {routes.map((route, i) => {
+               if(!route.navShow) return
                if(route.navSubLinks && route.navSubLinks.length > 0) {
                   return (
                      <CustomLink

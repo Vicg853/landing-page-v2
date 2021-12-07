@@ -122,14 +122,14 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
             <Logo id="logo"/>
             <LogoMini id="logo-mini"/>
             <NavSubSection>
-               {routes.map((route, index) => (
-                  <LinkCustom
+               {routes.map((route, index) => {
+                  if(route.navShow) return (<LinkCustom
                      key={index}
                      href={route.path}
                      name={route.name}
                      subLinks={route.navSubLinks ? route.navSubLinks : undefined}
-                  />
-               ))}
+                  />)
+               })}
                <NavMiniMenuButton 
                role="menu-button"
                onClick={() => setMiniMenu(val => !val)}
