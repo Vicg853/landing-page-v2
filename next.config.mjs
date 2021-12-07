@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
-const { v4 } = require('uuid')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+import { v4 } from 'uuid'
+import withPlugins from 'next-compose-plugins'
+import withBundleAnalyzer from '@next/bundle-analyzer'
 
-//TODO Add preact latter
+//TODO Add preact when it's fixed
 //const withPreact = require('next-plugin-preact')
 
-module.exports = withBundleAnalyzer({
+import pages from './pagesArr.js/index.js'
+
+const config = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -24,13 +25,14 @@ module.exports = withBundleAnalyzer({
     return 'alpesCap-landing-page-build-id-' + v4().toString()
   },
   //Customize webpack config
-  webpack(config) {
+  webpack(config, { dev, isServer }) {
+
+    //* Enabling inline-svg/svg-modules support
     config.module.rules.push({
       test: /\.svg$/,
       issuer: {
         and: [/\.(js|ts)x?$/]
       },
-      
       use: [
         {
           loader: '@svgr/webpack',
@@ -44,6 +46,7 @@ module.exports = withBundleAnalyzer({
       ],
     })
 
+    //* Adding support for static serving of .gltf 3D files
     config.module.rules.push({
       test: /\.(glb|gltf)$/,
       use: {
@@ -67,7 +70,7 @@ module.exports = withBundleAnalyzer({
     ]
   },
 
-  //! Get more info about using this for sercrets, good resource in the future to maybe create inner api to get posts directly from the server
+  //* Like env files
   //* More info here https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
   /*
   **
@@ -76,10 +79,12 @@ module.exports = withBundleAnalyzer({
     mySecret: 'secret',
     secondSecret: process.env.SECOND_SECRET, // Pass through env variables
   },
-  publicRuntimeConfig: {
-    // Will be available on both server and client
-    staticFolder: '/static',
-  },
-  **
   */
-})
+  publicRuntimeConfig: {
+    routes: pages
+  },
+}
+
+export default withPlugins([
+  [withBundleAnalyzer, {enabled: process.env.ANALYZE === 'true'}],
+], config)
