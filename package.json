@@ -5,12 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build:test": "env-cmd -f .env.development.local next build && next start",
-    "build:prod": "next build",
+    "build:prod": "next build && node -r esm node_modules/next-sitemap/bin/next-sitemap",
     "start": "next start",
     "lint:all": "next lint && stylelint './src/**/*.ts'",
     "lint:next": "next lint",
     "lint:style": "stylelint './**/*.{ts,tsx}'",
-    "postbuild": "next-sitemap",
+    "postbuild": "node -r esm node_modules/next-sitemap/bin/next-sitemap",
     "analyze": "cross-env ANALYZE=true env-cmd -f .env.development.local next build && yarn serve"
   },
   "dependencies": {

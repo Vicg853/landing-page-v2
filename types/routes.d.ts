@@ -2,11 +2,15 @@ interface PermanentProps {
    readonly name: string,
    readonly path: string,
    readonly navShow: boolean,
-   readonly appearOnRobotsTXT: boolean,
+   readonly appearForWebCrawllers: boolean,
    readonly siteMapOptions: {
      priority: number,
      changeFreq: string,
      lastMod: string,
+     alternateRefs?: {
+        href: string,
+        hreflang: string,
+     }[],
    },
  }
  
