@@ -11,14 +11,26 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
    const files = fs.readdirSync(dirPath)
 
    files.forEach(function(file: string) {
-      if(file === '_document.tsx' || file === '_app.tsx' || file === 'sitemap.xml' ||
-         file === '_document.js' || file === '_app.js' || file === 'sitemap' ||
-         file === '_error.tsx' || file === '_404.tsx' || file === 'sitemap.js' || 
-         file === '_error.js' || file === '_404.js') return 
+      //? Filtering out the files that are not actually pages 
+      //? and are just nextjs runtime files
+      if(file.match(RegExp(".json$", 'i')) || file.match(RegExp(".nft$", 'i')) || 
+      file.match(RegExp('[0-9a-z]\.nft\.[0-9a-z]+$', 'i')) || file.match(RegExp('[0-9a-z]\.nft+$', 'i')) || 
+      file.match(RegExp('_[0-9a-z].+$', 'i')) || file.match(RegExp('404\..', 'i')) ||
+      file.match(RegExp('.nft$', 'i')) || file.match(RegExp('.xml$', 'i')) ||
+      file.match(RegExp('error\..', 'i')) || file.match(RegExp('500\..', 'i')) || 
+      file.match(RegExp('sitemap\..', 'i'))) return 
+
+      //? If is a directory (if) then call the function again
+      //? and map out this directory's files or enter into other sub directories
+      //? or if is a file (else) just include it into the sitemap 
       if (fs.statSync(dirPath + "/" + file).isDirectory()) {
          arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
       } else {
-         const refinedDirPath = dirPath.replace(/pages/g, '')
+         //? Removing the '.next/server/pages' or 'page' prefix used by fs to find the files in prod
+         //? or dev (respectively), but isn't needed for the sitemap/web
+         const refinedDirPath = process.env.NODE_ENV === 'production' ? 
+            dirPath.replace(RegExp('.next/server/pages', 'g'), '') : 
+            dirPath.replace(RegExp('pages', 'g'), '')
          if(file === 'index.tsx' ||
          file === 'index.js' ||
          file === 'index') return arrayOfFiles.push(path.join(refinedDirPath, "/"))
@@ -30,8 +42,7 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
 }
 
 function generateSiteMap(): string {
-   //TODO Add production version with regex checking for the production files
-   const staticPages = getAllFiles('pages')
+   const staticPages = getAllFiles(process.env.NODE_ENV === 'production' ?'.next/server/pages' : 'pages')
 
    const routes = serverRuntimeConfig.allRoutes as PropsCombined
 
