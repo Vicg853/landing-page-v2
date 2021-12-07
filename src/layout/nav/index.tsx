@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from 'react'
 import { useEffect, useState } from 'react'
 import { a, useSpring, config } from '@react-spring/web'
 
-import type {PropsCombined as RoutesProps} from '@routes'
+import type {PropsCombined as RoutesProps} from '@custom-types/routes'
 
 import Logo from '@public/images/global/big_whitebg.svg'
 import LogoMini from '@public/images/global/mini.svg'

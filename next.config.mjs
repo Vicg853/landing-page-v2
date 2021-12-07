@@ -6,7 +6,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer'
 //TODO Add preact when it's fixed
 //const withPreact = require('next-plugin-preact')
 
-import pages from './pagesArr.js/index.js'
+import pages from './routes.js'
 
 const config = {
   reactStrictMode: true,
@@ -72,16 +72,11 @@ const config = {
 
   //* Like env files
   //* More info here https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
-  /*
-  **
   serverRuntimeConfig: {
-    // Will only be available on the server side
-    mySecret: 'secret',
-    secondSecret: process.env.SECOND_SECRET, // Pass through env variables
+    allRoutes: pages,
   },
-  */
   publicRuntimeConfig: {
-    routes: pages
+    routes: pages.filter(page => page.navShow),
   },
 }
 

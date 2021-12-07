@@ -1,12 +1,16 @@
 import React from 'react'
+import getConfig from 'next/config'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
+
+import type {PropsCombined} from '@custom-types/routes'
 
 import { GlobalStyle, Theme1, Theme2 } from "@components/global-style"
 import usePersistentState from '@components/hooks/usePersistentState'
 import CssThemeProvider from '@components/css-theme'
-import routes from '@routes'
 import { DefaultSEOComp } from '@components/SEO'
+
+const { publicRuntimeConfig } = getConfig()
 
 //Importing Layout elements
 import Navigation from '@layout/navigation'
@@ -23,7 +27,8 @@ const WithThemeProvider: React.FC = () => {
          <CssThemeProvider 
             theme={isDarkMode ? Theme2 : Theme1} 
             defaultTheme={Theme1} CustomGlobalStyle={GlobalStyle} />
-         <Navigation routes={routes} isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
+         <Navigation routes={publicRuntimeConfig.routes as PropsCombined} 
+         isDarkTheme={isDarkMode} toggleDarkTheme={isDarkModeToggle} />
       </>
    )
 }

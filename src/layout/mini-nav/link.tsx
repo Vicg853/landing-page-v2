@@ -55,7 +55,7 @@ const CustomLink: React.FC<Props> = ({ href, title, subLinks, openState, openMen
          {subLinks && 
             <SubLinkContainer isOpen={openState}>
                {subLinks.map((subLink, index) => (
-                  <Link href={subLink.href} passHref key={index}>
+                  <Link href={href + subLink.href} passHref key={index}>
                      <SubLinkStyle key={index}
                      role="link">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

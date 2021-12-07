@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import { config, useSpring, useTrail } from '@react-spring/web'
 
-import type {PropsCombined as RouteProps} from '@routes'
+import type {PropsCombined as RouteProps} from '@custom-types/routes'
 
 import CustomLink from './link'
 import { Container } from './style'

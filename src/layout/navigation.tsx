@@ -3,7 +3,7 @@ import type { Dispatch, SetStateAction } from 'react'
 
 import Nav from './nav'
 import MiniNav from './mini-nav'
-import type {PropsCombined as RouteProps} from '@routes'
+import type {PropsCombined as RouteProps} from '@custom-types/routes'
 
 
 type Props = {

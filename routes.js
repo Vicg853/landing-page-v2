@@ -1,6 +1,6 @@
-import type { PropsCombined } from './types/routes'
+/** @type {import('./types/routes').PropsCombined} */
 
-const pages: PropsCombined = [
+const pages = [
    { 
       name: "Home", 
       path: "/" ,
@@ -131,6 +131,4 @@ const pages: PropsCombined = [
    },
 ]
 
-export type {PropsCombined}
-
-export default pages
+module.exports = pages

@@ -1,8 +1,11 @@
 import type { GetServerSideProps } from 'next'
+import getConfig from 'next/config'
 import fs from 'fs'
 import path from 'path'
 
-import routes from "@routes"
+import type {PropsCombined} from '@custom-types/routes'
+
+const { serverRuntimeConfig } = getConfig()
 
 function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
    const files = fs.readdirSync(dirPath)
@@ -29,6 +32,8 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
 function generateSiteMap(): string {
    //TODO Add production version with regex checking for the production files
    const staticPages = getAllFiles('pages')
+
+   const routes = serverRuntimeConfig.allRoutes as PropsCombined
 
    return `<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

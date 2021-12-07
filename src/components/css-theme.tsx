@@ -48,7 +48,7 @@ const CssThemeProvider: React.FC<ThemeProviderProps> = ({ theme, defaultTheme, C
    useEffect(() => {
       setCssPalette(makeCssThemeVars(theme, true))
       setTheme(theme)
-   }, [theme])
+   }, [theme, setTheme])
 
    //*Actual provider with themeContainer HTML id so values can be latter accessed inside javascript as a function
    //? you can include if you will a custom global style, that 

@@ -25,7 +25,7 @@
       "@icons/*": ["./public/icons/*"],
       "@images/*": ["./public/images/*"],
       "@manifest/*": ["./public/manifest/*"],
-      "@routes": ["./routes.ts"],
+      "@custom-types/*": ["./types/*"],
     },
   },
   "include": [
