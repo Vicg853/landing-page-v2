@@ -45,3 +45,12 @@ export const degToRad = (degrees: number): number => degrees * (Math.PI / 180)
 export function scale (val: number, inMin: number, inMax: number, outMin: number, outMax: number): number {
    return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
+
+//* Check if a string matches any of the regex pattern passed in an array
+// * if it matches any of the regexes, returns true
+export function checkStrMatchAnyOfRgxArr (file: string, rgxArr: RegExp[]): boolean {
+   for(let i = 0; i < rgxArr.length; i++) {
+      if(file.match(rgxArr[i])) return true
+   }
+   return false
+}

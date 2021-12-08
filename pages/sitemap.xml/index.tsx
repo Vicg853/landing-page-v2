@@ -5,7 +5,14 @@ import path from 'path'
 
 import type {PropsCombined} from '@custom-types/routes'
 
+import {checkStrMatchAnyOfRgxArr} from '@components/utils'
 const { serverRuntimeConfig } = getConfig()
+
+var fileOptOutRegex = [
+   RegExp(".json$", 'i'), RegExp("(.nft$|.nft\..+$)", 'i'),RegExp('_.+$', 'i'), 
+   RegExp('404\..', 'i'), RegExp('(.xml.+$|.xml$)', 'i'), RegExp('500\..', 'i'), 
+   RegExp('robots\..', 'i')
+] 
 
 function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
    const files = fs.readdirSync(dirPath)
@@ -13,12 +20,7 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
    files.forEach(function(file: string) {
       //? Filtering out the files that are not actually pages 
       //? and are just nextjs runtime files
-      if(file.match(RegExp(".json$", 'i')) || file.match(RegExp(".nft$", 'i')) || 
-      file.match(RegExp('[0-9a-z]\.nft\.[0-9a-z]+$', 'i')) || file.match(RegExp('[0-9a-z]\.nft+$', 'i')) || 
-      file.match(RegExp('_[0-9a-z].+$', 'i')) || file.match(RegExp('404\..', 'i')) ||
-      file.match(RegExp('.nft$', 'i')) || file.match(RegExp('.xml$', 'i')) ||
-      file.match(RegExp('error\..', 'i')) || file.match(RegExp('500\..', 'i')) || 
-      file.match(RegExp('sitemap\..', 'i'))) return 
+      if(checkStrMatchAnyOfRgxArr(file, fileOptOutRegex)) return 
 
       //? If is a directory (if) then call the function again
       //? and map out this directory's files or enter into other sub directories
@@ -31,9 +33,7 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
          const refinedDirPath = process.env.NODE_ENV === 'production' ? 
             dirPath.replace(RegExp('.next/server/pages', 'g'), '') : 
             dirPath.replace(RegExp('pages', 'g'), '')
-         if(file === 'index.tsx' ||
-         file === 'index.js' ||
-         file === 'index') return arrayOfFiles.push(path.join(refinedDirPath, "/"))
+         if(file.match(RegExp('index', 'i'))) return arrayOfFiles.push(path.join(refinedDirPath, "/"))
          return arrayOfFiles.push(path.join(refinedDirPath, "/", file.split('.')[0]))
       }
    })
