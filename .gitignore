@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+#Dev Service worker
+workbox*
+sw.js
+
