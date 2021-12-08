@@ -22,9 +22,9 @@ const DefaultSEOComp: React.FC = () => (
       <link rel='index' title={SEO.title} href={SEO.index} />
       <meta name="keywords" content={SEO.keywords.join(', ')}/>
       <link rel="manifest" href={SEO.manifest} />
-      <link rel='icon' type='image/png' sizes='32x32' href='/icons/favicon-96x96.png' />
-      <link rel='icon' type='image/png' sizes='32x32' href='/icons/favicon-32x32.png' />
-      <link rel='icon' type='image/png' sizes='16x16' href='/icons/favicon-16x16.png' />
+      <link rel='icon' type='image/png' sizes='32x32' href='/favicon-96x96.png' />
+      <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+      <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
       
       
       {/* Apple mobile app capabilities */}

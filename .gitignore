@@ -41,6 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 
 #Dev Service worker
-workbox*
-sw.js
+**/public/workbox-*.js
+**/public/sw.js
+**/public/worker-*.js
 
