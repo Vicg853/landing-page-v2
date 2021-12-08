@@ -7,13 +7,8 @@ export default {
    owner: 'Alpes Capital',
    language: 'pt-br',
    manifest: '/manifest/manifest.json',
-   classification: 'Non-Profit Organization',
-   copyright: 'Alpes Capital - 2021-present. All rights reserved.',
-   email: 'alpes.capital@gmail.com',
    index: process.env.NEXT_PUBLIC_SITE_URL,
    keywords: ["Alpes Capital", "Fundo de endowment", "Endowment und", "Investment", "Investimento", "Jovens", "ONG", "Mercado Financeiro"],
-   googleSiteVerification: '',
-   themeColor: '#8DA0E2',
    openGraph: { 
       type: 'website',
       locale: 'pt_BR',
@@ -25,15 +20,13 @@ export default {
       locality: 'São Paulo',
       email: 'alpes.capital@gmail.com',
       description: 'Olá nós somos a Alpes Capital! Somos um fundo de endowment formado por jovens, focado em ensinar jovens a como investir no mercado financeiro.',
-      images: [
-         {
-            url: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png',
-            width: 96,
-            height: 96,
-            alt: 'Alpes Capital Logo',
-            type: 'image/png',
-         }
-      ],
+      image: {
+         url: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png',
+         width: 96,
+         height: 96,
+         alt: 'Alpes Capital Logo',
+         type: 'image/png',
+      }
    },
    twitter: {
       cardType: 'summary_large_image',
@@ -45,7 +38,8 @@ export default {
    structuredData: {
       context: "https://schema.org",
       name: "Alpes Capital",
-      type: "Nonprofit Organization",
+      type: "NGO",
+      description: "Olá nós somos a Alpes Capital! Somos um fundo de endowment formado por jovens, focado em ensinar jovens a como investir no mercado financeiro.",
       url: process.env.NEXT_PUBLIC_SITE_URL,
       logo: process.env.NEXT_PUBLIC_SITE_URL + '/favicon-96x96.png',
       foundingDate: "2019",
@@ -101,6 +95,13 @@ export default {
          "https://www.instagram.com/alpes_capital_/",
          "https://www.linkedin.com/company/alpes-capital/",
          "https://https://github.com/alpes-Capital/"
+      ],
+      sponsor: [
+         {
+            type: "Organization",
+            name: "Alpes Capital",
+            url: ''
+         }
       ]
    },
    asApplication: {
@@ -146,6 +147,26 @@ export default {
       {
          httpEquiv: 'X-UA-Compatible',
          content: 'IE=edge'
+      },
+      {
+         name: "reply-to",
+         content: 'alpes.capital@gmail.com'
+      },
+      {
+         name: 'google-site-verification',
+         content: '',
+      },
+      {
+         name: 'theme-color',
+         content: '#8DA0E2',
+      },
+      {
+         name: 'classification',
+         content: 'NGO'
+      },
+      {
+         name: 'copyright',
+         content: 'Alpes Capital - 2021-present. All rights reserved.'
       }
    ]
 }

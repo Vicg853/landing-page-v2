@@ -5,27 +5,16 @@ import SEO from '../../next-seo.config'
 //* SEO component that is used to define global and default SEO settings for the whole webp
 const DefaultSEOComp: React.FC = () => (
    <Head>
-      <title>{SEO.title}</title>
       <base href={process.env.NEXT_PUBLIC_SITE_URL} target="_blank" />
-      <meta name='canonical' content={SEO.canonical} />
-      <meta name="title" content={SEO.title} />
-      <meta name="description" content={SEO.description} />
-      <meta name="google-site-verification" content={SEO.googleSiteVerification} />
       <meta charSet='utf-8' />
       <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
-      <meta name="theme-color" content={SEO.themeColor} />
-      <meta name="language" content={SEO.language} />
-      <meta name="Classification" content={SEO.classification} />
-      <meta name="copyright" content={SEO.copyright} />
-      <meta name="reply-to" content={SEO.email} />
       <meta name="owner" content={SEO.owner} />
       <link rel='index' title={SEO.title} href={SEO.index} />
-      <meta name="keywords" content={SEO.keywords.join(', ')}/>
       <link rel="manifest" href={SEO.manifest} />
-      <link rel='icon' type='image/png' sizes='32x32' href='/favicon-96x96.png' />
-      <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
-      <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
-      
+      {/* Any additional meta tags */}
+      {SEO.additionalMetaTags.map((props, index) => (
+         <meta {...props} key={index} />
+      ))}
       
       {/* Apple mobile app capabilities */}
       <meta name="apple-mobile-web-app-status-bar-style" content={SEO.asApplication.appleMobile.statusBarStyle} />
@@ -56,6 +45,7 @@ const DefaultSEOComp: React.FC = () => (
             "url": `${SEO.structuredData.url}`,
             "name": `${SEO.structuredData.name}`,
             "logo": `${SEO.structuredData.logo}`,
+            "description": `${SEO.structuredData.description}`,
             "foundingDate": `${SEO.structuredData.foundingDate}`,
             "founders": [SEO.structuredData.founders.map((founder) => (
                {
@@ -82,51 +72,173 @@ const DefaultSEOComp: React.FC = () => (
          }
       )}} />
 
-      {/* Robots txt and search engines config */}
-      <meta name="robots" content= "index,follow" />
-
       {/* OpenGraph meta tags */}
-      <meta property="og:type" content={SEO.openGraph.type} />
-      <meta property="og:url" content={SEO.openGraph.url} />
       <meta property="og:site_name" content={SEO.openGraph.site_name} />
-      <meta property="og:title" content={SEO.openGraph.title} />
-      <meta property="og:description" content={SEO.openGraph.description} />
       <meta name="og:email" content={SEO.openGraph.email}/>
-      <meta property="og:locale" content={SEO.openGraph.locale} />
       <meta name="og:locality" content={SEO.openGraph.locality} />
       <meta name="og:region" content={SEO.openGraph.region} />
-      <meta name="og:country-name" content={SEO.openGraph.countryName} />
-      <meta name="fb:page_id" content="43929265776" />
-      {SEO.openGraph.images.map((image, index) => (
-         <>
-            <meta property="og:image" key={index} content={image.url} />
-            <meta property="og:image:width" key={index} content={image.width.toString()} />
-            <meta property="og:image:height" key={index} content={image.height.toString()} />
-            <meta property="og:image:alt" key={index} content={image.alt} />
-            <meta property="og:image:type" key={index} content={image.type} />
-         </>
-      ))}
+      <meta name="og:country-name" content={SEO.openGraph.countryName} />  
 
       {/* Twitter meta tags */}
       <meta property="twitter:card" content={SEO.twitter.cardType} />
-      <meta property="twitter:url" content={SEO.twitter.url} />
-      <meta property="twitter:title" content={SEO.twitter.title} />
-      <meta property="twitter:description" content={SEO.twitter.description} />
-      <meta property="twitter:image" content={SEO.twitter.img} />
-
-      {/* Any additional meta tags */}
-      {SEO.additionalMetaTags.map((props, index) => (
-         <meta {...props} key={index} />
-      ))}
    </Head>
 )
 
 //* SEO component that is used to be called in every page so each page
 //* can have it's custom SEO data
-const SEOComp: typeof Head = () => (
-   <Head>
-   </Head>
-)
+
+type CustomSEOProps = {
+   title?: string,
+   description?: string,
+   canonical?: string,
+   keywords?: string[],
+   image?: string,
+   locale?: string,
+   localeAlternates?: string[],
+   robotsFollow: boolean,
+   articleMetaTags?: {
+      author: string,
+      topic: string,
+      revised: string,
+      summary: string,
+   },
+   openGraph?: {
+      title: string,
+      description: string,
+      url: string,
+      type?: string,
+      locale?: string,
+      image?: {
+         url: string,
+         width: number,
+         height: number,
+         alt: string,
+         type: string,
+      }
+      article?: {
+         publishedTime: string,
+         modifiedTime?: string,
+         expirationTime?: string,
+         author: string,
+         tag: string[],
+      }
+      profile?: {
+         firstName: string,
+         lastName: string,
+         gender: string
+      }
+      video?: {
+         videoUrl: string
+         height: string
+         width: string
+         type: string
+      }
+   }
+   twitter?: {
+      url: string
+      title: string
+      description: string
+      image: string
+   }
+   linkTags?: {
+      rel: 'next' | 'prev' | 'comments'
+      href: string
+   }[]
+}
+
+const SEOComp: React.FC<CustomSEOProps> = (props) => {
+   const checkOpenGraph = {
+      title: props.openGraph ? props.openGraph.title : SEO.openGraph.title,
+      description: props.openGraph ? props.openGraph.description : SEO.openGraph.description,
+      url: props.openGraph ? props.openGraph.url : SEO.openGraph.url,
+      type: (props.openGraph && props.openGraph.type) ? props.openGraph.type : SEO.openGraph.type,
+      locale: (props.openGraph && props.openGraph.locale) ? props.openGraph.locale : SEO.openGraph.locale,
+      image: (props.openGraph && props.openGraph.image) ? props.openGraph.image : SEO.openGraph.image,
+      article: (props.openGraph && props.openGraph.article) ? props.openGraph.article : undefined,
+      profile: (props.openGraph && props.openGraph.profile) ? props.openGraph.profile : undefined,
+      video: (props.openGraph && props.openGraph.video) ? props.openGraph.video : undefined,
+   } 
+
+   return (
+      <Head>
+         {/* Main meta tags */}
+         <title>{props.title ? props.title : SEO.title}</title>
+         <meta name="title" content={props.title ? props.title : SEO.title} />
+         <meta name="description" content={props.description ? props.description: SEO.description} />
+         <link rel="canonical" href={props.canonical ? props.canonical : SEO.canonical} />
+         <meta name="keywords" content={props.keywords ? 
+            props.keywords.join(', ') : SEO.keywords.join(', ')} />
+         {props.image && <meta name="image" content={props.image} />}
+         <meta name="language" content={props.locale ? props.locale : SEO.language} />
+
+         {/* //TODO In case we add support for multiple languages, check this out and other related SEO tags
+         */}
+         {props.localeAlternates && props.localeAlternates.map((locale, index) => (
+            <link key={index} rel="alternate" hrefLang={locale} href={`${props.canonical}?lang=${locale}`} />
+         ))}
+
+         {/* Robots meta tags */}
+         <meta name="robots" content={props.robotsFollow ? 'index,follow' : 
+            'noindex,nofollow,noimageindex,noarchive,nositelinkssearchbox'} />
+
+         {/* Article main meta tags */}
+         {props.articleMetaTags && <>
+            <meta name="author" content={props.articleMetaTags.author} />
+            <meta name="topic" content={props.articleMetaTags.topic} />
+            <meta name="revised" content={props.articleMetaTags.revised} />
+            <meta name="summary" content={props.articleMetaTags.summary} />
+         </>}
+
+         {/* OpenGraph */}
+         <meta property="og:title" content={checkOpenGraph.title} />
+         <meta property="og:description" content={checkOpenGraph.description} />
+         <meta property="og:type" content={checkOpenGraph.type} />
+         <meta property="og:url" content={checkOpenGraph.url} />
+         <meta property="og:locale" content={checkOpenGraph.locale} />
+         <meta property="og:image" content={checkOpenGraph.image.url} />
+         <meta property="og:image:width" content={checkOpenGraph.image.width.toString()} />
+         <meta property="og:image:height" content={checkOpenGraph.image.height.toString()} />
+         <meta property="og:image:alt" content={checkOpenGraph.image.alt} />
+         <meta property="og:image:type" content={checkOpenGraph.image.type} />
+
+         {/* OPtional OpenGraph tags */}
+         {checkOpenGraph.article && <>
+            <meta property="article:published_time" content={checkOpenGraph.article.publishedTime} />
+            <meta property="article:author" content={checkOpenGraph.article.author} />
+            {checkOpenGraph.article.modifiedTime && 
+               <meta property="article:modified_time" content={checkOpenGraph.article.modifiedTime} />}
+            {checkOpenGraph.article.expirationTime &&
+               <meta property="article:expiration_time" content={checkOpenGraph.article.expirationTime} />}
+            {checkOpenGraph.article.tag && checkOpenGraph.article.tag.map((tag, index) => (
+               <meta property="article:tag" key={index} content={tag} />
+            ))}
+         </>}
+         {checkOpenGraph.profile && <>
+            <meta property="profile:first_name" content={checkOpenGraph.profile.firstName} />
+            <meta property="profile:last_name" content={checkOpenGraph.profile.lastName} />
+            <meta property="profile:gender" content={checkOpenGraph.profile.gender} />
+         </>}
+         {checkOpenGraph.video && <>
+            <meta property="og:video" content={checkOpenGraph.video.videoUrl} />
+            <meta property="og:video:type" content={checkOpenGraph.video.type} />
+            <meta property="og:video:width" content={checkOpenGraph.video.width} />
+            <meta property="og:video:height" content={checkOpenGraph.video.height} />
+         </>}
+
+         {/* TwitterSEO */}
+         <meta name="twitter:url" content={props.twitter ? props.twitter.url : SEO.twitter.url} />
+         <meta name="twitter:title" content={props.twitter ? props.twitter.title : SEO.twitter.title} />
+         <meta name="twitter:description" content={props.twitter ? props.twitter.description : SEO.twitter.description} />
+         <meta name="twitter:image" content={props.twitter ? props.twitter.image : SEO.twitter.img} />
+
+         {/* Other link tags */}
+         {props.linkTags && props.linkTags.map((linkTag, index) => (
+            <link key={index} rel={linkTag.rel} href={linkTag.href} />
+         ))}
+      </Head>
+   )
+}  
+
 
 export {
    DefaultSEOComp,
