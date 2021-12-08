@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://alpescap.org
-
-# Sitemaps
-Sitemap: https://alpescap.org/sitemap.xml
