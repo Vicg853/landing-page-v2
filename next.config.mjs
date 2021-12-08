@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 import { v4 } from 'uuid'
+import withPWA from 'next-pwa'
+import runtimeCaching from 'next-pwa/cache.js'
 import withPlugins from 'next-compose-plugins'
 import withBundleAnalyzer from '@next/bundle-analyzer'
 
@@ -25,7 +27,7 @@ const config = {
     return 'alpesCap-landing-page-build-id-' + v4().toString()
   },
   //Customize webpack config
-  webpack(config, { dev, isServer }) {
+  webpack(config) {
 
     //* Enabling inline-svg/svg-modules support
     config.module.rules.push({
@@ -81,5 +83,15 @@ const config = {
 }
 
 export default withPlugins([
+  //withPreact,
+  [withPWA, {pwa: {
+    runtimeCaching, 
+    dest: 'public',
+    disable: process.env.NODE_ENV === 'development',
+
+    //? Docs recomend removing .next/static/images from caching rules
+    //? for next's optimized-images-plugin to work properly
+    buildExcludes: [/chunks\/images\/.*$/]
+  }}],
   [withBundleAnalyzer, {enabled: process.env.ANALYZE === 'true'}],
 ], config)

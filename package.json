@@ -10,7 +10,6 @@
     "lint:all": "next lint && stylelint './src/**/*.ts'",
     "lint:next": "next lint",
     "lint:style": "stylelint './**/*.{ts,tsx}'",
-    "postbuild": "node -r esm node_modules/next-sitemap/bin/next-sitemap",
     "analyze": "cross-env ANALYZE=true env-cmd -f .env.development.local next build && yarn serve"
   },
   "dependencies": {
@@ -18,6 +17,7 @@
     "next": "^12.0.8-canary.1",
     "next-compose-plugins": "^2.2.1",
     "next-page-transitions": "^1.0.0-beta.2",
+    "next-pwa": "^5.4.4",
     "react": "^18.0.0-beta-c7917fe76-20211206",
     "react-dom": "^18.0.0-beta-c7917fe76-20211206",
     "react-hooks-global-state": "^1.0.2",
