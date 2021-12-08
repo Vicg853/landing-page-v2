@@ -6,6 +6,7 @@ export default {
    canonical: process.env.NEXT_PUBLIC_SITE_URL,
    owner: 'Alpes Capital',
    language: 'pt-br',
+   manifest: '/manifest/manifest.json',
    classification: 'Non-Profit Organization',
    copyright: 'Alpes Capital - 2021-present. All rights reserved.',
    email: 'alpes.capital@gmail.com',
@@ -120,6 +121,7 @@ export default {
          statusBarStyle: 'black-translucent',
          capable: 'yes',
          formatDetection: 'telephone=no',
+         barTitle: 'Alpes Capital Webpage',
          touchIcon: process.env.NEXT_PUBLIC_SITE_URL + '/manifest/apple-icon.png',
          images: [
             {
@@ -141,6 +143,9 @@ export default {
       }
    },
    additionalMetaTags: [
-      
+      {
+         httpEquiv: 'X-UA-Compatible',
+         content: 'IE=edge'
+      }
    ]
 }

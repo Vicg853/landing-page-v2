@@ -12,7 +12,7 @@ const DefaultSEOComp: React.FC = () => (
       <meta name="description" content={SEO.description} />
       <meta name="google-site-verification" content={SEO.googleSiteVerification} />
       <meta charSet='utf-8' />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
       <meta name="theme-color" content={SEO.themeColor} />
       <meta name="language" content={SEO.language} />
       <meta name="Classification" content={SEO.classification} />
@@ -21,6 +21,10 @@ const DefaultSEOComp: React.FC = () => (
       <meta name="owner" content={SEO.owner} />
       <link rel='index' title={SEO.title} href={SEO.index} />
       <meta name="keywords" content={SEO.keywords.join(', ')}/>
+      <link rel="manifest" href={SEO.manifest} />
+      <link rel='icon' type='image/png' sizes='32x32' href='/icons/favicon-96x96.png' />
+      <link rel='icon' type='image/png' sizes='32x32' href='/icons/favicon-32x32.png' />
+      <link rel='icon' type='image/png' sizes='16x16' href='/icons/favicon-16x16.png' />
       
       
       {/* Apple mobile app capabilities */}
@@ -28,6 +32,7 @@ const DefaultSEOComp: React.FC = () => (
       <meta name="apple-mobile-web-app-capable" content={SEO.asApplication.appleMobile.capable} />
       <meta name="format-detection" content={SEO.asApplication.appleMobile.formatDetection} />
       <link rel='apple-touch-icon' href={SEO.asApplication.appleMobile.touchIcon} />
+      <meta name='apple-mobile-web-app-title' content={SEO.asApplication.appleMobile.barTitle} />
       {SEO.asApplication.appleMobile.images.map((image, index) => (
          <link rel={image.rel} key={index} sizes={image.sizes} href={image.href} />
       ))}
