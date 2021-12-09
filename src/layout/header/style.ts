@@ -21,14 +21,6 @@ export const HeaderContainer = styled.header`
       z-index: var(--zIndex-headerContent);
       margin-right: 10vw; 
    }
-   #parallaxHideEffect {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      z-index: var(--zIndex-headerContent - 1);
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--palette-background) 90%);
-   }
    @media (max-width: 730px) {
       #headerIllustration {
          position: absolute;

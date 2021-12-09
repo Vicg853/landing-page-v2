@@ -91,21 +91,31 @@ const Header: React.FC<HeaderProps> = ({
       }
    })
 
-   const hiderParallaxSpring = useSpring({
-      opacity: scale(scrollVal, 30, 90, 0, 1),
+
+
+   const backgroundSpring = useSpring({
+      opacity: 1,
+      transform: `scale(1)`,
+      y: scale(scrollVal, 0, 100, 0, 500),
+      from: {
+         opacity: 0.3,
+         transform: `scale(1.6)`,
+      },
       config: {
-         ...config.stiff
+         ...config.molasses
       }
    })
    
    return (
-      <HeaderContainer>
-         <DynamicImageImport
-            imgSource={isCustomImgBg?.imgSource}
-            bgAlt={bgAlt} 
-            customBlurDataURL={isCustomImgBg?.customBlurDataURL}
-            customPlaceholder={isCustomImgBg?.customPlaceholder}
-            />
+      <HeaderContainer >
+         <a.div id='background' style={{...backgroundSpring}}>
+            <DynamicImageImport
+               imgSource={isCustomImgBg?.imgSource}
+               bgAlt={bgAlt} 
+               customBlurDataURL={isCustomImgBg?.customBlurDataURL}
+               customPlaceholder={isCustomImgBg?.customPlaceholder}
+               />
+         </a.div>
          <HeaderContent customMask={customMask}>
             <a.h2 style={mainContentSpring}>{title}</a.h2>
             <a.p style={mainContentSpring}>{subTitle}</a.p>
@@ -132,7 +142,6 @@ const Header: React.FC<HeaderProps> = ({
                <CustomIllustration />
             </a.div>
          )}
-         <a.div style={hiderParallaxSpring} id='parallaxHideEffect' />
       </HeaderContainer>
    )
 }
