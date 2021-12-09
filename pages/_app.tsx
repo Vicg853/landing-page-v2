@@ -1,15 +1,18 @@
-import React from 'react'
+import {useEffect} from 'react'
 import getConfig from 'next/config'
 import Head from 'next/head'
-import type { AppProps } from 'next/app'
+import { Globals } from 'react-spring'
 
+//@ts-expect-error
+import { useReduceMotion  } from 'react-reduce-motion'
+
+import type { AppProps } from 'next/app'
 import type {PropsCombined} from '@custom-types/routes'
 
 import { GlobalStyle, Theme1, Theme2 } from "@components/global-style"
 import usePersistentState from '@components/hooks/usePersistentState'
 import CssThemeProvider from '@components/css-theme'
 import { DefaultSEOComp } from '@components/SEO'
-
 const { publicRuntimeConfig } = getConfig()
 
 //Importing Layout elements
@@ -33,7 +36,18 @@ const WithThemeProvider: React.FC = () => {
    )
 }
 
+const windowCheck = typeof window !== 'undefined' ? 
+   window : undefined
+
 function MyApp({ Component, pageProps }: AppProps) {
+   /* eslint-disable */
+   const prefersReducedMotion  = windowCheck && useReduceMotion()
+   /* eslint-enable */
+   useEffect(() => {
+      Globals.assign({
+        skipAnimation: prefersReducedMotion,
+      })
+    }, [prefersReducedMotion])
 
    return (
      <>

@@ -122,4 +122,9 @@ export const GlobalStyle = createGlobalStyle<cssVarsRootProps>`
    ::-webkit-scrollbar-track{
       background: var(--palette-background);
    }
+   @media (prefers-reduced-motion: reduce) {
+      * {
+         transition: none all !important;
+      }
+   }
 `
