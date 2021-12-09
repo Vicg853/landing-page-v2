@@ -16,7 +16,8 @@ WORKDIR /alpes-landing-page-v2
 ENV NODE_ENV production
 # If you are using a custom next.config.js file, uncomment this line.
 COPY --from=builder /alpes-landing-page-v2/COPYRIGHT ./
-COPY --from=builder /alpes-landing-page-v2/next.config.js ./
+COPY --from=builder /alpes-landing-page-v2/next.config.mjs ./
+COPY --from=builder /alpes-landing-page-v2/routes.js ./
 COPY --from=builder /alpes-landing-page-v2/public ./public
 COPY --from=builder /alpes-landing-page-v2/.next ./.next
 COPY --from=builder /alpes-landing-page-v2/node_modules ./node_modules
