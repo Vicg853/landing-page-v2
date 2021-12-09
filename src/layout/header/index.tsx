@@ -91,15 +91,12 @@ const Header: React.FC<HeaderProps> = ({
       }
    })
 
-
-
    const backgroundSpring = useSpring({
       opacity: 1,
-      transform: `scale(1)`,
-      y: scale(scrollVal, 0, 100, 0, 500),
+      transform: `scale(1) translateY(${scale(scrollVal, 0, 100, 0, 500)}px)`,
       from: {
          opacity: 0.3,
-         transform: `scale(1.6)`,
+         transform: `scale(1.5) translateY(${scale(scrollVal, 0, 100, 0, 500)}px)`,
       },
       config: {
          ...config.molasses
@@ -108,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({
    
    return (
       <HeaderContainer >
-         <a.div id='background' style={{...backgroundSpring}}>
+         <a.div id='background' style={backgroundSpring}>
             <DynamicImageImport
                imgSource={isCustomImgBg?.imgSource}
                bgAlt={bgAlt} 

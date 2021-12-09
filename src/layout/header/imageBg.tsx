@@ -34,7 +34,7 @@ import DefaultImg from '@p-images/defaultHeaderBg.jpg'
 
 const HeaderImgBackground = ({imgSource, customPlaceholder, customBlurDataURL, bgAlt}: BgImgElemProps) => (
    <Image 
-      id="background"
+      
       src={imgSource ? imgSource : DefaultImg} 
       alt={bgAlt? bgAlt : 'Background do cabeçalho de pagina do site da Alpes Capital.'}
       layout="fill"
