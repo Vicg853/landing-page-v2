@@ -13,6 +13,7 @@
     "analyze": "cross-env ANALYZE=true env-cmd -f .env.development.local next build && yarn serve"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.4.1",
     "@react-spring/web": "^9.3.0",
     "next": "^12.0.8-canary.1",
     "next-compose-plugins": "^2.2.1",

@@ -63,14 +63,14 @@ const config = {
 
     return config
   },
-  async rewrites() {
-    return [
-      {
-        source: '/:path',
-        destination: 'https://alpescap.com.br/:path',
-      }
-    ]
-  },
+  //async rewrites() {
+  //  return process.env.NODE_ENV !== 'development' ? [
+  //    {
+  //      source: '/:path',
+  //      destination: 'https://alpescap.com.br/:path',
+  //    }
+  //  ] : []
+  //},
 
   //* Like env files
   //* More info here https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
