@@ -31,7 +31,6 @@ yarn-error.log*
 .env.production
 .env.local
 .env.development.local
-.env.test.local
 .env.production.local
 
 # vercel
@@ -44,4 +43,5 @@ yarn-error.log*
 **/public/workbox-*.js
 **/public/sw.js
 **/public/worker-*.js
+**/public/fallback-*.js
 
