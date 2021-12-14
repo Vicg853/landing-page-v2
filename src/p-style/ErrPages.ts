@@ -36,4 +36,8 @@ export const Container = styled.div`
       height: 400px;
       margin-bottom: 5rem;
    }
+   .offlineIcon{
+      width: 90px;
+      height: 90px;
+   }
 `
