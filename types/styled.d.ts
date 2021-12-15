@@ -23,6 +23,10 @@ declare module 'styled-components' {
             info: string
             neutral: string
          }
+         constant: {
+            white: string
+            black: string
+         }
       }
       zIndex: {
          navMaster: number

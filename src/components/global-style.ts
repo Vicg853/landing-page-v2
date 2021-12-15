@@ -28,6 +28,11 @@ const fonts = {
    secondary: '"Montserrat Alternates", sans-serif',
 }
 
+const contant = {
+   white: '#fff',
+   black: '#000',
+}
+
 //TODO Improve both mode palettes
 //! Caution, also look for components that don't follow palete rules and fix them
 // ! (or add add new item to palete to support them) (also check logos and add their version for it)
@@ -49,6 +54,7 @@ export const Theme1: ThemeTyping = {
          textMain: '#1E1D4560',
          textInverse: '#FFFFFF60',
       },
+      constant: contant,
       userAdvise: userAdvise,
    },
    zIndex: {...zIndexes},
@@ -74,6 +80,7 @@ export const Theme2: ThemeTyping = {
          textMain: '#FFFFFF60',
          textInverse: '#1E1D4560',
       },
+      constant: contant,
       userAdvise: userAdvise,
    },
    zIndex: {...zIndexes},
