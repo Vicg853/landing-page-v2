@@ -18,6 +18,7 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@p-styles/*": ["./src/p-style/*"],
+      "@p-components/*": ["./src/components/pages-mini-components/*"],
       "@layout/*": ["./src/layout/*"],
       "@public/*": ["./public/*"],
       "@p-images/*": ["./public/images/pages/*"],
