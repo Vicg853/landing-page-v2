@@ -72,7 +72,7 @@ const Home: NextPage = () => (
         title='Faça parte da mudança:'
         description='Você pode fazer parte desse projeto doando para o nosso fundo. O rendimento é doado para  ONGs, como o Projeto Arrastão.' />
       </sub>
-      <span style={{fontWeight: '500', fontFamily: 'Montserrat Alternates'}}>
+      <span style={{fontWeight: '500', fontFamily: 'Montserrat Alternates', color: "var(--palette-textMain)"}}>
         Se quiser, segue lá no insta??!! {"("}pode ser em qualquer outra se quiser{")"} 😉</span>
       <sub>
         <SocialCard

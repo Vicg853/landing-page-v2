@@ -38,7 +38,7 @@ const ImageReferenceCardStyle = styled.a`
       position: relative;
       font-size: 1.3rem;
       font-weight: 500;
-      color: var(--palette-textInverse);
+      color: var(--palette-constant-white);
       margin-bottom: 0.5rem;
       font-family: 'Montserrat Alternates';
       z-index: 1;
@@ -49,7 +49,7 @@ const ImageReferenceCardStyle = styled.a`
       position: relative;
       font-size: 0.9rem;
       font-weight: 400;
-      color: var(--palette-textInverse);
+      color: var(--palette-constant-white);
       opacity: 0.7;
       padding-left: 0.3rem;
       z-index: 1;
@@ -60,7 +60,7 @@ const ImageReferenceCardStyle = styled.a`
    transition: border 0.4s ease-in-out;
    cursor: pointer;
    &&[data-has-border='true'] {
-      border: 0.2rem solid var(--palette-accent1);
+      border: 0.2rem solid var(--palette-textMain);
    }
    &&[data-has-border='false'] {
       border: 0.2rem solid #ffffff00;
