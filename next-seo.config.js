@@ -6,6 +6,7 @@ export default {
    canonical: process.env.NEXT_PUBLIC_SITE_URL,
    owner: 'Alpes Capital',
    language: 'pt-br',
+   image: process.env.NEXT_PUBLIC_SITE_URL + '/images/global/Logo_mini_bg.png',
    manifest: '/manifest/manifest.json',
    index: process.env.NEXT_PUBLIC_SITE_URL,
    keywords: ["Alpes Capital", "Fundo de endowment", "Endowment und", "Investment", "Investimento", "Jovens", "ONG", "Mercado Financeiro"],
@@ -142,31 +143,5 @@ export default {
             },
          ]
       }
-   },
-   additionalMetaTags: [
-      {
-         httpEquiv: 'X-UA-Compatible',
-         content: 'IE=edge'
-      },
-      {
-         name: "reply-to",
-         content: 'alpes.capital@gmail.com'
-      },
-      {
-         name: 'google-site-verification',
-         content: '',
-      },
-      {
-         name: 'theme-color',
-         content: '#8DA0E2',
-      },
-      {
-         name: 'classification',
-         content: 'NGO'
-      },
-      {
-         name: 'copyright',
-         content: 'Alpes Capital - 2021-present. All rights reserved.'
-      }
-   ]
+   }
 }

@@ -12,9 +12,13 @@ const DefaultSEOComp: React.FC = () => (
       <link rel='index' title={SEO.title} href={SEO.index} />
       <link rel="manifest" href={SEO.manifest} />
       {/* Any additional meta tags */}
-      {SEO.additionalMetaTags.map((props, index) => (
-         <meta {...props} key={index} />
-      ))}
+      <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+      <meta name="reply-to" content='alpes.capital@gmail.com' />
+      <meta name='google-site-verification' content='' />
+      <meta name='theme-color' content='#8DA0E2' />
+      <meta name='classification' content='NGO' />
+      <meta name='copyright' content='Alpes Capital - 2021-present. All rights reserved.' />
+
       
       {/* Apple mobile app capabilities */}
       <meta name="apple-mobile-web-app-status-bar-style" content={SEO.asApplication.appleMobile.statusBarStyle} />
@@ -168,7 +172,7 @@ const SEOComp: React.FC<CustomSEOProps> = (props) => {
          <link rel="canonical" href={props.canonical ? props.canonical : SEO.canonical} />
          <meta name="keywords" content={props.keywords ? 
             props.keywords.join(', ') : SEO.keywords.join(', ')} />
-         {props.image && <meta name="image" content={props.image} />}
+         <meta name="image" content={props.image ? props.image : SEO.image} />
          <meta name="language" content={props.locale ? props.locale : SEO.language} />
 
          {/* //TODO In case we add support for multiple languages, check this out and other related SEO tags
