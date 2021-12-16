@@ -11,8 +11,12 @@ const { serverRuntimeConfig } = getConfig()
 var fileOptOutRegex = [
    RegExp(".json$", 'i'), RegExp("(.nft$|.nft\..+$)", 'i'),RegExp('_.+$', 'i'), 
    RegExp('404\..', 'i'), RegExp('(.xml.+$|.xml$)', 'i'), RegExp('500\..', 'i'), 
-   RegExp('robots\..', 'i')
+   RegExp('robots\..', 'i'), RegExp('favicon\..', 'i'), RegExp('fallback\..', 'i'),
+   RegExp('sw\..', 'i'), RegExp('workbox\..', 'i'), 
+   RegExp('(.jpg$|.png$|.jpeg$|.svg$|.avif$|.webp$)', 'i')
 ] 
+
+const productionPath = process.env.IS_VERCEL ? process.env.IS_VERCEL : './next/server/pages'
 
 function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
    const files = fs.readdirSync(dirPath)
@@ -31,7 +35,7 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
          //? Removing the '.next/server/pages' or 'page' prefix used by fs to find the files in prod
          //? or dev (respectively), but isn't needed for the sitemap/web
          const refinedDirPath = process.env.NODE_ENV === 'production' ? 
-            dirPath.replace(RegExp('.next/server/pages', 'g'), '') : 
+            dirPath.replace(RegExp(productionPath, 'g'), '') : 
             dirPath.replace(RegExp('pages', 'g'), '')
          if(file.match(RegExp('index', 'i'))) return arrayOfFiles.push(path.join(refinedDirPath, "/"))
          return arrayOfFiles.push(path.join(refinedDirPath, "/", file.split('.')[0]))
@@ -42,7 +46,7 @@ function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
 }
 
 function generateSiteMap(): string {
-   const staticPages = getAllFiles(process.env.NODE_ENV === 'production' ?'.next/server/pages' : 'pages')
+   const staticPages = getAllFiles(process.env.NODE_ENV === 'production' ? productionPath : 'pages')
 
    const routes = serverRuntimeConfig.allRoutes as PropsCombined
 
