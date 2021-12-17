@@ -16,7 +16,7 @@ var fileOptOutRegex = [
    RegExp('(.jpg$|.png$|.jpeg$|.svg$|.avif$|.webp$)', 'i')
 ] 
 
-const productionPath = process.env.IS_VERCEL ? process.env.IS_VERCEL : './next/server/pages'
+const productionPath = process.env.IS_VERCEL ? process.env.IS_VERCEL : '.next/server/pages'
 
 function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
    const files = fs.readdirSync(dirPath)
@@ -54,35 +54,30 @@ function generateSiteMap(): string {
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
          ${staticPages.map(page => {
             const pageConfig = routes.find(route => route.path === page)
-            if(!pageConfig) return `
-               <url>
+            if(!pageConfig) return `<url>
                   <loc>${page}</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>never</changefreq>
                   <priority>0.1</priority>
-               </url>
-            `
+               </url>`
 
             if(!pageConfig.appearForWebCrawllers) return  
 
-            return `
-               <url>
+            return `<url>
                   <loc>${page}</loc>
                   <lastmod>${pageConfig.siteMapOptions.lastMod}</lastmod>
                   <changefreq>${pageConfig.siteMapOptions.changeFreq}</changefreq>
                   <priority>${pageConfig.siteMapOptions.priority}</priority>
-               </url>
-            `
+               </url>`
          })}
-      </urlset>
-   `
+      </urlset>`
 }
 
 function SiteMap() {
   // getServerSideProps will do the heavy lifting
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetServerSideProps = async ({ res }) => {
    const sitemap = generateSiteMap()
 
    res.setHeader('Content-Type', 'text/xml')

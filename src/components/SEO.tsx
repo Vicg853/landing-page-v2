@@ -5,13 +5,14 @@ import SEO from '../../next-seo.config'
 //* SEO component that is used to define global and default SEO settings for the whole webp
 const DefaultSEOComp: React.FC = () => (
    <Head>
-      <base href={process.env.NEXT_PUBLIC_SITE_URL} target="_blank" />
+      <base href={`${process.env.NEXT_PUBLIC_SITE_URL}`} target="_blank" />
       <meta charSet='utf-8' />
       <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
       <meta name="owner" content={SEO.owner} />
       <link rel='index' title={SEO.title} href={SEO.index} />
       <link rel="manifest" href={SEO.manifest} />
       {/* Any additional meta tags */}
+      <link rel="icon" href="/favicon.ico" />
       <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
       <meta name="reply-to" content='alpes.capital@gmail.com' />
       <meta name='google-site-verification' content='' />
@@ -133,16 +134,17 @@ type CustomSEOProps = {
       }
       video?: {
          videoUrl: string
-         height: string
-         width: string
-         type: string
+         height?: string
+         width?: string
+         type?: string
       }
    }
    twitter?: {
       url: string
       title: string
       description: string
-      image: string
+      image?: string
+      video?: string
    }
    linkTags?: {
       rel: 'next' | 'prev' | 'comments'
@@ -166,10 +168,10 @@ const SEOComp: React.FC<CustomSEOProps> = (props) => {
    return (
       <Head>
          {/* Main meta tags */}
-         <title>{props.title ? props.title : SEO.title}</title>
-         <meta name="title" content={props.title ? props.title : SEO.title} />
+         <title>AlpesCap - {props.title ? props.title : SEO.title}</title>
+         <meta name="title" content={`AlpesCap - ${props.title ? props.title : SEO.title}`} />
          <meta name="description" content={props.description ? props.description: SEO.description} />
-         <link rel="canonical" href={props.canonical ? props.canonical : SEO.canonical} />
+         <link rel="canonical" href={`${props.canonical ? props.canonical : SEO.canonical}`} />
          <meta name="keywords" content={props.keywords ? 
             props.keywords.join(', ') : SEO.keywords.join(', ')} />
          <meta name="image" content={props.image ? props.image : SEO.image} />
@@ -194,10 +196,10 @@ const SEOComp: React.FC<CustomSEOProps> = (props) => {
          </>}
 
          {/* OpenGraph */}
-         <meta property="og:title" content={checkOpenGraph.title} />
+         <meta property="og:title" content={`AlpesCap - ${checkOpenGraph.title}`} />
          <meta property="og:description" content={checkOpenGraph.description} />
          <meta property="og:type" content={checkOpenGraph.type} />
-         <meta property="og:url" content={checkOpenGraph.url} />
+         <meta property="og:url" content={`${checkOpenGraph.url}`} />
          <meta property="og:locale" content={checkOpenGraph.locale} />
          <meta property="og:image" content={checkOpenGraph.image.url} />
          <meta property="og:image:width" content={checkOpenGraph.image.width.toString()} />
@@ -224,16 +226,17 @@ const SEOComp: React.FC<CustomSEOProps> = (props) => {
          </>}
          {checkOpenGraph.video && <>
             <meta property="og:video" content={checkOpenGraph.video.videoUrl} />
-            <meta property="og:video:type" content={checkOpenGraph.video.type} />
-            <meta property="og:video:width" content={checkOpenGraph.video.width} />
-            <meta property="og:video:height" content={checkOpenGraph.video.height} />
+            {checkOpenGraph.video.type && <meta property="og:video:type" content={checkOpenGraph.video.type} />}
+            {checkOpenGraph.video.width && <meta property="og:video:width" content={checkOpenGraph.video.width} />}
+            {checkOpenGraph.video.height && <meta property="og:video:height" content={checkOpenGraph.video.height} />}
          </>}
 
          {/* TwitterSEO */}
          <meta name="twitter:url" content={props.twitter ? props.twitter.url : SEO.twitter.url} />
-         <meta name="twitter:title" content={props.twitter ? props.twitter.title : SEO.twitter.title} />
+         <meta name="twitter:title" content={`AlpesCap - ${props.twitter ? props.twitter.title : SEO.twitter.title}`} />
          <meta name="twitter:description" content={props.twitter ? props.twitter.description : SEO.twitter.description} />
-         <meta name="twitter:image" content={props.twitter ? props.twitter.image : SEO.twitter.img} />
+         {(props.twitter && props.twitter.image) && <meta name="twitter:image" content={props.twitter.image} />}
+         {(props.twitter && props.twitter.video) && <meta name="twitter:image" content={props.twitter.video} />}
 
          {/* Other link tags */}
          {props.linkTags && props.linkTags.map((linkTag, index) => (

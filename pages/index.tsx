@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 
+//* Importing page components
 import Header from '@layout/header'
 import { SEOComp } from '@components/SEO'
-
 import { Container } from '@p-styles/index'
 import SimpleContentCard from '@p-components/SimpleContentCard'
 import ImageReferenceCard from '@p-components/ImageReferenceCard'
@@ -19,7 +19,7 @@ import AlpesDonateArrastao from '@p-images/index/alpes-donate-arrastao.jpg'
 const Home: NextPage = () => (
   <>
     <SEOComp 
-    title='AlpesCap - Home'
+    title='Home'
     description='Olá, nós somos a Alpes Capital, um fundo de endowment que tem como objetivo ajudar diversas ONGs. E essa é nossa pagina principal! Prazer 👋😄!!'
     canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/`}
     keywords={['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro']}
@@ -28,8 +28,6 @@ const Home: NextPage = () => (
       title: 'AlpesCap - Home',
       description: 'Olá, nós somos a Alpes Capital, um fundo de endowment que tem como objetivo ajudar diversas ONGs. E essa é nossa pagina principal! Prazer 👋😄!!',
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
-      type: 'NGO',
-      locale: 'pt_BR',
       image: {
         url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/global/Logo_mini_bg.png`,
         width: 1500,
