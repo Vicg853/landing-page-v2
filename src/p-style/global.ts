@@ -38,4 +38,16 @@ export const Container = styled.div`
       position: relative;
       z-index: 1;
    }
+
+   .sectionTitle {
+      display: inline-flex;
+      width: 100%;
+      padding: 1rem;
+      font-family: 'Montserrat Alternates';
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--palette-textMain);
+      justify-content: center;
+      align-items: center;
+   }
 `

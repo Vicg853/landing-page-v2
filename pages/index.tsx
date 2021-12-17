@@ -4,7 +4,7 @@ import Image from 'next/image'
 //* Importing page components
 import Header from '@layout/header'
 import { SEOComp } from '@components/SEO'
-import { Container } from '@p-styles/index'
+import { Container } from '@p-styles/global'
 import SimpleContentCard from '@p-components/SimpleContentCard'
 import ImageReferenceCard from '@p-components/ImageReferenceCard'
 import SocialCard from '@components/react-mini-components/socialCard'
