@@ -5,7 +5,6 @@ export const Container = styled.div`
    flex-direction: column;
    align-items: center;
    width: 95vw;
-   max-width: 1920px;
    margin-left: 2.5vw;
    margin-right: 2.5vw;
    padding-top: 5rem;
@@ -17,7 +16,7 @@ export const Container = styled.div`
       justify-content: space-between;
       align-items: stretch;
       justify-content: center;
-      padding-top: 5rem;
+      padding-top: 2rem;
       padding-bottom: 5rem;
    }
    .twoLayers {
@@ -42,12 +41,19 @@ export const Container = styled.div`
    .sectionTitle {
       display: inline-flex;
       width: 100%;
-      padding: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 0.3rem;
       font-family: 'Montserrat Alternates';
       font-size: 1.25rem;
       font-weight: 500;
       color: var(--palette-textMain);
       justify-content: center;
       align-items: center;
+   }
+
+   @media (min-width: 2000px) {
+      width: 1920px;
+      margin-left: calc((100vw - 1920px) / 2);
+      margin-right: calc((100vw - 1920px) / 2);
    }
 `
