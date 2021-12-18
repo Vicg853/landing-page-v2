@@ -77,7 +77,7 @@ function SiteMap() {
   // getServerSideProps will do the heavy lifting
 }
 
-export const getStaticProps: GetServerSideProps = async ({ res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
    const sitemap = generateSiteMap()
 
    res.setHeader('Content-Type', 'text/xml')
