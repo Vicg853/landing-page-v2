@@ -21,8 +21,6 @@ const WideContentCardStyle = styled.div`
       margin-right: 7%;
       border-radius: 0.8rem;
       overflow: hidden;
-      
-      
    }
    && > .background {
       position: absolute;
@@ -32,10 +30,26 @@ const WideContentCardStyle = styled.div`
       z-index: 0;
    }
    &&[data-display-left='true'] {
-      justify-content: flex-start !important;
+      justify-content: flex-start;
       && > .card {   
-         margin-left: 7% !important;
-         margin-right: 0 !important;
+         margin-left: 7%;
+         margin-right: 0;
+      }
+   }
+   @media (max-width: 950px) {
+      justify-content: center !important;
+      && > .card {
+         margin-left: 0px !important;
+         margin-right: 0px !important;
+      }
+   }
+   @media (max-width: 670px) {
+      width: 95vw;
+      && > .card {
+         max-width: 100%;
+         width: 100%;
+         margin: 0px !important;
+         border-radius: 0px !important;
       }
    }
 `
