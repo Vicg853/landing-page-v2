@@ -129,33 +129,11 @@ type AlertProps = {
    display: boolean
 }
 
-//* Defining alert's global state so it can be activated and it's message can be set
-const { useGlobalState: useAlertState } = createGlobalState({
-   alert: 'No alert message!',
-   alertType: 'neutral',
-   display: false
-} as AlertProps)
-
-
-//? This is only a temporary function while dispatch function is not working
-const useSetAlert = (
-   alert: AlertProps['alert'], 
-   alertType: AlertProps['alertType']) => {
-   const setAlertMsg = useAlertState('alert')[1]
-   const setAlertType = useAlertState('alertType')[1]
-   const setAlertDisplay = useAlertState('display')[1]
-   return () => {
-      setAlertMsg(alert)
-      setAlertType(alertType)
-      setAlertDisplay(true)
-   }
-}
-
 //* Alert React component
 const AlertComponent = () => {
-   const [alertType] = useAlertState('alertType')
-   const [alertMessage] = useAlertState('alert')
-   const [alertDisplay, toggleAlertDisplay] = useAlertState('display')
+   const [alertType] = ['success', 'warning', 'error', 'info', 'neutral']
+   const [alertMessage] = ['alert']
+   const [alertDisplay, toggleAlertDisplay] = ['display', (a: boolean) => {}]
 
    const alertComponentSpring = useSpring({
       opacity: alertDisplay ? 1 : 0,
@@ -180,12 +158,6 @@ const AlertComponent = () => {
          </sub>
       </Container>
    )
-}
-   
-//* Exporting alert hooks to read/write it's values
-export {
-   useAlertState,
-   useSetAlert
 }
 
 export default AlertComponent
