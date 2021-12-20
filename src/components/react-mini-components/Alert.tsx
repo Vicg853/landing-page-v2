@@ -129,6 +129,8 @@ type AlertProps = {
    display: boolean
 }
 
+//TODO Add global state with preact
+
 //* Alert React component
 const AlertComponent = () => {
    const [alertType] = ['success', 'warning', 'error', 'info', 'neutral']

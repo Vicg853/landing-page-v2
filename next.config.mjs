@@ -5,7 +5,10 @@ import runtimeCaching from 'next-pwa/cache.js'
 import withPlugins from 'next-compose-plugins'
 import withBundleAnalyzer from '@next/bundle-analyzer'
 
-//TODO Add preact when it's fixed
+//TODO Style by prop not working correctly as well as styled-components behaving weirdly
+//TODO Fix problem next/dynamic suspense and preact
+//TODO Fix problem with react-spring and preact
+//TODO Add global state with preact
 import withPreact from 'next-plugin-preact'
 
 import pages from './routes.js'

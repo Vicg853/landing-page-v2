@@ -19,6 +19,7 @@ const CssRootTheme = createGlobalStyle<cssVarsRootProps>`
    }
 `
 
+//TODO Add global state with preact
 
 /*
 * @param {Object | Array} theme 
