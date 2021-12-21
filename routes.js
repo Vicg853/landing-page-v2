@@ -35,7 +35,8 @@ const pages = [
       },
       navSubLinks: [
         { title: 'Gestão', href: '/management' },
-        { title: 'Conselho', href: '/council' }
+        { title: 'Conselho', href: '/council' },
+        { title: 'Ex membros', href: '/ex-members' },
      ]
    },
    { 
@@ -49,7 +50,7 @@ const pages = [
         lastMod: "never",
       },
       navSubLinks: [
-        { title: 'Arrastão', href: '/management' },
+        { title: 'Arrastão', href: '/arrastao' },
       ]
    },
    { 
