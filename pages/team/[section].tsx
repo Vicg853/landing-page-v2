@@ -53,14 +53,14 @@ export const getStaticProps: GetStaticProps<{
  
 //* Actual page component
 const Management: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({sectionMembers, currentSection}) => {
-   const SeoTitle = `Time - `
+   const SeoTitle = `Time - ${currentSection}`
    const SeoCanonical = `${process.env.NEXT_PUBLIC_BASE_URL}/team/${currentSection}`
    const SeoDescription = `Olá nós somos a Alpes e como falamos em '${process.env.NEXT_PUBLIC_BASE_URL}/team': 
       uma equipe é essencial. Então descubra mais sobre cada um de nós qeu participam do ${currentSection} da AlpesCap!`
    return (
    <>
       <SEOComp 
-      title="Nosso time"
+      title={SeoTitle}
       description={SeoDescription}
       canonical={SeoCanonical}
       keywords={['AlpesCap', 'Time', 'Equipe da AlpesCap', 'Sobre', 'Investimento', 'Fundo de endowment', 'Jovens', 'Sobre', currentSection]}
