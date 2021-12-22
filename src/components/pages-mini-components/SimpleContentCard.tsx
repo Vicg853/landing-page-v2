@@ -76,8 +76,8 @@ const SimpleCard: React.FC<Props> = ({title, description, icon, hasBorder, hasBa
       <SimpleCardStyle 
       {...props}
       style={{background: (hasBackground && typeof hasBackground !== 'boolean') ? 
-         hasBackground : 'var(--palette-bgContrast'}}
-         data-has-border={hasBorder}>
+         hasBackground : 'var(--palette-bgContrast)'}}
+         data-has-border={hasBorder ? 'true' : 'false'}>
          {icon && <span className='icon'>{icon}</span>}
          <span className='title'>
             {title}

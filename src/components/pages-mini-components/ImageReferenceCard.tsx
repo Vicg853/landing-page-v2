@@ -102,7 +102,7 @@ const ImageReferenceCard: React.FC<Props> = ({
          style={style}
          onMouseOver={() => setHover(true)}
          onMouseOut={() => setHover(false)}
-         {...props} data-has-border={hover}>
+         {...props} data-has-border={hover ? 'true' : 'false'}>
             <div className='background'>
                <Image src={backgroundSrc} quality={100}
                   layout="fill" objectFit="cover" 

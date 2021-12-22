@@ -1,12 +1,14 @@
+import type { State } from '@hookstate/core'
 import { useState, useEffect } from "react"
+import { createState, useState as useStateGlobal } from '@hookstate/core'
 import { makeCssThemeVars } from '@components/utils'
 import { createGlobalStyle } from "styled-components"
 import type { GlobalStyleComponent, DefaultTheme } from "styled-components"
-import { createGlobalState } from 'react-hooks-global-state'
 
+type ThemeType = Object
 type ThemeProviderProps = {
-   theme: Array<any> | Object
-   defaultTheme: Array<any> | Object,
+   theme: ThemeType
+   defaultTheme: ThemeType,
    CustomGlobalStyle?: GlobalStyleComponent<cssVarsRootProps, DefaultTheme>
 }
 
@@ -20,13 +22,32 @@ const CssRootTheme = createGlobalStyle<cssVarsRootProps>`
    }
 `
 
-//* Global theme definitions so theme can be accessed via js vars globally
-//* if needed
-const { useGlobalState: useThemeState } = createGlobalState({cssTheme: {}})
-const useTheme = () => {
-   const themeJsVals = useThemeState('cssTheme')[0]
-   return themeJsVals as ThemeProviderProps['theme']
-}
+const globalState = createState<Object>({})
+const wrapState = (s: State<Object>) => ({
+   get: () => s.value,
+   set: (val: Object) => s.set(val)
+})
+
+/**
+ * Makes css theme state global and accessible outside a component.
+* @returns {get()} - The current css theme state
+* @returns {set(Object)} - The css theme setter function.
+* @example 
+* const theme = accessCssTheme().get()
+* accessCssTheme().set({pallete: {primary: '#ff0000'}})
+*/
+export const accessCssTheme = () => wrapState(globalState)
+
+/**
+ * Makes css theme state global and accessible inside a component as a hook.
+* @returns {get() => Object} - The current css theme state.
+* @returns {set(Object)} - The theme setter function.
+* @example 
+* const theme = useCssTheme().get()
+* const setCssTheme = useCssTheme().set
+*/
+export const useCssTheme = () => wrapState(useStateGlobal(globalState))
+
 
 /*
 * @param {Object | Array} theme 
@@ -36,19 +57,16 @@ const useTheme = () => {
 const CssThemeProvider: React.FC<ThemeProviderProps> = ({ theme, defaultTheme, CustomGlobalStyle }) => {
    
    //* Function to update global theme state values
-   const setTheme = useThemeState('cssTheme')[1]
+   const setCssTheme = useCssTheme().set
 
    //* State with theme in css var format
-   const [cssTheme, setCssPalette] = useState(() => {
-      setTheme(theme)
-      return makeCssThemeVars(defaultTheme, true)
-   })
+   const [cssTheme, setCssPalette] = useState(() => makeCssThemeVars(defaultTheme, true))
    
    //*Updates css vars state when theme value changes
    useEffect(() => {
+      setCssTheme(theme)
       setCssPalette(makeCssThemeVars(theme, true))
-      setTheme(theme)
-   }, [theme, setTheme])
+   }, [theme])
 
    //*Actual provider with themeContainer HTML id so values can be latter accessed inside javascript as a function
    //? you can include if you will a custom global style, that 
@@ -58,10 +76,6 @@ const CssThemeProvider: React.FC<ThemeProviderProps> = ({ theme, defaultTheme, C
    return (
       <CssRootTheme cssTheme={cssTheme} />
    )
-}
-
-export {
-   useTheme,
 }
 
 export default CssThemeProvider
