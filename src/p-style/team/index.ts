@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { a } from '@react-spring/web'
 
 export const Graph = styled.sub`
    display: inline-flex;
@@ -53,10 +54,7 @@ export const Graph = styled.sub`
    }
 `
 
-export const Details = styled.sub`
-   &&[data-display=false] {
-      display: none !important;
-   }
+export const Details = styled(a.sub)`
    flex-direction: column;
    justify-content: center;
    align-items: center;
@@ -74,7 +72,7 @@ export const Details = styled.sub`
    }
    .description {
       font-family: 'Montserrat';
-      font-size: 0.7rem;
+      font-size: 0.84rem;
       font-weight: 400;
       color: var(--palette-textMain);
       margin-top: 0.9rem;
@@ -83,7 +81,7 @@ export const Details = styled.sub`
       display: flex;
       width: 100%;
       justify-content: flex-end;
-      font-size: 0.6rem;
+      font-size: 0.75rem;
       font-weight: 400;
       margin-top: 0.9rem;
    }
