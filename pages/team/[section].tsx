@@ -1,13 +1,9 @@
 import type { NextPage, GetStaticPaths, InferGetStaticPropsType, GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 //* Importing page components
 import { SEOComp } from '@components/SEO'
 import { Container } from '@p-styles/team/sections'
-
-//* Importing page images
-import DefaultMemberImg from '@public/images/global/Logo_mini_bg.png'
+import MemberCard from '@p-components/MemberCard'
 
 //* Static generation functions
 type Member = {
@@ -22,6 +18,7 @@ type Member = {
 }
 import Members from '../../data/index'
 const teamSections = ['management', 'council', 'ex-members']
+//TODO Later, add an actual DB or CMS data fetch
 export const getStaticPaths: GetStaticPaths = async () => {
    return {
       paths: teamSections.map(section => ({
@@ -80,7 +77,7 @@ const Management: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({s
          url: SeoCanonical,
          title: SeoTitle,
          description: SeoDescription,
-         image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/pages/about/header/.jpg`,
+         image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/pages/about/header/Logo_mini_bg.jpg`,
       }}
       robotsFollow={true}
       linkTags={[
@@ -93,40 +90,15 @@ const Management: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({s
          <h1>Essa é a equipe que constitui o {currentSection}</h1>
          <div className='memberCardsContainer'>
          {sectionMembers.map((member, i) => (
-            <div key={i} className='memberCard'>
-               <sub className='leftContent'>
-                  <div className='memberBackgroundImage'>
-                     <Image
-                        src={member.img ? member.img : DefaultMemberImg}
-                        alt={`Foto do membro ${member.name}`}
-                        layout='fill'
-                        objectFit='cover'
-                        objectPosition='50% 50%'
-                     />
-                  </div>
-                  <div className='memberProfileImg'>
-                     <Image
-                        src={member.img ? member.img : DefaultMemberImg}
-                        alt={`Foto do membro ${member.name}`}
-                        layout='fill'
-                        objectFit='cover'
-                        objectPosition='50% 0%'
-                     />
-                  </div>
-                  <section>
-                     <span className="memberName" style={{marginTop: member.age ? '0' : '15px' }}>{member.name}</span>
-                     {member.age && <span className="memberAge">Idade: {member.age}</span>}
-                  </section>
-               </sub>
-               <sub className='centerContent'>
-                  <span className="memberDesc">{member.description ? member.description : 'N.Inf.'}</span>
-                  <span className="memberInstitution">{member.institution ? member.institution : 'N.Inf.'}</span>
-               </sub>
-               <sub className='rightContent'>
-                  <span className="memberRole">{member.role ? member.role : 'N.Inf.'}</span>
-                  {member.isFounder && <span className="memberFounder">Co-fundador</span>}
-               </sub>
-            </div>
+            <MemberCard key={i}
+            name={member.name}
+            description={member.description}
+            role={member.role}
+            age={member.age}
+            img={member.img}
+            isFounder={member.isFounder}
+            institution={member.institution}
+             />
          ))}
          </div>
       </Container>
