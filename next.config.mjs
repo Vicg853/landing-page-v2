@@ -4,12 +4,8 @@ import withPWA from 'next-pwa'
 import runtimeCaching from 'next-pwa/cache.js'
 import withPlugins from 'next-compose-plugins'
 import withBundleAnalyzer from '@next/bundle-analyzer'
-
-//TODO Style by prop not working correctly as well as styled-components behaving weirdly
-//TODO Fix problem next/dynamic suspense and preact
-//TODO Fix problem with react-spring and preact
-//TODO Add global state with preact
 import withPreact from 'next-plugin-preact'
+//TODO Fix problem next/dynamic suspense and preact
 
 import pages from './routes.js'
 
@@ -17,10 +13,6 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    //reactRoot: true,
-    //concurrentFeatures: true,
-    //serverComponents: true,
-    //urlImports: ['https://example.com/modules/'], //New url imports feature
     styledComponents: true,
   },
   images: {
@@ -28,7 +20,7 @@ const config = {
     formats: ['image/avif', 'image/webp'],
   },
   generateBuildId: async () => {
-    return 'alpesCap-landing-page-build-id-' + v4().toString()
+    return 'alpesCap-landing-page-v2.0-build-id-' + v4().toString()
   },
   //Customize webpack config
   webpack(config) {
@@ -67,15 +59,7 @@ const config = {
 
     return config
   },
-  //async rewrites() {
-  //  return process.env.NODE_ENV !== 'development' ? [
-  //    {
-  //      source: '/:path',
-  //      destination: 'https://alpescap.com.br/:path',
-  //    }
-  //  ] : []
-  //},
-
+  
   //* Like env files
   //* More info here https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
   serverRuntimeConfig: {

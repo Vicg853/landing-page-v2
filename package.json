@@ -13,6 +13,7 @@
     "analyze": "cross-env ANALYZE=true env-cmd -f .env.development.local next build && yarn serve"
   },
   "dependencies": {
+    "@hookstate/core": "^3.0.13",
     "@react-spring/web": "^9.3.0",
     "lottie-react": "^2.1.0",
     "next": "^12.0.7",
@@ -23,7 +24,6 @@
     "preact-render-to-string": "^5.1.19",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
-    "react-hooks-global-state": "^1.0.2",
     "react-reduce-motion": "^2.0.2",
     "react-spring": "^9.3.0",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
@@ -47,7 +47,6 @@
     "eslint": "8.2.0",
     "eslint-config-next": "12.0.4",
     "file-loader": "^6.2.0",
-    "next-sitemap": "^1.6.203",
     "serve": "^13.0.2",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",
