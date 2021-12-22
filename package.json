@@ -16,7 +16,7 @@
     "@hookstate/core": "^3.0.13",
     "@react-spring/web": "^9.3.0",
     "lottie-react": "^2.1.0",
-    "next": "^12.0.7",
+    "next": "^12.0.8-canary.12",
     "next-compose-plugins": "^2.2.1",
     "next-plugin-preact": "^3.0.6",
     "next-pwa": "^5.4.4",
