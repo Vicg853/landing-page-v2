@@ -1,11 +1,14 @@
+import type { State } from '@hookstate/core'
 import { useState, useEffect } from "react"
+import { createState, useState as useStateGlobal } from '@hookstate/core'
 import { makeCssThemeVars } from '@components/utils'
 import { createGlobalStyle } from "styled-components"
 import type { GlobalStyleComponent, DefaultTheme } from "styled-components"
 
+type ThemeType = Object
 type ThemeProviderProps = {
-   theme: Array<any> | Object
-   defaultTheme: Array<any> | Object,
+   theme: ThemeType
+   defaultTheme: ThemeType,
    CustomGlobalStyle?: GlobalStyleComponent<cssVarsRootProps, DefaultTheme>
 }
 
@@ -19,7 +22,32 @@ const CssRootTheme = createGlobalStyle<cssVarsRootProps>`
    }
 `
 
-//TODO Add global state with preact
+const globalState = createState<Object>({})
+const wrapState = (s: State<Object>) => ({
+   get: () => s.value,
+   set: (val: Object) => s.set(val)
+})
+
+/**
+ * Makes css theme state global and accessible outside a component.
+* @returns {get()} - The current css theme state
+* @returns {set(Object)} - The css theme setter function.
+* @example 
+* const theme = accessCssTheme().get()
+* accessCssTheme().set({pallete: {primary: '#ff0000'}})
+*/
+export const accessCssTheme = () => wrapState(globalState)
+
+/**
+ * Makes css theme state global and accessible inside a component as a hook.
+* @returns {get() => Object} - The current css theme state.
+* @returns {set(Object)} - The theme setter function.
+* @example 
+* const theme = useCssTheme().get()
+* const setCssTheme = useCssTheme().set
+*/
+export const useCssTheme = () => wrapState(useStateGlobal(globalState))
+
 
 /*
 * @param {Object | Array} theme 
@@ -29,13 +57,14 @@ const CssRootTheme = createGlobalStyle<cssVarsRootProps>`
 const CssThemeProvider: React.FC<ThemeProviderProps> = ({ theme, defaultTheme, CustomGlobalStyle }) => {
    
    //* Function to update global theme state values
-   
+   const setCssTheme = useCssTheme().set
 
    //* State with theme in css var format
    const [cssTheme, setCssPalette] = useState(() => makeCssThemeVars(defaultTheme, true))
    
    //*Updates css vars state when theme value changes
    useEffect(() => {
+      setCssTheme(theme)
       setCssPalette(makeCssThemeVars(theme, true))
    }, [theme])
 
