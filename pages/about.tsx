@@ -21,7 +21,7 @@ import Story2 from '@p-images/about/alpes-story-image-4.jpg'
 const SeoCanonical = `${process.env.NEXT_PUBLIC_BASE_URL}/about`
 const SeoDescription = "Olá, nos somos da AlpesCap e caso queira saber mais sobre nós, siga essa pagina. Aqui falamos sobre a historia do nosso projeto/nossas ambições/abições e como foi desenvolvido. 📖🎯" 
 
-const Home: NextPage = () => (
+const About: NextPage = () => (
    <>
       <SEOComp 
       title="About"
@@ -124,5 +124,5 @@ const Home: NextPage = () => (
    </>
 )
 
-export default Home
+export default About
  

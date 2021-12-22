@@ -24,6 +24,7 @@ const config = {
     styledComponents: true,
   },
   images: {
+    domains: ['beta.victorgomez.dev', 'static.wixstatic.com'],
     formats: ['image/avif', 'image/webp'],
   },
   generateBuildId: async () => {
