@@ -71,7 +71,6 @@ const config = {
 }
 
 export default withPlugins([
-  withPreact,
   withBundleAnalyzer({enabled: process.env.ANALYZE === 'true'}), 
   [withPWA, {pwa: {
     runtimeCaching, 
@@ -82,5 +81,5 @@ export default withPlugins([
     //? for next's optimized-images-plugin to work properly
     buildExcludes: [/chunks\/images\/.*$/]
   }}],
-  config
-])
+  withPreact,
+], config)
