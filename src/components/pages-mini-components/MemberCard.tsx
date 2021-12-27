@@ -25,16 +25,17 @@ export const MemberCardContainer = styled.div`
          width: 40%;
          overflow: hidden;
          border-radius: 0.5rem;
-         justify-content: center;
+         justify-content: space-between;
          align-items: space-between;
          .memberMainInf{
             height: calc(100% - 80px - 1.3rem - 1.05rem);
             writing-mode: vertical-rl;
             transform: rotate(180deg);
+            margin-bottom: 1rem;
          }
          .memberProfImg {
             align-self: center;
-            margin-top: 1.3rem;
+            margin-top: 1.7rem;
          }
       }
       .rightContent {
@@ -129,11 +130,12 @@ export const MemberCardContainer = styled.div`
          height: 100%;
          background-color: var(--palette-opaque-accent3);
          z-index: 1;
-         backdrop-filter: blur(10px);
+         backdrop-filter: blur(1rem);
          border-radius: 0.5rem;
       }
    }
    .rightContent{
+      color: var(--palette-textMain);
       .memberRole{
          font-weight: 600;
       }
@@ -212,7 +214,6 @@ const MemberCard: React.FC<Props> = ({
                {isFounder && <span className="memberFounder">Co-founder</span>}
             </div>
          </sub>
-         {/*<span className="memberDesc">{description ? description : 'N.Inf.'}</span>*/}
       </MemberCardContainer>
    )
 }

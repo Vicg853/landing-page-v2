@@ -23,9 +23,26 @@ export const Container = styled.div`
    .memberCardsContainer {
       width: 90vw;
       max-width: 1920px;
-      display: grid;
+      margin-bottom: 4rem;
+      display: inline-grid;
       grid-template-columns: repeat(auto-fill, 450px);
       justify-content: center;
-      grid-gap: 20px;
+      gap: 10px;
+      .memberCard {
+         width: 450px;
+         break-inside: avoid;
+      }
+      @media (max-width: 800px) {
+         grid-template-columns: repeat(auto-fill, 600px);
+         .memberCard {
+            width: 600px;
+         }
+      }
+      @media (max-width: 650px) {
+         grid-template-columns: repeat(auto-fill, 90vw);
+         .memberCard {
+            width: 90vw;
+         }
+      }
    }
 `
