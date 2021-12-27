@@ -49,9 +49,6 @@ const pages = [
         changeFreq: "never",
         lastMod: "never",
       },
-      navSubLinks: [
-        { title: 'Arrastão', href: '/arrastao' },
-      ]
    },
    { 
       name: "Doar", 
