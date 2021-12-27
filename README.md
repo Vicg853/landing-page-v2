@@ -53,8 +53,8 @@ Well, there are two ways to run the project, in ```production ``` mode or ```dev
 
 ## Main stack and references
 
-- React: javascript framework to create UI - version 18.0.0-alpha
-- NextJS: React based web framework - version: 12.0.5-canary.10
+- Preact: javascript framework to create UI - version 10.6.4
+- NextJS: React based web framework - version: 12.0.8-canary.12
 - styled-component: CSS-in-JS framework for react - version: 5.3.3
 - typescript: strong typing javascript based language - version: 4.4.4
 
