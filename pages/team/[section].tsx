@@ -17,12 +17,16 @@ type Member = {
    institution: string
 }
 import Members from '../../data/index'
-const teamSections = ['management', 'council', 'ex-members']
+const teamSections = [
+   {id: 'management', title: 'Gestão'}, 
+   {id: 'council', title: 'Conselho'}, 
+   {id: 'ex-members', title: 'Ex-membros'}
+]
 //TODO Later, add an actual DB or CMS data fetch
 export const getStaticPaths: GetStaticPaths = async () => {
    return {
       paths: teamSections.map(section => ({
-         params: { section },
+         params: { section: section.id },
       })),
       fallback: false,
    }

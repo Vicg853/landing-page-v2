@@ -9,10 +9,10 @@ import SimpleCard from '@components/pages-mini-components/SimpleContentCard'
 import HeaderImg from '@p-images/ngo/header.jpg'
 
 const ONGs = () => {
-   const SeoTitle = 'ONGs'
-   const SeoDescription = 'ONGs'
+   const SeoTitle = 'ONG'
+   const SeoDescription = 'Veja qui a ONG que nós apoiamos e um pouco sobre ela.'
    const SeoKeywords = ['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro', 'ONGs', 'ONG', 'NGO']
-   const SeoCanonical =  process.env.NEXT_PUBLIC_SITE_URL + '/ongs'
+   const SeoCanonical =  process.env.NEXT_PUBLIC_SITE_URL + '/ong'
    return (
       <>
          <SEOComp 
@@ -41,8 +41,12 @@ const ONGs = () => {
          }}
          linkTags={[
             {
-               rel: 'next',
+               rel: 'prev',
                href: `${process.env.NEXT_PUBLIC_SITE_URL}/about`
+            },
+            {
+               rel: 'next',
+               href: `${process.env.NEXT_PUBLIC_SITE_URL}/donate`
             }
          ]}
          robotsFollow={true} />
