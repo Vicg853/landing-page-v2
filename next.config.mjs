@@ -56,6 +56,17 @@ const config = {
         }
       },
     })
+    config.module.rules.push({
+      test: /\.pdf$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          publicPath: "/_next/static/pdf",
+          outputPath: "static/pdf/",
+          name: '[name].[ext]'
+        }
+      },
+    })
 
     return config
   },

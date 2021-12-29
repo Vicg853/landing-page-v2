@@ -1,17 +1,23 @@
 declare module '*.glb' {
-   const content: string;
+   const content: string
 
-   export default content;
+   export default content
 }
 
 declare module '*.gltf' {
-   const content: string;
+   const content: string
 
-   export default content;
+   export default content
 }
 
 declare module '*.json' {
-   const content: string;
+   const content: string
 
-   export default content;
+   export default content
+}
+
+declare module '*.pdf' {
+   const content: string
+
+   export default content
 }
