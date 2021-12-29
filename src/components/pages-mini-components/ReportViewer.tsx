@@ -1,15 +1,44 @@
 import { memo } from "react"
+import styled from "styled-components"
 
-import PDF from '@public/pdf/Relatório_3T2020_-_Alpes_Capital.pdf'
+export const PDFIframe = styled.iframe`
+   max-width: 100%;
+   width: 900px;
+   min-height: 100vh;
+   border-radius: 0.6rem;
+`
 
-const PDFViewer = () => {
-   return (
-      <iframe 
-      src={PDF} 
-      title={PDF.split('/')[PDF.split('/').length - 1].split(':')[0]} 
-      height="100%" width="100%"
-      />
-   )
+export const ErrorLoading = styled.div`
+   max-width: 100%;
+   padding: 1rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   border-radius: 0.4rem;
+   background-color: var(--palette-bgContrast);
+   color: var(--palette-userAdvise-error);
+   font-size: 0.85rem;
+   font-weight: 500;
+`
+
+type PDFViewerProps = {
+   title?: string
+   PDFsrc: string
+   scrType: 'url'
+}
+
+const PDFViewer: React.FC<PDFViewerProps> = ({ title, PDFsrc, scrType }) => {
+   return scrType === 'url' ?
+      <PDFIframe 
+      src={`${PDFsrc}#view=fitW`} 
+      title={`Relatório: ${title ? title : 
+         PDFsrc.split('/')[PDFsrc.split('/').length - 1].split('.')[0]}`} 
+      /> : 
+      <ErrorLoading>
+         Desculpe-nos, parece que um erro ocorreu ao carregar o PDF. <br/> 
+         Parece que os guaxinins comeram o PDF ...
+      </ErrorLoading>
 }
 
 export default memo(PDFViewer)

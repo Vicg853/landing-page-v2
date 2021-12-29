@@ -1,3 +1,5 @@
+import type { NextPage } from 'next'
+
 //* Importing page components
 import Header from '@layout/header'
 import { SEOComp } from '@components/SEO'
@@ -8,7 +10,7 @@ import SimpleCard from '@components/pages-mini-components/SimpleContentCard'
 //* Importing static assets
 import HeaderImg from '@p-images/ngo/header.jpg'
 
-const ONGs = () => {
+const ONGs: NextPage = () => {
    const SeoTitle = 'ONG'
    const SeoDescription = 'Veja qui a ONG que nós apoiamos e um pouco sobre ela.'
    const SeoKeywords = ['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro', 'ONGs', 'ONG', 'NGO']

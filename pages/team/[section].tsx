@@ -45,8 +45,7 @@ export const getStaticProps: GetStaticProps<{
    return {
       props: { 
          sectionMembers,
-         currentSection: params.section as string,
-         allSections: teamSections,
+         currentSection: params.section as string
       },
       revalidate: 604800,
    }
