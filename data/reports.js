@@ -16,7 +16,7 @@ const reports = [
       source: 'https://docs.wixstatic.com/ugd/c80689_bfe5a5f865b44b74a7478f9c6f1b58fe.pdf', 
       unixDate: 1607344529, 
       sourceType: 'url',
-      path: 'report-2',
+      path: 'report-3',
       title: 'Report 3',
    },
 ]
