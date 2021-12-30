@@ -40,11 +40,11 @@ export const Container = styled.div`
 
    .sectionTitle {
       display: inline-flex;
-      width: 100%;
+      width: 90%;
       padding-top: 1.5rem;
       padding-bottom: 0.3rem;
       font-family: 'Montserrat Alternates';
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 500;
       color: var(--palette-textMain);
       justify-content: center;
