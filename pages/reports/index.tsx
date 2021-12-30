@@ -34,10 +34,10 @@ export const getStaticProps: GetStaticProps<{
 }
 
 const Report = ({mostRecentReport, reports}: InferGetStaticPropsType<typeof getStaticProps>) => {
-   const SeoTitle = 'ONG'
-   const SeoDescription = 'Veja qui a ONG que nós apoiamos e um pouco sobre ela.'
-   const SeoKeywords = ['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro', 'ONGs', 'ONG', 'NGO']
-   const SeoCanonical =  process.env.NEXT_PUBLIC_SITE_URL + '/ong'
+   const SeoTitle = 'Lista de relatórios'
+   const SeoDescription = 'Nós sempre publicamos nossos relatórios para você acessar e visualizar. Veja aqui a lista de todos, assim como o mais recente deles.'
+   const SeoKeywords = ['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro', 'Trimestral', 'Relatório']
+   const SeoCanonical =  process.env.NEXT_PUBLIC_SITE_URL + '/reports'
 
    //* Defining a ref to add scrollTo functionality/animation
    const reportsListRef = useRef<HTMLDivElement>(null)
@@ -60,9 +60,6 @@ const Report = ({mostRecentReport, reports}: InferGetStaticPropsType<typeof getS
                alt: 'AlpesCap Logo',
                type: 'image/png'
             },
-            //article: {
-            //TODO don't forget about me...   
-            //}
          }}
          twitter={{
             url: SeoCanonical,
@@ -70,19 +67,9 @@ const Report = ({mostRecentReport, reports}: InferGetStaticPropsType<typeof getS
             description: SeoDescription,
             image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/global/Logo_mini_bg.png`
          }}
-         linkTags={[
-            {
-               rel: 'prev',
-               href: `${process.env.NEXT_PUBLIC_SITE_URL}/about`
-            },
-            {
-               rel: 'next',
-               href: `${process.env.NEXT_PUBLIC_SITE_URL}/donate`
-            }
-         ]}
          robotsFollow={true} />
          <Header 
-         title="Projeto Arrastão..." subTitle="... a AlpesCap e o fundo Arrastão 🤝"
+         title="Relatórios" subTitle="Publicamos todos nossos relatórios, veja os aqui📄"
          isCustomImgBg={{imgSourceType: 'import', imgSource: HeaderImg}} 
          illustrationDisplay={true} />
          <Container>
