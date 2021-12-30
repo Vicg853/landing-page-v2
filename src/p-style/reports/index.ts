@@ -19,8 +19,11 @@ export const MainReportTitle = styled.div`
       font-size: 1.1rem;
       font-weight: 500;
       font-family: var(--fonts-secondary);
+      display: inline-flex;
+      white-space: nowrap; 
+      overflow: hidden;
    }
-   button {
+   button, a {
       max-width: 50%;
       border-radius: 0.4rem;
       background-color: var(--palette-accent3);

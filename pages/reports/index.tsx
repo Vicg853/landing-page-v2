@@ -87,7 +87,11 @@ const Report = ({mostRecentReport, reports}: InferGetStaticPropsType<typeof getS
          illustrationDisplay={true} />
          <Container>
             <MainReportTitle >
-                  <span>Relatório mais recente: {'2020 - T3'}</span>
+                  <span>
+                     Relatório mais recente: {mostRecentReport.title ? mostRecentReport.title : 
+                        mostRecentReport.source
+                        .split('/')[mostRecentReport.source.split('/').length - 1]}
+                  </span>
                   <button onClick={() => 
                      reportsListRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
                      Ver outros...
