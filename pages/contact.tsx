@@ -1,4 +1,7 @@
 import type { NextPage } from 'next'
+import type { FormEvent, ChangeEvent } from 'react'
+import { useCallback, useState } from 'react'
+import axios from 'axios'
 
 //* Importing page components
 import Header from '@layout/header'
@@ -6,6 +9,7 @@ import { SEOComp } from '@components/SEO'
 import { Container } from '@p-styles/global'
 import { ContactForm } from '@p-styles/contact'
 import SocialCard from '@components/react-mini-components/socialCard'
+import { useAlertState } from '@components/react-mini-components/Alert'
 
 //* Importing static content
 import HeaderImg from '@p-images/contact/header.jpg'
@@ -15,6 +19,115 @@ const Contact: NextPage = () => {
    const SeoDescription = 'Entre em contato com nosco, mesmo que seja só para dar um oi 😉👋. Ou siga nos nas redes socais.'
    const SeoKeywords = ['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro', 'Message', 'Contato', 'Contact', 'Social']
    const SeoCanonical =  process.env.NEXT_PUBLIC_SITE_URL + '/contact'
+
+   //const useSetAlert = useAlertState().set
+
+   const [formState, setFormState] = useState([
+      {
+         id: 'contactFromNameInput',
+         name: 'name',
+         value: '',
+         error: false,
+         errorMessage: 'Você deve informar seu nome.',
+      },
+      {
+         id: 'contactFromLastNameInput',
+         name: 'lastName',
+         value: '',
+         error: false,
+         errorMessage: 'Você deve informar seu sobrenome.',
+      },
+      {
+         id: 'contactFromEmailInput',
+         name: 'email',
+         value: '',
+         error: false,
+         errorMessage: 'Voce deve informar um email válido.',
+      },
+      {
+         id: 'contactFromSubjectInput',
+         name: 'subject',
+         value: '',
+         error: false,
+         errorMessage: 'Você deve informar um assunto.',
+      },
+      {
+         id: 'contactFromMessageInput',
+         name: 'message',
+         value: '',
+         error: false,
+         errorMessage: 'Você deve escrever uma mensagem.',
+      },
+   ])
+
+   const setAlert = useAlertState().set
+
+   //*Updating state on input update
+   const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+      const { name, value } = e.target
+      
+      //*Updating state
+      setFormState(prevState => {
+         const newState = [...prevState]
+         const index = newState.findIndex(item => item.name === name)
+         newState[index].value = value
+         if(value.length > 0) newState[index].error = false
+         else newState[index].error = true
+         return newState
+      })
+
+      //* Checking if input is empty and setting error
+      if(value.length < 1) setAlert({
+         alertType: "warning",
+         alert: formState.find(item => item.name === name)?.errorMessage ?? 'Você deve preencher esse campo.',
+         display: true,
+      })
+
+   }, [])
+
+   //*Submit form function
+   const onSubmit = useCallback((args: FormEvent<HTMLFormElement>) => {
+      args.preventDefault()
+      formState.forEach(item => {
+         //* Checking if any of the inputs are empty
+         if(item.error || item.value.length < 1) return setAlert({
+            alertType: "error",
+            alert: item.errorMessage,
+            display: true,
+         })
+         
+         //* Checking if email is valid
+         if(item.name === 'email' 
+            && item.value.match(RegExp(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/, 'i'))) return setAlert({
+            alertType: "error",
+            alert: 'E-mail deve ter um formato valido...',
+            display: true,
+         })
+         return setAlert({
+            alertType: "info",
+            alert: 'Enviando mensagem...',
+            display: true,
+         })
+      })
+
+      //* Finally try to send the message to the API
+      axios.post('/api/message', {
+         name: formState.find(item => item.name === 'name')?.value ?? '',
+         lastName: formState.find(item => item.name === 'lastName')?.value ?? '',
+         email: formState.find(item => item.name === 'email')?.value ?? '',
+         subject: formState.find(item => item.name === 'subject')?.value ?? '',
+         message: formState.find(item => item.name === 'message')?.value ?? '',  
+      }).then(res => setAlert({
+         alertType: "success",
+         alert: 'Mensagem enviada com sucesso!',
+         display: true,
+      })).catch(err => setAlert({
+         alertType: "error",
+         alert: `Ocorreu um erro ao enviar a mensagem: ${err.message}`,
+         display: true
+      }))
+   }, [])
+
    return (
       <>
          <SEOComp 
@@ -61,21 +174,41 @@ const Contact: NextPage = () => {
             <span className='sectionTitle'>
               Mande nos uma mensagem, responderemos logo pelo endereço fornecido abaixo</span>
             <sub style={{width: '100%'}}>
-               <ContactForm>
+               <ContactForm onSubmit={e => onSubmit(e)}>
                   <div className='inputsContainer'>
                      <section className='left'>
                         <label>Nome: </label>
-                        <input data-error={false} name='name' type='text' placeholder='AlpesCap' />
+                        <input 
+                        onChange={e => onInputChange(e)}
+                        data-error={formState.find(val => val.id === 'contactFromNameInput')?.error}
+                         name='name' type='text' placeholder='AlpesCap' 
+                        id='contactFromNameInput'/>
                         <label>Sobrenome: </label>
-                        <input data-error={true} name='lastName' type='text' placeholder='AlpesCap' />
+                        <input 
+                        onChange={e => onInputChange(e)}
+                        data-error={formState.find(val => val.id === 'contactFromLastNameInput')?.error}
+                         name='lastName' type='text' placeholder='AlpesCap'
+                        id='contactFromLastNameInput' />
                         <label>E-mail: </label>
-                        <input data-error={false} name='email' type='email' placeholder='alpes.capital@gmail.com' />
+                        <input 
+                        onChange={e => onInputChange(e)}
+                        data-error={formState.find(val => val.id === 'contactFromEmailInput')?.error}
+                         name='email' type='email' placeholder='alpes.capital@gmail.com'
+                        id='contactFromEmailInput' />
                         <label>Assunto: </label>
-                        <input data-error={false} name='subject' placeholder='Quero só dar um oi!' />
+                        <input 
+                        onChange={e => onInputChange(e)}
+                        data-error={formState.find(val => val.id === 'contactFromSubjectInput')?.error}
+                         name='subject' placeholder='Quero só dar um oi!' 
+                        id='contactFromSubjectInput' />
                      </section>
                      <section className='right'>
                         <label>Assunto: </label>
-                        <textarea data-error={false} name='message' placeholder='Oi AlpesCap 😉👋!'/>
+                        <textarea 
+                        onChange={e => onInputChange(e)}
+                        data-error={formState.find(val => val.id === 'contactFromMessageInput')?.error}
+                         name='message' placeholder='Oi AlpesCap 😉👋!'
+                        id='contactFromMessageInput' />
                      </section>
                   </div>
                   <button type='submit'>Enviar</button>
