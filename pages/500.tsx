@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { Container } from '@p-styles/ErrPages'
 import { a, useSpring, config } from '@react-spring/web'
 const Lottie = dynamic(() => import('@components/react-mini-components/ErrPageLottie'), {
-   ssr: false
+   ssr: false,
 })
 
 const Err500 = () => {
