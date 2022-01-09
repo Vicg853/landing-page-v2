@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 
+import { SEOComp } from '@components/SEO'
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { a, useSpring, config } from '@react-spring/web'
@@ -28,7 +29,36 @@ const Error: NextPage<Props> = ({ statusCode }) => {
     config: { ...config.wobbly }
   })
 
+  const SeoTitle = `Erro ${statusCode ? statusCode : '500' } - Erro inesperado`
+  const SeoDescription = `Ocorreu um erro inesperado no servidor. ${statusCode ? statusCode : '500'}. Iremos examinar isso... Nós somos a ApesCap btw!'`
+
   return (
+    <>
+    <SEOComp 
+      title={SeoTitle}
+      description={SeoDescription}
+      canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/`}
+      keywords={['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro']}
+      locale='pt-BR'
+      openGraph={{
+        title: SeoTitle,
+        description: SeoDescription,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+        image: {
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/global/500.jpg`,
+          width: 945,
+          height: 685,
+          alt: 'AlpesCap Logo',
+          type: 'image/png'
+        }
+      }}
+      twitter={{
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+        title: SeoTitle,
+        description: SeoDescription,
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/global/500.jpg`
+      }}
+      robotsFollow={false} />
     <Container>
       <a.span className="errorText" style={messageSpring}>
         {statusCode ? 
@@ -48,6 +78,7 @@ const Error: NextPage<Props> = ({ statusCode }) => {
         </Suspense>
       </div>
     </Container>
+    </>
   )
  }
  

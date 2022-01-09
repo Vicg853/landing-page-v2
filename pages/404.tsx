@@ -1,11 +1,13 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 
+import { SEOComp } from '@components/SEO'
 import { Container } from '@p-styles/ErrPages'
 import { a, useSpring, config } from '@react-spring/web'
 const Lottie = dynamic(() => import('@components/react-mini-components/ErrPageLottie'), {
    ssr: false,
 })
+
 
 const Err404 = () => {
    const messageSpring = useSpring({
@@ -22,7 +24,36 @@ const Err404 = () => {
      config: { ...config.wobbly }
    })
    
+   const SeoTitle = 'Erro 404 - Erro interno do servidor'
+   const SeoDescription = 'Parece que essa pagina não existe... a menos que você quisesse... então nesse caso aqui está nossa pagina de 404. Nós somos a ApesCap btw!'
+
    return (
+      <>
+      <SEOComp 
+      title={SeoTitle}
+      description={SeoDescription}
+      canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/`}
+      keywords={['Fundo de endowment', 'ONG', 'Alpes Capital', 'AlpesCap', 'Investimentos', 'Mercado financeiro']}
+      locale='pt-BR'
+      openGraph={{
+        title: SeoTitle,
+        description: SeoDescription,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+        image: {
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/global/404.jpg`,
+          width: 1026,
+          height: 724,
+          alt: 'AlpesCap Logo',
+          type: 'image/png'
+        }
+      }}
+      twitter={{
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+        title: SeoTitle,
+        description: SeoDescription,
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/global/404.jpg`
+      }}
+      robotsFollow={false} />
       <Container>
          <a.span className="errorText" style={messageSpring}>
             Uhm.... você tem certeza que está no local correto?  <br/>
@@ -38,6 +69,7 @@ const Err404 = () => {
             </Suspense>
          </div>
       </Container>
+      </>
    )
 }
 
