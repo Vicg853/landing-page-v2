@@ -16,7 +16,7 @@ import {
 
 //* Background components that will be dynamically imported based 
 //* if customBg is chosen between custom threeBg and imageBg
-const DynamicImageImport = dynamic(() => import('./imageBg'))
+import ImageImport from './imageBg'
 const DefaultIllustrationImport = dynamic(() => import('./defaultIllustration'))
 
 type DefaultProps = {
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({
    return (
       <HeaderContainer >
          <a.div id='background' style={backgroundSpring}>
-            <DynamicImageImport
+            <ImageImport
                imgSource={isCustomImgBg?.imgSource}
                bgAlt={bgAlt} 
                customBlurDataURL={isCustomImgBg?.customBlurDataURL}

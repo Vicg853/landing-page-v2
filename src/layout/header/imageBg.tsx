@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import Image from 'next/image'
+import Head from 'next/head'
 import type { ImageProps } from 'next/image'
 
 //* Typing that ensures that the correct bg type source is passed to the image component
@@ -27,22 +28,39 @@ export type CustomImgBgProps = CustomImgBg<ImgBgsType> & CommonProps
 
 //*Props for the actual background component
 export type BgImgElemProps = CommonProps & {
-   imgSource: any
+   imgSource: StaticImageData | undefined | string
 }
 
 import DefaultImg from '@p-images/defaultHeaderBg.jpg'
 
 const HeaderImgBackground = ({imgSource, customPlaceholder, customBlurDataURL, bgAlt}: BgImgElemProps) => (
+   <>
+   <Head> 
+      {
+         imgSource ? 
+         <link
+            rel="preload"
+            href={typeof imgSource === 'string' ? imgSource : imgSource.src}
+            as="image"
+         />
+         : 
+         <link
+            rel="preload"
+            href={DefaultImg.src}
+            as="image"
+         />
+      }
+   </Head>
    <Image 
-      
       src={imgSource ? imgSource : DefaultImg} 
       alt={bgAlt? bgAlt : 'Background do cabeçalho de pagina do site da Alpes Capital.'}
       layout="fill"
       objectFit="cover"
-      loading='lazy' 
+      loading='eager'
       placeholder={customPlaceholder ? customPlaceholder : 'blur'}
       blurDataURL={customBlurDataURL ? customBlurDataURL : undefined}
       quality={100} />
+   </>
 )
 
 export default memo(HeaderImgBackground)

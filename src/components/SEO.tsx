@@ -7,7 +7,7 @@ const DefaultSEOComp: React.FC = () => (
    <Head>
       <base href={`${process.env.NEXT_PUBLIC_SITE_URL}`} target="_blank" />
       <meta charSet='utf-8' />
-      <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' />
+      <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
       <meta name="owner" content={SEO.owner} />
       <link rel='index' title={SEO.title} href={SEO.index} />
       <link rel="manifest" href={SEO.manifest} />
@@ -176,6 +176,7 @@ const SEOComp: React.FC<CustomSEOProps> = (props) => {
             props.keywords.join(', ') : SEO.keywords.join(', ')} />
          <meta name="image" content={props.image ? props.image : SEO.image} />
          <meta name="language" content={props.locale ? props.locale : SEO.language} />
+         <html lang={props.locale ? props.locale : SEO.language} />
 
          {props.localeAlternates && props.localeAlternates.map((locale, index) => (
             <link key={index} rel="alternate" hrefLang={locale} href={`${props.canonical}?lang=${locale}`} />
