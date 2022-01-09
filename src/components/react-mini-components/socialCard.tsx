@@ -30,7 +30,7 @@ export const Container = styled.a`
    background-color: var(--palette-background);
    backdrop-filter: blur(10px);
    margin: 0.3rem;
-   title {
+   .title {
       display: block;
       font-size: 0.8rem;
       font-weight: 600;
@@ -58,7 +58,7 @@ const SocialCard: React.FC<ComponentProps> = ({iconType, IconSource, text, url, 
                   'Ilustração de card social para visitar uma de nossas redes!'} 
                />
             }
-            <title>{text}</title>
+            <span className='title'>{text}</span>
          </Container>
       </> 
    )
