@@ -82,19 +82,19 @@ const Home: NextPage = () => (
       <sub style={{width: '100% !important', paddingLeft: '5%', paddingRight: '5%', paddingTop: '16rem'}}>
         <ImageReferenceCard 
         href='/about'
-        style={{width: '100% !important', marginBottom: '1.5rem'}}
+        style={{width: '100%', marginBottom: '1.5rem'}}
         backgroundSrc={AlpesAboutCard}
         title='O fundo do bem'
         description='Saiba como funciona nosso projeto, um pouco da nossa história e um pouco sobre a estrutura do fundo.' />
         <ImageReferenceCard 
         href='/team'
-        style={{flex: 'auto', marginBottom: '1.5rem'}}
+        style={{flex: '1 1 auto', marginBottom: '1.5rem'}}
         backgroundSrc={AlpesTeamCard}
         title='A equipe:'
         description='Conheça um pouco mais sobre os jovens pros trás dessa iniciativa e os profissionais nos ajudando em nossa jornada.' />
         <ImageReferenceCard 
         href='/donate'
-        style={{flex: 'auto', marginBottom: '1.5rem'}}
+        style={{flex: '1 1 auto', marginBottom: '1.5rem'}}
         backgroundSrc={AlpesDonateArrastao}
         title='Faça parte da mudança:'
         description='Você pode fazer parte desse projeto doando para o nosso fundo. O rendimento é doado para  ONGs, como o Projeto Arrastão.' />
