@@ -131,7 +131,7 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                   />)
                })}
                <NavMiniMenuButton 
-               role='menu'
+               role='button'
                onClick={() => setMiniMenu(val => !val)}
                aria-label={`${miniMenuState ? `Close` : `Open`} mini page's menu`}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" >
@@ -142,7 +142,7 @@ const Nav: React.FC<NavProps> = ({isDarkTheme, setTheme, miniMenuState, setMiniM
                   </svg>
                </NavMiniMenuButton>
                <NavColorThemeButton 
-               role='option'
+               role='button'
                   onClick={() => setTheme(val => !val)} 
                   aria-label={`Set color theme to ${!isDarkTheme? `dark.` : `light.`}`}>
                   <a.svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={svgSpring}>
