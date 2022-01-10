@@ -89,6 +89,8 @@ const MobileMiniVersion = styled.button`
    background: transparent;
    z-index: var(--zIndex-cookiesPolicyCard);
    overflow: hidden;
+   display: none !important;
+   cursor: pointer;
    :before{
       content: "";
       width: 100%;
@@ -116,12 +118,9 @@ const MobileMiniVersion = styled.button`
       z-index: calc(var(--zIndex-cookiesPolicyCard) + 1);
    }
    
-   @media (min-width: 950px),  (min-height: 720px) {
-      display: none;
-   }
 
    @media (max-width: 950px), (max-height: 720px) {
-      display: block;
+      display: block !important;
       &&[data-show='true'] {
          transform: translateY(0);
          transition: transformY 0.3s ease-in-out;
