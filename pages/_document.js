@@ -1,3 +1,4 @@
+import AsyncNextScripts from '@components/AsyncNextScripts'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 import { ServerStyleSheet } from 'styled-components'
@@ -37,7 +38,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript />
+          <AsyncNextScripts />
         </body>
       </Html>
     )
