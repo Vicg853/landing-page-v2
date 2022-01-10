@@ -131,6 +131,12 @@ const MobileMiniVersion = styled.button`
          transition: transformY 0s ease-in-out;
       }
    }
+
+   @media (max-width: 5500px), (max-width: 730px){
+      #cookiesMiniCardContent {
+         font-size: 0.86rem;
+      }
+   }        
 `
 
 const CookiesCard = () => {
