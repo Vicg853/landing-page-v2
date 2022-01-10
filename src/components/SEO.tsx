@@ -176,7 +176,6 @@ const SEOComp: React.FC<CustomSEOProps> = (props) => {
             props.keywords.join(', ') : SEO.keywords.join(', ')} />
          <meta name="image" content={props.image ? props.image : SEO.image} />
          <meta name="language" content={props.locale ? props.locale : SEO.language} />
-         <html lang={props.locale ? props.locale : SEO.language} />
 
          {props.localeAlternates && props.localeAlternates.map((locale, index) => (
             <link key={index} rel="alternate" hrefLang={locale} href={`${props.canonical}?lang=${locale}`} />
