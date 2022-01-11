@@ -129,7 +129,7 @@ export function checkStrMatchAnyOfRgxArr (string: string, rgxArr: RegExp[]): boo
  */
 export function generateSitemap (
 	host: string, 
-	routes?: { url: string, lastmod?: string, changefreq?: string, priority?: number }[], 
+	routes?: { url: string, lastmod?: string, changefreq?: string, priority?: string }[], 
 	sitemaps?: string[]): string {
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 	${routes ? `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${

@@ -37,7 +37,7 @@ function getPagesSitemapDetails(pages: string[], routes: PropsCombined) {
          url: page,
          lastmod: routes.filter(route => route.path === page)[0]?.siteMapOptions.lastMod ?? new Date().toISOString(),
          changefreq: routes.filter(route => route.path === page)[0]?.siteMapOptions.changeFreq ?? 'never',
-         priority: routes.filter(route => route.path === page)[0]?.siteMapOptions.priority ?? '0.1'
+         priority: routes.filter(route => route.path === page)[0]?.siteMapOptions.priority.toString() ?? '0.1'
       }
    })
 
