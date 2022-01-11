@@ -1,37 +1,27 @@
 import type { GetServerSideProps } from 'next'
 import fs from 'fs'
 import path from 'path'
+import {checkStrMatchAnyOfRgxArr} from '@components/utils'
 
-function getAllSitemaps (dirPath: string, arrayOfFiles: string[] = []) {
-   const files = fs.readdirSync(dirPath)
-
-   files.forEach(function(file: string) {
-      if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-         //? If is a dir, diving deeper into it recursively
-         arrayOfFiles = getAllSitemaps(dirPath + "/" + file, arrayOfFiles)
-      } else {
-         //? Checking for any files or dirs that are not xml ones
-         if(!dirPath.match(RegExp("(.xml.js$|.xml$)", 'i')) && 
-         !file.match(RegExp("(.xml.js$|.xml$)", 'i'))) return
-         
-         //? Refining path and removing filesystem path from it, only including
-         //? the portion of the path that is public
-         const refinedDirPath = process.env.NODE_ENV === 'production' ? 
-            dirPath.replace(RegExp('.next/server/pages', 'g'), '') : 
-            dirPath.replace(RegExp('pages', 'g'), '')
-
-         //? Checking if is index file to remove it from path, but in both cases simply
-         //? and finally including the path
-         if(file.match(RegExp('index', 'i'))) return arrayOfFiles.push(path.join(refinedDirPath))
-         return arrayOfFiles.push(path.join(refinedDirPath, "/", file.replace(RegExp('.js', 'g'), '')))
-      }
+//* Getting sitemap routes from pages-manifest.json
+async function getAllSitemaps (basePath: string) {
+   const routes_manifest_path = path.join(basePath + '/.next/server/pages-manifest.json')
+   const routes_manifest = await JSON.parse(fs.readFileSync(routes_manifest_path, 'utf8'))
+   
+   //* Getting pages paths form manifest keys
+   const pages = Object.keys(routes_manifest)
+   
+   //* Filtering out only sitemap paths (if ends with .xml)
+   const filteredPages = pages.filter(page => {
+       if(page.toString().match(/\.xml\..+$/i)) return page.replace(/\.xml\..+$/i, '.xml')
+       return page.match(/\.xml$/i) ?? undefined
    })
 
-   return arrayOfFiles
+   return filteredPages
 }
 
-function generateRobotsTxt(): string {
-   const sitemaps = getAllSitemaps(process.env.NODE_ENV === 'production' ?'.next/server/pages' : 'pages')
+async function generateRobotsTxt(basePath: string): Promise<string> {
+   const sitemaps = await getAllSitemaps(basePath)
 
    return ['# *',
    'User-agent: *',
@@ -50,7 +40,16 @@ function RobotsTxt() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-   const robotsTxt = generateRobotsTxt()
+   const basePath = process.cwd()
+
+   if(!basePath) return {
+      redirect: {
+         destination: '/500',
+         permanent: false
+      }
+   }
+
+   const robotsTxt = await generateRobotsTxt(basePath)
 
    res.setHeader('Content-Type', 'text/txt')
   
