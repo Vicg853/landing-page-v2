@@ -1,76 +1,69 @@
 import type { GetServerSideProps } from 'next'
 import getConfig from 'next/config'
+import {checkStrMatchAnyOfRgxArr} from '@components/utils'
 import fs from 'fs'
 import path from 'path'
 
 import type {PropsCombined} from '@custom-types/routes'
 
-import {checkStrMatchAnyOfRgxArr} from '@components/utils'
 const { serverRuntimeConfig } = getConfig()
 
-var fileOptOutRegex = [
-   RegExp(".json$", 'i'), RegExp("(.nft$|.nft\..+$)", 'i'),RegExp('_.+$', 'i'), 
-   RegExp('404\..', 'i'), RegExp('(.xml.+$|.xml$)', 'i'), RegExp('500\..', 'i'), 
-   RegExp('robots\..', 'i'), RegExp('favicon\..', 'i'), RegExp('fallback\..', 'i'),
-   RegExp('sw\..', 'i'), RegExp('workbox\..', 'i'), 
-   RegExp('(.jpg$|.png$|.jpeg$|.svg$|.avif$|.webp$)', 'i')
-] 
+//const productionPath = process.env.IS_VERCEL ? process.env.IS_VERCEL : '.next/server/pages'
 
-const productionPath = process.env.IS_VERCEL ? process.env.IS_VERCEL : '.next/server/pages'
+//* Gets all build time static pages
+async function getAllFiles(basePath: string) {
+   const routes_manifest_path = path.join(basePath + '/.next/server/pages-manifest.json')
+   const routes_manifest = await JSON.parse(fs.readFileSync(routes_manifest_path, 'utf8'))
+   
+   //* Getting pages paths form manifest keys
+   const pages = Object.keys(routes_manifest)
+   
+   //* Filtering out nextjs's special pages, api paths, sitemap/robots txt and ISG functions paths
+   var fileOptOutRegex = [
+      RegExp(".json$", 'i'), RegExp("(.nft$|.nft\..+$)", 'i'),RegExp('_.+$', 'i'), 
+      RegExp('(404|500|api)', 'i'), RegExp('(.xml.+$|.xml$)', 'i'), 
+      RegExp('robots\..', 'i'), /\[.+\]/
+   ] 
+   const filteredPages = pages.filter(page => {
+      return !checkStrMatchAnyOfRgxArr(page.toString(), fileOptOutRegex)
+   })
 
-function getAllFiles (dirPath: string, arrayOfFiles: string[] = []) {
-   const files = fs.readdirSync(dirPath)
+   return filteredPages
+}
 
-   files.forEach(function(file: string) {
-      //? Filtering out the files that are not actually pages 
-      //? and are just nextjs runtime files
-      if(checkStrMatchAnyOfRgxArr(file, fileOptOutRegex)) return 
-
-      //? If is a directory (if) then call the function again
-      //? and map out this directory's files or enter into other sub directories
-      //? or if is a file (else) just include it into the sitemap 
-      if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-         arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
-      } else {
-         //? Removing the '.next/server/pages' or 'page' prefix used by fs to find the files in prod
-         //? or dev (respectively), but isn't needed for the sitemap/web
-         const refinedDirPath = process.env.NODE_ENV === 'production' ? 
-            dirPath.replace(RegExp(productionPath, 'g'), '') : 
-            dirPath.replace(RegExp('pages', 'g'), '')
-         if(file.match(RegExp('index', 'i'))) return arrayOfFiles.push(path.join(refinedDirPath, "/"))
-         return arrayOfFiles.push(path.join(refinedDirPath, "/", file.split('.')[0]))
+//* Get all pages and their details to then generate the sitemap
+function getPagesSitemapDetails(pages: string[], routes: PropsCombined) {
+   const sitemapDetails = pages.map(page => {
+      return {
+         url: process.env.NEXT_PUBLIC_SITE_URL + page,
+         lastmod: routes.filter(route => route.path === page)[0]?.siteMapOptions.lastMod ?? new Date().toISOString(),
+         changefreq: routes.filter(route => route.path === page)[0]?.siteMapOptions.changeFreq ?? 'never',
+         priority: routes.filter(route => route.path === page)[0]?.siteMapOptions.priority ?? '0.1'
       }
    })
 
-   return arrayOfFiles
+   return sitemapDetails
 }
 
-function generateSiteMap(): string {
-   const staticPages = getAllFiles(process.env.NODE_ENV === 'production' ? productionPath : 'pages')
+//* Get all pages and their details to then generate the sitemap
+async function generateSiteMap(routes: PropsCombined, basePath: string): Promise<string> {
 
-   const routes = serverRuntimeConfig.allRoutes as PropsCombined
+   const pages = await getAllFiles(basePath)
 
-   return `<?xml version="1.0" encoding="UTF-8"?>
-      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-         ${staticPages.map(page => {
-            const pageConfig = routes.find(route => route.path === page)
-            if(!pageConfig) return `<url>
-                  <loc>${page}</loc>
-                  <lastmod>${new Date().toISOString()}</lastmod>
-                  <changefreq>never</changefreq>
-                  <priority>0.1</priority>
-               </url>`
+   const sitemapDetails = getPagesSitemapDetails(pages, routes)
 
-            if(!pageConfig.appearForWebCrawllers) return  
+   //* Generating the sitemap
+   const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${
+      sitemapDetails.map(page => {
+      return `<url>
+         <loc>${page.url}</loc>
+         <lastmod>${page.lastmod}</lastmod>
+         <changefreq>${page.changefreq}</changefreq>
+         <priority>${page.priority}</priority>
+      </url>`
+   }).join('')}</urlset>`
 
-            return `<url>
-                  <loc>${page}</loc>
-                  <lastmod>${pageConfig.siteMapOptions.lastMod}</lastmod>
-                  <changefreq>${pageConfig.siteMapOptions.changeFreq}</changefreq>
-                  <priority>${pageConfig.siteMapOptions.priority}</priority>
-               </url>`
-         })}
-      </urlset>`
+   return sitemap
 }
 
 function SiteMap() {
@@ -78,7 +71,19 @@ function SiteMap() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-   const sitemap = generateSiteMap()
+   const basePath: string = process.cwd();
+   const routes = serverRuntimeConfig.allRoutes as PropsCombined
+
+   console.log(basePath)
+   console.log(fs.readdirSync(basePath))
+   if(!routes || !basePath) return {
+      redirect: {
+         destination: '/500',
+         permanent: false,
+      },
+   }
+
+   const sitemap = await generateSiteMap(routes, basePath)
 
    res.setHeader('Content-Type', 'text/xml')
   
