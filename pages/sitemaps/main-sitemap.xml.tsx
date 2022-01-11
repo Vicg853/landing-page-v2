@@ -3,6 +3,7 @@ import getConfig from 'next/config'
 import {checkStrMatchAnyOfRgxArr} from '@components/utils'
 import fs from 'fs'
 import path from 'path'
+import { generateSitemap } from '@components/utils'
 
 import type {PropsCombined} from '@custom-types/routes'
 
@@ -33,7 +34,7 @@ async function getAllFiles(basePath: string): Promise<string[]> {
 function getPagesSitemapDetails(pages: string[], routes: PropsCombined) {
    const sitemapDetails = pages.map(page => {
       return {
-         url: process.env.NEXT_PUBLIC_SITE_URL + page,
+         url: page,
          lastmod: routes.filter(route => route.path === page)[0]?.siteMapOptions.lastMod ?? new Date().toISOString(),
          changefreq: routes.filter(route => route.path === page)[0]?.siteMapOptions.changeFreq ?? 'never',
          priority: routes.filter(route => route.path === page)[0]?.siteMapOptions.priority ?? '0.1'
@@ -41,27 +42,6 @@ function getPagesSitemapDetails(pages: string[], routes: PropsCombined) {
    })
 
    return sitemapDetails
-}
-
-//* Get all pages and their details to then generate the sitemap
-async function generateSiteMap(routes: PropsCombined, basePath: string): Promise<string> {
-
-   const pages = await getAllFiles(basePath)
-
-   const sitemapDetails = getPagesSitemapDetails(pages, routes)
-
-   //* Generating the sitemap
-   const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${
-      sitemapDetails.map(page => {
-      return `<url>
-         <loc>${page.url}</loc>
-         <lastmod>${page.lastmod}</lastmod>
-         <changefreq>${page.changefreq}</changefreq>
-         <priority>${page.priority}</priority>
-      </url>`
-   }).join('')}</urlset>`
-
-   return sitemap
 }
 
 function SiteMap() {
@@ -79,7 +59,10 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
       },
    }
 
-   const sitemap = await generateSiteMap(routes, basePath)
+   const pages = await getAllFiles(basePath)
+   const sitemapDetails = getPagesSitemapDetails(pages, routes)
+
+   const sitemap = generateSitemap(process.env.NEXT_PUBLIC_SITE_URL as string, sitemapDetails)
 
    res.setHeader('Content-Type', 'text/xml')
   
