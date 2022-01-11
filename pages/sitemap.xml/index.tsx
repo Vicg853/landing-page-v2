@@ -8,10 +8,8 @@ import type {PropsCombined} from '@custom-types/routes'
 
 const { serverRuntimeConfig } = getConfig()
 
-//const productionPath = process.env.IS_VERCEL ? process.env.IS_VERCEL : '.next/server/pages'
-
 //* Gets all build time static pages
-async function getAllFiles(basePath: string) {
+async function getAllFiles(basePath: string): Promise<string[]> {
    const routes_manifest_path = path.join(basePath + '/.next/server/pages-manifest.json')
    const routes_manifest = await JSON.parse(fs.readFileSync(routes_manifest_path, 'utf8'))
    
@@ -74,8 +72,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
    const basePath: string = process.cwd();
    const routes = serverRuntimeConfig.allRoutes as PropsCombined
 
-   console.log(basePath)
-   console.log(fs.readdirSync(basePath))
    if(!routes || !basePath) return {
       redirect: {
          destination: '/500',

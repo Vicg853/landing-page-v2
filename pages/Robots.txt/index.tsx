@@ -1,7 +1,6 @@
 import type { GetServerSideProps } from 'next'
 import fs from 'fs'
 import path from 'path'
-import {checkStrMatchAnyOfRgxArr} from '@components/utils'
 
 //* Getting sitemap routes from pages-manifest.json
 async function getAllSitemaps (basePath: string) {
