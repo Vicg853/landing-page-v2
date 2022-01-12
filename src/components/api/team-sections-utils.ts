@@ -6,6 +6,8 @@ const teamSections = [
    {id: 'ex-members', title: 'Ex-membros'}
 ]
 
+//TODO add real CMS data
+
 export const getTeamSections = async (): Promise<{
    id: string,
    title: string,
