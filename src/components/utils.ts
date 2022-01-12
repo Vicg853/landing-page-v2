@@ -92,3 +92,65 @@ export function checkStrMatchAnyOfRgxArr (string: string, rgxArr: RegExp[]): boo
    }
    return false
 }
+
+/**
+ * Generates a sitemap string.
+ * @param {string} basePath - The current projects basePath
+ * @param {{url: string, lastMod?: string, changeFreq?: string, priority?: number }[]} routes - The array of routes containing the url, lastMod, changeFreq and priority sitemap properties for each.
+ * @param {string[]?} sitemaps - Other sitemap sources that is optional.
+ * @returns {string} - The generated sitemap string.
+ * @example
+ * generateSitemap('/', [
+ *  { url: '/', lastMod: '2020-01-01', changeFreq: 'daily', priority: 1 },
+ * { url: '/about', lastMod: '2020-01-01', changeFreq: 'daily', priority: 0.8 },
+ * { url: '/contact', lastMod: '2020-01-01', changeFreq: 'daily', priority: 0.7 }
+ * ]) => 
+ * <?xml version="1.0" encoding="UTF-8"?>
+ * <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ * <url>
+ * <loc>https://www.example.com/</loc>
+ * <lastmod>2020-01-01</lastmod>
+ * <changefreq>daily</changefreq>
+ * <priority>1.0</priority>
+ * </url>
+ * <url>
+ * <loc>https://www.example.com/about</loc>
+ * <lastmod>2020-01-01</lastmod>
+ * <changefreq>daily</changefreq>
+ * <priority>0.8</priority>
+ * </url>
+ * <url>
+ * <loc>https://www.example.com/contact</loc>
+ * <lastmod>2020-01-01</lastmod>
+ * <changefreq>daily</changefreq>
+ * <priority>0.7</priority>
+ * </url>
+ * </urlset>
+ */
+export function generateSitemap (
+	host: string, 
+	routes?: { url: string, lastmod?: string, changefreq?: string, priority?: string }[], 
+	sitemaps?: string[]): string {
+	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+	${routes ? `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${
+      routes.map(page => {
+      return `
+		<url>
+         <loc>${host}${page.url}</loc>
+         <lastmod>${page.lastmod}</lastmod>
+         <changefreq>${page.changefreq}</changefreq>
+         <priority>${page.priority}</priority>
+		</url>`
+   }).join('')}
+	</urlset>` : ''}
+	${sitemaps ? `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${
+	sitemaps.map(sitemap => {
+		return `
+		<sitemap>
+			<loc>${host}${sitemap}</loc>
+		</sitemap>`
+	}).join('')}
+	</sitemapindex>` : ''}`
+
+   return sitemap
+}

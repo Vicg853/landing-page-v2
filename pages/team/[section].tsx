@@ -4,6 +4,7 @@ import type { NextPage, GetStaticPaths, InferGetStaticPropsType, GetStaticProps 
 import { SEOComp } from '@components/SEO'
 import { Container } from '@p-styles/team/sections'
 import MemberCard from '@p-components/MemberCard'
+import { getTeamSections, getSectionMembers } from '@components/api/team-sections-utils'
 
 //* Static generation functions
 type Member = {
@@ -16,16 +17,13 @@ type Member = {
    isFounder: boolean,
    institution: string
 }
-import Members from '../../data/index'
-const teamSections = [
-   {id: 'management', title: 'Gestão'}, 
-   {id: 'council', title: 'Conselho'}, 
-   {id: 'ex-members', title: 'Ex-membros'}
-]
+
 //TODO Later, add an actual DB or CMS data fetch
 export const getStaticPaths: GetStaticPaths = async () => {
+   const sections = await getTeamSections()
+
    return {
-      paths: teamSections.map(section => ({
+      paths: sections.map(section => ({
          params: { section: section.id },
       })),
       fallback: false,
@@ -39,8 +37,10 @@ export const getStaticProps: GetStaticProps<{
    if(!params || !params.section) return { 
       notFound: true 
    }
+   const sectionMemberFetch = await getSectionMembers(false, params.section as string)
 
-   const sectionMembers: Member[] = Members.filter(member => member.section === params.section) as Member[]
+   const sectionMembers: Member[] = 
+      sectionMemberFetch.filter(member => member.section === params.section) as Member[]
 
    return {
       props: { 
