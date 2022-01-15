@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({
                />
          </a.div>
          <HeaderContent customMask={customMask}>
-            <a.h2 style={mainContentSpring}>{title}</a.h2>
+            <a.h1 style={mainContentSpring}>{title}</a.h1>
             <a.p style={mainContentSpring}>{subTitle}</a.p>
             {optionalButton && (
                optionalButton.isExternal ? (
