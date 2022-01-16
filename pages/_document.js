@@ -1,5 +1,5 @@
 import AsyncNextScripts from '@components/AsyncNextScripts'
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main } from 'next/document'
 
 import { ServerStyleSheet } from 'styled-components'
 
