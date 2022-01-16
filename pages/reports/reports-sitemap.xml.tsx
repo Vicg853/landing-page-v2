@@ -4,15 +4,15 @@ import { generateSitemap } from '@components/utils'
 
 import { getReports } from '@components/api/reports-utils'
 
-const buildDate = new Date().toISOString()
+const date = new Date().toISOString()
 
 //* Generate a sitemap based on the reports object
 function getPagesSitemapDetails(pages: ReportType[]) {
    const sitemapDetails = pages.map(page => {
       return {
          url: `/reports/${page.path}`,
-         lastmod: buildDate,
-         changefreq: 'early',
+         lastmod: `${date}`,
+         changefreq: 'yearly',
          priority: '0.1'
       }
    })

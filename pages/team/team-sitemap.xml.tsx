@@ -5,14 +5,14 @@ import { generateSitemap } from '@components/utils'
 //* Team info functions import
 import { getTeamSections } from '@components/api/team-sections-utils'
 
-const buildDate = new Date().toISOString()
+const date = new Date().toISOString()
 
 //* Get all pages and their details to then generate the sitemap
 function getPagesSitemapDetails(pages: {id: string, title: string}[]) {
    const sitemapDetails = pages.map(page => {
       return {
          url: `/team/${page.id}`,
-         lastmod: buildDate,
+         lastmod: `${date}`,
          changefreq: 'never',
          priority: '0.5'
       }
