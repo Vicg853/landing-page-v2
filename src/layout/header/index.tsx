@@ -61,9 +61,8 @@ const Header: React.FC<HeaderProps> = ({
 
    const mainContParallaxY = scale(scrollVal, 0, 100, 0, 600)
    const mainContentSpring = useSpring({
-      y: mainContParallaxY,
       opacity: scale(mainContParallaxY, 300, 500, 1, 0),
-      transform: 'translateY(0)',
+      transform: `translateY(${mainContParallaxY}px)`,
       from: {
          opacity: 0,
          transform: 'translateY(100px)'
@@ -80,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({
    const illustrationSpring = useSpring({
       y: illustParallaxY,
       opacity: illustParallaxOpacity > opacityConst ? opacityConst : illustParallaxOpacity,
-      transform: 'translateY(0) rotateY(0) rotateX(0)',
+      transform: `translateY(${illustParallaxY}) rotateY(0) rotateX(0)`,
       from: {
          opacity: 0,
          transform: 'translateY(100px)'

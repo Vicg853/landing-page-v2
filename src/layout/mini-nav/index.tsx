@@ -30,8 +30,8 @@ const MiniNav: React.FC<MiniNavProps> = ({active, routes}) => {
    
    const linksTrail = useTrail(routes.length, {
       opacity: active ? 1 : 0,
-      y: active ? 0 : 40,
-      from: { opacity: 0, y: 40 },
+      transform: `translateY(${active ? 0 : 40}px)`,
+      from: { opacity: 0, transform: `translateY(${40})` },
       config: { ...config.stiff, duration: active ? 300 : 50 },
       delay: active ? 200 : 0,
    }) 
