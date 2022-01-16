@@ -32,10 +32,11 @@ async function getAllFiles(basePath: string): Promise<string[]> {
 
 //* Get all pages and their details to then generate the sitemap
 function getPagesSitemapDetails(pages: string[], routes: PropsCombined) {
+   const date = new Date().toISOString()
    const sitemapDetails = pages.map(page => {
       return {
          url: page,
-         lastmod: routes.filter(route => route.path === page)[0]?.siteMapOptions.lastMod ?? new Date().toISOString(),
+         lastmod: routes.filter(route => route.path === page)[0]?.siteMapOptions.lastMod ?? `${date}`,
          changefreq: routes.filter(route => route.path === page)[0]?.siteMapOptions.changeFreq ?? 'never',
          priority: routes.filter(route => route.path === page)[0]?.siteMapOptions.priority.toString() ?? '0.1'
       }
