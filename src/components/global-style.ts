@@ -1,5 +1,4 @@
 import { ThemeTyping, createGlobalStyle } from 'styled-components'
-import { cssVarsRootProps } from '@components/css-theme'
 
 const userAdvise = {
    success: '#00c853',
@@ -88,10 +87,7 @@ export const Theme2: ThemeTyping = {
    fonts: {...fonts}
 }
 
-export const GlobalStyle = createGlobalStyle<cssVarsRootProps>`
-   :root {
-      ${props => props.cssTheme}
-   }
+export const GlobalStyle = createGlobalStyle`
    *{
       margin: 0px;
       padding: 0px;

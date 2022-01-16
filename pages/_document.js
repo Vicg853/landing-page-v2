@@ -1,4 +1,5 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import AsyncNextScripts from '@components/AsyncNextScripts'
+import Document, { Html, Head, Main } from 'next/document'
 
 import { ServerStyleSheet } from 'styled-components'
 
@@ -31,13 +32,13 @@ class MyDocument extends Document {
   
   render() {
     return (
-      <Html>
+      <Html lang='pt'>
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;200;300;400;500;800&family=Montserrat:wght@100;200;300;400;500;600;800&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />
-          <NextScript />
+          <AsyncNextScripts />
         </body>
       </Html>
     )

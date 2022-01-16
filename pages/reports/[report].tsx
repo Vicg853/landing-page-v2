@@ -1,29 +1,19 @@
 import type { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next'
-import { useRef } from 'react'
+import type { ReportType } from '@components/api/reports-utils'
 
 //* Importing page components
-import Header from '@layout/header'
 import { SEOComp } from '@components/SEO'
 import { Container } from '@p-styles/global'
 import { MainReportTitle } from '@p-styles/reports/index'
 import PDFViewer from '@p-components/ReportViewer'
 
-//* Importing static assets
-import HeaderImg from '@p-images/report/header.jpg'
-
-//? Just importing an test pdf file
-import PDF from '@public/pdf/Relatório_3T2020_-_Alpes_Capital.pdf'
-import Reports from '../../data/reports'
 
 //* Importing pages paths and data
-//? using temporally sample data from static resource
-import ReportsImport from '../../data/reports'
+import { getReports } from '@components/api/reports-utils'
 import Link from 'next/link'
-import { report } from 'process'
 
-type ReportType = {title: string, path: string, source: string, sourceType: 'url', unixDate: number}
 export const getStaticPaths: GetStaticPaths = async () => {
-   const reports = ReportsImport as ReportType[]
+   const reports = await getReports(true) as ReportType[]
 
    return {
       paths: reports.map(report => ({
@@ -41,9 +31,9 @@ export const getStaticProps: GetStaticProps<{
       notFound: true 
    }
 
-   const reports = ReportsImport as ReportType[]
+   const reports = await getReports(true) as ReportType[]
 
-   const currentReport = reports.filter(report => report.path === params.report)[0]
+   const currentReport = await getReports(false, params.report as string) as ReportType
 
    return {
       props: { 
