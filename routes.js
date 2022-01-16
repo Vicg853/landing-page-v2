@@ -9,7 +9,6 @@ const pages = [
       siteMapOptions: {
         priority: 1,
         changeFreq: "never",
-        lastMod: "never",
       }
    },
    { 
@@ -20,7 +19,6 @@ const pages = [
       siteMapOptions: {
         priority: 0.9,
         changeFreq: "never",
-        lastMod: "never",
       }
    },
    { 
@@ -31,7 +29,7 @@ const pages = [
       siteMapOptions: {
         priority: 0.5,
         changeFreq: "never",
-        lastMod: "never",
+        
       },
       navSubLinks: [
         { title: 'Gestão', href: '/management' },
@@ -47,7 +45,6 @@ const pages = [
       siteMapOptions: {
         priority: 0.7,
         changeFreq: "never",
-        lastMod: "never",
       },
    },
    { 
@@ -58,7 +55,6 @@ const pages = [
       siteMapOptions: {
         priority: 0.8,
         changeFreq: "never",
-        lastMod: "never",
       }
    },
    { 
@@ -69,7 +65,6 @@ const pages = [
       siteMapOptions: {
         priority: 0.1,
         changeFreq: "never",
-        lastMod: "never",
       }
    },
    { 
@@ -80,7 +75,7 @@ const pages = [
       siteMapOptions: {
         priority: 0.6,
         changeFreq: "never",
-        lastMod: "never",
+        
       }
    },
    { 
@@ -91,7 +86,6 @@ const pages = [
       siteMapOptions: {
         priority: 0.5,
         changeFreq: "never",
-        lastMod: "never",
       }
    },
    { 
@@ -102,7 +96,6 @@ const pages = [
     siteMapOptions: {
       priority: 0.6,
       changeFreq: "never",
-      lastMod: "never",
     }
    },
    { 
@@ -113,7 +106,6 @@ const pages = [
     siteMapOptions: {
       priority: 0.6,
       changeFreq: "never",
-      lastMod: "never",
     }
    },
    { 
@@ -124,7 +116,6 @@ const pages = [
     siteMapOptions: {
       priority: 0.4,
       changeFreq: "never",
-      lastMod: "never",
     }
    },
 ]
